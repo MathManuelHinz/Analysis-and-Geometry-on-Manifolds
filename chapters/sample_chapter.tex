@@ -1,0 +1,32 @@
+\chapter{Test}
+
+Some text.
+
+\begin{theorem}
+    There are infinitely many primes.
+\end{theorem}
+
+\begin{definition}
+    This is a definition.\marginnote{Not a very useful definition \dots\\ but a very useful marginnote!}
+\end{definition}
+
+\begin{remark}
+    This is a remark.
+\end{remark}
+TEST
+\begin{algorithm}[H]
+    \caption{}
+    \textbf{Input:} $A\in\R^{m\times n},m\geq n$\\
+    \textbf{Output:} $R$ von der $QR$-Zerlegung ($A$ wird zerstört ``in place'')
+    \begin{algorithmic}
+    \For{$j=1,\dots, n$}
+        \For{$i=m,m-1,\dots, j+1$}
+            \State Berechne $c,s$
+            \State $A[i-1:i,j:n]=\begin{bmatrix}
+                c & s \\
+                -s & c 
+            \end{bmatrix}^t A[i-1:i,j:n]$
+        \EndFor
+    \EndFor
+    \end{algorithmic}
+\end{algorithm}

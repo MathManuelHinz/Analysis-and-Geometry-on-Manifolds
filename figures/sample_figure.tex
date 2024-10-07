@@ -1,0 +1,20 @@
+\begin{figure}[!h]
+        \begin{tikzpicture}[
+            circ/.style={circle, draw=red!60, fill=red!5, very thick, minimum size=1cm},
+            ]
+            %Nodes
+            \node[circ]    (A)                              {$\mathcal{A}$};
+            \node[circ]    (R)       [right=of A] {$\R$};
+            \node[circ]    (Ap)      [below=of R]  {$\mathcal{A}'$};
+            \node (inA) [right=0.02 cm and 0.03cm of A.center] {};
+            \node (inR) [left=0.02 cm and 0.03cm of R.center] {};
+            \node (inAp) [left=0.02 cm and 0.03cm of Ap.center] {};
+            \node (p) at ($(A)!0.5!(R)$) {$P$};
+            \node (x) at ($(A)!0.5!(Ap)$) {$X^{-1}$};
+            \draw[->, very thick] (inA.center) to[out=20,in=100] (inR.center);
+            \draw[->, very thick] (inAp.center) to[out=110,in=-10] (inA.center);
+            \fill[red] (inA) circle (1pt);
+            \fill[red] (inAp) circle (1pt);
+            \fill[red] (inR) circle (1pt);
+        \end{tikzpicture}
+\end{figure}

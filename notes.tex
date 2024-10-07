@@ -1,0 +1,66 @@
+\documentclass[a4paper, 10pt, oneside]{book}
+\input{preamble.tex}
+
+\author{Manuel Hinz}
+
+
+\begin{document}
+\newgeometry{left=15mm,right=15mm,bmargin=2cm}
+\pagecolor{mycolor}
+\begin{titlepage}
+    \centering
+
+    \vspace*{1cm}
+
+    % Title and subtitle are enclosed between two rules.
+    \rule{\textwidth}{1pt}
+
+    % Title
+    \vspace{.7\baselineskip}
+    {\huge \textbf{Lecture notes on Analysis and Geometry on Manifolds}}
+
+    % Subtitle
+    \rule{\textwidth}{1pt}
+
+    \vspace{1.5cm}
+
+    % Set this size for the remaining titlepage.
+    \large
+
+    % Authors side by side, using two minipages as a trick.
+    \begin{minipage}{.5\textwidth}
+        \centering
+        Written by \\
+        Manuel Hinz\\
+        {\normalsize mh@mssh.dev or s6mlhinz@uni-bonn.de}
+    \end{minipage}%
+    \begin{minipage}{.5\textwidth}
+        \centering
+        Lecturer\\
+        Prof. Dr. Laurent Côté  \\
+        {\normalsize lcote@math.uni-bonn.de}
+    \end{minipage}
+
+
+    \vspace{3cm}
+
+    % Report logo.
+    \includegraphics[width=.7\textwidth]{example-image}
+
+    \vfill
+
+    % University and date information at the bottom of the titlepage.
+    University of Bonn \\
+    Winter semester 2024/2025\\
+    Last update: \today
+   
+\end{titlepage}
+\pagecolor{white}
+\tableofcontents
+
+\restoregeometry
+\setcounter{chapter}{-1}
+\chapter{Manuel's notes}
+\input{warning}
+\input{general_information}
+\end{document}

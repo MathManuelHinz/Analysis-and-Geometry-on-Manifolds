@@ -1,0 +1,331 @@
+\usepackage{float}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper,footskip=0.25in]{geometry}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{ dsfont }
+\usepackage[most]{tcolorbox}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{adjustbox}
+\usepackage{mathrsfs}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{marginnote}
+\usepackage{xhfill}
+\usepackage{mparhack}
+\usepackage{pagecolor}
+\usepackage{titlesec}
+\usepackage{sectsty}
+\usepackage{tocloft}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{tocloft}
+\usepackage{hyperref}
+\usepackage{etoolbox}
+\usepackage{xstring}
+
+
+\definecolor{mygray}{RGB}{239,240,241}
+\definecolor{mycolor}{RGB}{139, 0, 0}
+\usetikzlibrary{babel}
+\usetikzlibrary{cd}
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+\usetikzlibrary{arrows.meta}
+
+\geometry{
+	left=10mm, % left margin
+	textwidth=150mm, % main text block
+	marginparsep=5mm, % gutter between main text block and margin notes
+	marginparwidth=40mm, % width of margin notes
+  bmargin=2cm % height of foot note space
+}
+\graphicspath{ {./figures/} }
+\setlength{\cftchapnumwidth}{2.25cm}
+\renewcommand{\cftchappresnum}{\chaptername\ }
+
+
+\pagestyle{fancy}
+
+\renewcommand{\headrule}{\color{mycolor}\hrulefill}
+
+\newlength\FHoffset
+\setlength\FHoffset{1cm}
+
+\addtolength\headwidth{2\FHoffset}
+
+\fancyheadoffset{\FHoffset}
+
+% these lengths will control the headrule trimming to the left and right 
+\newlength\FHleft
+\newlength\FHright
+
+% here the trimmings are controlled by the user
+\setlength\FHleft{1cm}
+\setlength\FHright{-3.25cm}
+
+% The new definition of headrule that will take into account the trimming(s)
+\newbox\FHline
+\setbox\FHline=\hbox{\hsize=\paperwidth%
+  \hspace*{\FHleft}%
+  \rule{\dimexpr\headwidth-\FHleft-\FHright\relax}{\headrulewidth}\hspace*{\FHright}%
+}
+\renewcommand\headrule{\color{mycolor}\vskip-.7\baselineskip\copy\FHline}
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{#1}}
+\fancyhead[R]{}
+\fancyhead[L]{}
+\fancyhead[C]{\hspace{3.25cm}\color{mycolor}\chaptername\ \thechapter\ --\ \leftmark}
+\fancyfoot[L]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+\fancyfoot[C]{}
+
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[L]{Page \thepage \hspace{1pt} of \pageref{LastPage}}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+  
+}
+
+\def\C{\mathbb{C}}
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\Q{\mathbb{Q}}
+\def\bE{\mathbb{E}}
+\def\bP{\mathbb{P}}
+\def\Z{\mathbb{Z}}
+\def\cA{\mathcal{A}}
+\def\cM{\mathcal{M}}
+\def\cE{\mathcal{E}}
+\def\cF{\mathcal{F}}
+\def\cS{\mathcal{S}}
+\def\cH{\mathcal{H}}
+\def\cN{\mathcal{N}}
+\def\Mloc{\mathcal{M}_{\text{loc}}}
+\def\as{\text{ a.s. }}
+\def\cov{\text{cov}}
+\def\gp{\text{GP}}
+\def\tr{\text{tr}}
+\def\Id{\text{Id}}
+\def\Var{\text{Var}}
+\def\EDM{\text{EDM}}
+\def\DM{\text{DM}}
+\def\Lrw{L_{\text{RW}}}
+\def\Lsym{L_{\text{sym}}}
+\def\dd{{\text{dd}}}
+\def\KL{{\text{KL}}}
+\DeclareMathOperator*{\argmin}{\text{argmin}}
+
+
+\counterwithout*{equation}{equation}
+\renewcommand{\theequation}{\arabic{equation}}
+
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem*{*definition}{Definition}
+\newtheorem*{remark}{Remark}
+\newtheorem*{aremark}{Added remark}
+\newtheorem*{example}{Example}
+\newtheorem*{adefinition}{Added definition}
+\newtheorem*{aexample}{Added example}
+\newtheorem*{theorem*}{Theorem}
+\raggedright
+
+
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=mycolor,  %choose some color if you want links to stand out
+    linkbordercolor=mycolor,
+    urlcolor=mycolor
+}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries\flushleft\color{mycolor}}{\Huge\chaptertitlename\ \thechapter:}{0pt}{\Huge}
+\sectionfont{\color{mycolor}}
+\subsectionfont{\color{mycolor}}
+
+
+\renewcommand{\cftchapfont}{\color{mycolor}\large\bfseries}
+\renewcommand{\cftsecfont}{\color{mycolor}}
+\renewcommand{\cftsubsecfont}{\color{mycolor}}
+\renewcommand{\cftsubsubsecfont}{\color{mycolor}}
+
+\renewcommand{\cftchapleader}{\color{mycolor}     \cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftsecleader}{\color{mycolor}     \cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftsubsecleader}{\color{mycolor} \cftdotfill{\cftsecdotsep}}
+\renewcommand{\cftsubsubsecleader}{\color{mycolor} \cftdotfill{\cftsecdotsep}}
+
+\def\lecturelist{}
+\def\tutlist{}
+
+\newcommand{\beginlecture}[2]{\hypertarget{lec#1}{}\listxadd{\lecturelist}{lec#1}\marginnote{Start of lecture #1 (#2)}}
+\newcommand{\begintutorial}[2]{\hypertarget{tut#1}{}\listxadd{\tutlist}{tut#1}\marginnote{Start of tutorial #1 (#2)}}
+\newcommand{\dhighlight}[1]{{\color{mycolor}{\underline{{\textbf{#1}}}}}}
+\newcommand{\highlight}[1]{{\color{mycolor}{\textbf{#1}}}}
+\newcommand{\includeproblem}[2]{
+\begin{tcolorbox}[enhanced,breakable,
+	title=Problem #1,frame style={color=mycolor}]
+	\input{#2}
+\end{tcolorbox}}
+\newcommand{\includesolution}[2]{
+\begin{tcolorbox}[enhanced,breakable,
+	title=Solution #1,frame style={color=mycolor}]
+	\input{#2}
+\end{tcolorbox}}
+
+\renewcommand{\labelitemi}{$\textcolor{mycolor}{\bullet}$}
+\renewcommand{\labelitemii}{$\textcolor{mycolor}{\cdot}$}
+\renewcommand{\labelitemiii}{$\textcolor{mycolor}{\diamond}$}
+\renewcommand{\labelitemiv}{$\textcolor{mycolor}{\ast}$}
+
+\tcolorboxenvironment{corollary}{
+  colback=blue!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{theorem}{
+  colback=blue!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{lemma}{
+  colback=blue!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{proposition}{
+  colback=blue!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{*definition}{
+  colback=blue!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{remark}{
+  colback=red!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{aremark}{
+  colback=red!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{example}{
+  colback=red!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{adefinition}{
+  colback=blue!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{aexample}{
+  colback=red!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{definition}{
+  colback=green!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
+
+\tcolorboxenvironment{algorithm}{
+  colback=mygray,
+  boxrule=0pt,
+  boxsep=1pt,
+  oversize=2pt,
+  left=2pt,right=2pt,top=-12pt,bottom=0pt,
+  sharp corners,
+  breakable
+}
