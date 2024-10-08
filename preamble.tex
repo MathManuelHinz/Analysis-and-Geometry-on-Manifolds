@@ -31,7 +31,7 @@
 
 
 \definecolor{mygray}{RGB}{239,240,241}
-\definecolor{mycolor}{RGB}{139, 0, 0}
+\definecolor{mycolor}{RGB}{1,50,32}
 \usetikzlibrary{babel}
 \usetikzlibrary{cd}
 \usetikzlibrary{positioning}
@@ -167,7 +167,6 @@
 
 \def\lecturelist{}
 \def\tutlist{}
-
 \newcommand{\beginlecture}[2]{\hypertarget{lec#1}{}\listxadd{\lecturelist}{lec#1}\marginnote{Start of lecture #1 (#2)}}
 \newcommand{\begintutorial}[2]{\hypertarget{tut#1}{}\listxadd{\tutlist}{tut#1}\marginnote{Start of tutorial #1 (#2)}}
 \newcommand{\dhighlight}[1]{{\color{mycolor}{\underline{{\textbf{#1}}}}}}

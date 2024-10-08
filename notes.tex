@@ -13,14 +13,14 @@
     \vspace*{1cm}
 
     % Title and subtitle are enclosed between two rules.
-    \rule{\textwidth}{1pt}
+    {\color{white}\rule{\textwidth}{1pt}}
 
     % Title
     \vspace{.7\baselineskip}
-    {\huge \textbf{Lecture notes on Analysis and Geometry on Manifolds}}
+    {\huge {\color{white}\textbf{Lecture notes on Analysis and Geometry on Manifolds}}}
 
     % Subtitle
-    \rule{\textwidth}{1pt}
+    {\color{white}\rule{\textwidth}{1pt}}
 
     \vspace{1.5cm}
 
@@ -29,12 +29,14 @@
 
     % Authors side by side, using two minipages as a trick.
     \begin{minipage}{.5\textwidth}
+        \color{white}
         \centering
         Written by \\
         Manuel Hinz\\
         {\normalsize mh@mssh.dev or s6mlhinz@uni-bonn.de}
     \end{minipage}%
     \begin{minipage}{.5\textwidth}
+        \color{white}
         \centering
         Lecturer\\
         Prof. Dr. Laurent Côté  \\
@@ -45,14 +47,16 @@
     \vspace{3cm}
 
     % Report logo.
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{Noise_1.0_50.0_32.0}
 
     \vfill
 
     % University and date information at the bottom of the titlepage.
+    \color{white}{
     University of Bonn \\
     Winter semester 2024/2025\\
     Last update: \today
+    }
    
 \end{titlepage}
 \pagecolor{white}
@@ -63,4 +67,10 @@
 \chapter{Manuel's notes}
 \input{warning}
 \input{general_information}
+\chapter*{List of Lectures}
+\addcontentsline{toc}{chapter}{List of Lectures}
+\begin{itemize}
+    \renewcommand*{\do}[1]{\item \hyperlink{#1}{Lecture \StrBehind{#1}{c}:} \input{journal/#1}}
+    \dolistloop{\lecturelist}
+\end{itemize}
 \end{document}
