@@ -24,7 +24,11 @@ Some (set theoretical) conventions for the whole course:
     Assume that \(X\) is locally Euclidean. A \dhighlight{chart} is a pair \(U,\phi\), where \(U\subset X\),
     \(\phi:U\to\R^n\) is a homeomorphism into its image. Given \(p\in X\), we say that \(U,\phi\) is 
     \dhighlight{centered at \(p\)} if \(p\in U\) and \(\phi(p)=0\in\R^n\)
-    %Todo: insert sketch 1.01
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_1_01.png}
+        \caption{Sketch 1.01}
+    \end{figure}
 \end{definition*}
 
 \begin{lemma}\label{lem:1.1}
@@ -51,7 +55,11 @@ Some (set theoretical) conventions for the whole course:
 
 \begin{definition*}
     A topological space \(X\) is called Hausdorff, if given any \(p_1\neq p_2\),\(p_1,p_2\in X\), there exist neighborhoods \(p_1\in U_1,p_2\in U_2\) s.t. \(U_1\cap U_2=\emptyset\).
-    %TODO: ADD SKETCH 1.02
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_1_02.png}
+        \caption{Sketch 1.02}
+    \end{figure}
 \end{definition*}
 
 \begin{example}
@@ -71,7 +79,7 @@ Some (set theoretical) conventions for the whole course:
 \end{remark}
 
 
-\begin{lemma}
+\begin{lemma}\label{lem:1.2}
     Let \(X\) be Hausdorff. 
     \begin{enumerate}
         \item[(a)] point sets \(\{x\}\) are closed
@@ -87,7 +95,13 @@ Some (set theoretical) conventions for the whole course:
     \(q\in K\), we can choose \(U_q\ni q, U_p\ni p: U_q\cap U_p=\emptyset\) Since K is compact, it can be covered by \(U_{q_1},\dots,U_{q_l}\). Then \(\bigcap_{i=1}^l U_{q_i}\) is oen and contains 
     \(p\), disjoint, then \(\bigcup_{i=1}^l U_{q_i}\supset K\).
 
-    (b) Suppose for contradiction that \(x_i\to p,x_i\to q\) and \(p\neq q\). Since \(X\) is Hausdorff, \(exists U\ni p, O\ni q, U\cap O=\emptyset\). But for \(N>>0 x_i\in U, x_i\in O\forall i>N\)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_1_03.png}
+        \caption{Sketch 1.03}
+    \end{figure}
+
+    (b) Suppose for contradiction that \(x_i\to p,x_i\to q\) and \(p\neq q\). Since \(X\) is Hausdorff, \(\exists U\ni p, O\ni q, U\cap O=\emptyset\). But for \(N>>0 x_i\in U, x_i\in O\forall i>N\)
 \end{proof}
 
 
@@ -97,8 +111,12 @@ Let \(X\) be a topological space.
 
 \begin{definition*}
     A collection \(\cB\) of subsets of \(X\) is called a \dhighlight{basis(base)} for \(X\), if for any \(p\in X\)
-    and any neighborhood\(U\ni p\), there exists an element \(\cU\in\cB\) s.t. \(p\in \cU\subset U\).
-    % Add sketch 1.04
+    and any neighborhood \(U\ni p\), there exists an element \(\cU\in\cB\) s.t. \(p\in \cU\subset U\).
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_1_04.png}
+        \caption{Sketch 1.04}
+    \end{figure}
 \end{definition*}
 
 
@@ -147,10 +165,10 @@ Let \(X\) be a topological space.
 
 \begin{definition*}
     Let \(X\) be a topological space. An \dhighlight{exhaustion of \(X\) by compact subsets} is a sequence \(\{K_i\}_{i\in\N}\),
-    where \(K_i\subset X\) compact and \(K_i\subset \interior{K_{i+1}}\) and \(\bigcup_{i=1}^\infty K_i=X\).
+    where \(K_i\subset X\) compact and \(K_i\subset \interior(K_{i+1})\) and \(\bigcup_{i=1}^\infty K_i=X\).
 \end{definition*}
 
-Recall given \(A\subset X\). \(\int(A)\coloneqq \{x\in A\mid x \text{ in a neighborhood } U\subset A\}\).
+Recall given \(A\subset X\). \(\interior(A)\coloneqq \{x\in A\mid x \text{ in a neighborhood } U\subset A\}\).
 
 
 \begin{lemma}\label{lem:1.6}
@@ -159,12 +177,16 @@ Recall given \(A\subset X\). \(\int(A)\coloneqq \{x\in A\mid x \text{ in a neigh
 
 \begin{proof}
     Since \(X\) is locally Euclidean, admits a basis \(\cB\) of open subsets having compact closure.\marginnote{That is take the close of \(B_{\frac{1}{2}}\subset\R^n\)}
-    % insert sketch 1.05
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_1_05.png}
+        \caption{Sketch 1.05}
+    \end{figure}
     By Lemma 1.5, one can extract a countable subcover \(\{U_i\}_{i=1}^\infty\). Set \(K_1=\overline{U_1}\).
     Assume that we already constructed \(K_1,\dots,K_k\) such that \(U_j\subset K_j\)
     and \(K_{j-1}\subset\interior(K_j),j\geq 2\). Since \(K_k\) is compact and \(K_k\subset X=\bigcup_{i=1}^\infty U_i\), then there exists some \(m_k\) such that 
     \(K_k\subset X=\bigcup_{i=1}^{m_k} U_i\) by compactness. Might as well assume that \(m_k\geq k\). Set 
-    \[K_{k+1}=\overline{\bigcup_{i=1}^{m_k} U_i}=\bigcup_{i=1}^{m_k} \overline{U_i}\]. By construction \(K_{k+1}\) 
+    \[K_{k+1}=\overline{\bigcup_{i=1}^{m_k} U_i}=\bigcup_{i=1}^{m_k} \overline{U_i}.\] By construction \(K_{k+1}\) 
     is compact, \(K_k\subset \interior(K_{k+1})\). We get \(\{K_j\}_{j=1}^\infty\), \(U_j\subset K_j\) (because \(m_j\geq j\)) \(\implies \bigcup_{i=1}^\infty U_i=\bigcup_{i=1}^\infty K_i\)
 \end{proof}
 
