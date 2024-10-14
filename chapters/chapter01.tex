@@ -105,7 +105,7 @@ Some (set theoretical) conventions for the whole course:
 \end{proof}
 
 
-\section{Basis and covers}
+\subsection{Basis and covers}
 
 Let \(X\) be a topological space.
 
@@ -142,7 +142,7 @@ Let \(X\) be a topological space.
     The property of being second-countable is closed under 
     \begin{enumerate}
         \item[(a)] subspaces
-        \item[(b)] finite unions
+        \item[(b)] countable disjoint unions
         \item[(c)] countable products
     \end{enumerate}
 \end{lemma}
@@ -172,7 +172,7 @@ Recall given \(A\subset X\). \(\interior(A)\coloneqq \{x\in A\mid x \text{ in a 
 
 
 \begin{lemma}\label{lem:1.6}
-    If \(X\) is locally Euclidean, Hausdorff and second countable. Then \(X\) admits an exhaustion by compact subsets.
+    If \(X\) is locally Euclidean, Hausdorff\footnote{not needed} and second countable. Then \(X\) admits an exhaustion by compact subsets.
 \end{lemma}
 
 \begin{proof}
@@ -189,7 +189,211 @@ Recall given \(A\subset X\). \(\interior(A)\coloneqq \{x\in A\mid x \text{ in a 
     \[K_{k+1}=\overline{\bigcup_{i=1}^{m_k} U_i}=\bigcup_{i=1}^{m_k} \overline{U_i}.\] By construction \(K_{k+1}\) 
     is compact, \(K_k\subset \interior(K_{k+1})\). We get \(\{K_j\}_{j=1}^\infty\), \(U_j\subset K_j\) (because \(m_j\geq j\)) \(\implies \bigcup_{i=1}^\infty U_i=\bigcup_{i=1}^\infty K_i\)
 \end{proof}
+\beginlecture{02}{11.10.2024}
+\subsection*{Some remarks and apologies}
+\begin{itemize}
+    \item Homework 01, apology for paracompactness (if this happens again, feel free to complain)
+    \item Lemma \ref{lem:1.4} should be countable disjoint unions (already corrected in my notes)
+    \item In lemma \ref{lem:1.6}, Hausdorff assumption not needed (already corrected in my notes)
+    \item For questions about exercises, email Koen von der Dungen or your TA\footnote{tutor} directly
+\end{itemize}
+
+\begin{definition*}\label{def:local_finiteness}
+    Let \(X\) be a topological space. Let \(\cC\) be a collection of subsets of \(X\). We say that \(\cC\) 
+    is \dhighlight{locally finite} if for every \(x\in X\) there exists a neighborhood \(U\ni x\) such that 
+    the intersection of \(U\) with all but finitely many elements of \(\cC\) is empty.
+\end{definition*}
+
+\begin{example}[Example for local finiteness]
+    Take \(X=\R\), \(\cC=\{(i-1,i+1)\}_{i\in\Z}\).
+    %SKETCH 1.06
+\end{example}
+
+\begin{example}[Non-example for local finiteness]
+    \(X=\R\), \(\cC=(q-1,q+1)_{q\in\Q}\)
+\end{example}
+
+\begin{definition*}\label{def:refinement}
+    Let \(X\) be a topological space. Let \(\cC\) be a cover of \(X\). A cover \(\cC'\) of \(X\) is called a 
+    \dhighlight{refinement of \(\cC\)}, if for all elements \(U\in\cC'\), there exists such \(V\in\cC\): \(U\subset V\).
+\end{definition*}
+
+\begin{example}[Example of Refinement]
+   In the proof of lemma \ref{lem:1.5}, we showed that any open cover admits a refinement by basis elements. 
+\end{example}
+
+\begin{definition*}
+    A topological space \(X\) is called \dhighlight{paracompact} if every open cover admits a locally finite refinement.
+\end{definition*}
+
+Whats up with the word \highlight{para}compact? It's like compact, but weaker! It is necessary that it only admits a locally finite refinement!
+
+\begin{lemma}\label{lem:1.7}
+    Let \(X\) be Hausdorff and suppose that \(X\) admits an exhaustion by compact subsets. Then 
+    \(X\) is paracompact.In fact, we will show that given any basis \(\cB\) of \(X\), any open cover 
+    admits a locally finite refinement by elements of \(\cB\).
+\end{lemma}
+
+\begin{proof}
+    By assumption, \(\{K_i\}_{i\in \N}\), \(K_i\) compact, \(K_i\subset\interior(K_{i+1}),\bigcup_{i=1}^\infty K_i=X\).\marginnote{Careful! There are many definitions of exhaustion by compact sets \dots}
+    Let, for  \(j\in\Z: V_j=K_{j+1}\setminus \int (K_j)\) if \(j\leq 0: K_j=\emptyset\)\footnote{He writes \(-\) for \(\setminus\)}.
+    % sketch 1.07
+    Notice:
+    \begin{itemize}
+        \item \(V_j\) is compact, since we take the intersection of a compact set and a closed set. (\(\interior(K_j)^c\) is closed)
+        \item \(\bigcup_{j\in \Z} V_J=X\), since \(\bigcup_{j\leq n}=\bigcup_{j\leq n+1} K_j=K_{j+1}\)
+        \item The compact sets \(V_j\) are intersecting (along their boundary?) \(V_j\cap V_{j-1}=\partial K_j\coloneqq K_j\setminus\interior(K_j)\)
+    \end{itemize}
+    Evidently \marginnote{Here we use Hausdorffness}\(\{U_\alpha \cap \interior(K_{j+1})\cap \interior(K_{j-1})^c\}_{\alpha\in\cA}\) covers \(V_j=K_{j+1}-\setminus K_{j-1}^c\), where the \(\{U_\alpha\}_{\alpha\in\cA}\) is an open cover.
+    Since \(\cB\) is a basis, we can find a refinement of this cover by basis elements. Since \(V_j\) are compact, we can extract a 
+    finite subcover \(\{V_l^j\}_{l=1,\dots,k_j}\). Let's consider: \(\{V_l^j\}_{j\in Z, l=1,\dots,k_j}\). This 
+    subcover works, i.e. 
+    \begin{itemize}
+        \item obviously a cover, since the \(V_j\) cover \(X\), obviously a refinement of \(\{U_\alpha\}\) 
+        \item locally finite: given \(x\in X, x\in V_j\), hence \(x\in \interior(K_{K_{j+2}})\cap K_{j-1}^c\eqqcolon U\). If 
+              \(U\cap V_l^k\), then we must have \(j-2\leq k\leq j+2\). But \(\{V_l^k\}_{j-2\leq k\leq j+2}\) is finite. \qedhere  
+    \end{itemize} 
+\end{proof}
+
+\begin{corollary}\label{cor:1.8}
+    If \(X\) is locally Euclidean, Hausdorff and second countable \(\implies X\) is paracompact.
+\end{corollary}
+
+\begin{proof}
+    By lemma \ref{lem:1.6} (exhaustion by compact subsets) and lemma \ref{lem:1.7} \(\implies\) paracompact.
+\end{proof}
+\setcounter{theorem}{7}
+\begin{corollary}[1.8']\label{cor:1.8'} % TODO
+    Let \(X\) be Euclidean amd Hausdorff. Then \(X\) is second countable iff \(X\) has countably many components and \(X\) is paracompact.
+\end{corollary}
+\begin{remark}
+    There are different definitions of manifolds. They differ in either forcing second countability or paracompactness. This lemma shows 
+    that there only is a difference if there are uncountably many components.
+\end{remark}
+
+\begin{proof}
+    Corollary \ref{cor:1.8} and the bonus homework problem from sheet 01.
+\end{proof}
+
+\begin{remark}
+    Basis elements are open.
+\end{remark}
+
+\section{Topological manifolds}
+
+\begin{definition*}
+    A \dhighlight{topological \(n\)-manifold} \(M\) is a topological space with the following properties:
+    \begin{enumerate}
+        \item[(i)]   \(M\) is locally Euclidean (of dimension \(n\)) 
+        \item[(ii)]  \(M\) is Hausdorff
+        \item[(iii)] \(M\) is second countable 
+    \end{enumerate}
+\end{definition*}    
+
+Morally we only really need condition (i). Why do we need the others? 
+For (ii) you will not get a useful theor without it, while (iii) can be replaced by paracompactness (see corollary \ref{cor:1.8'}).
+
+\begin{definition*}
+    Let Man$^0$ be the category of topological manifolds with 
+    \begin{enumerate}
+        \item objects: topological manifolds 
+        \item morphisms: continuous functions  
+    \end{enumerate}
+\end{definition*}
+
+\begin{remark}
+    \(\man0\) full subcategory of Top.
+\end{remark}
+
+\begin{remark}
+    By definition, \(M,N\in\man0\), then \(M,N\) are isomorphic iff \(M,N\) are homeomorphic.
+\end{remark}
+
+\subsection{Examples of topological manifolds}
+
+\begin{example}[Spaces isomorphic to \(R^n\)]
+    \(\R^n,n\geq 0\) More generally, if \(V\) a finite dimensional \(\R\)-vector space, then \(V\)
+    is a topological \(n\)-manifold.
+\end{example}
+
+\begin{example}
+    Any open subset of \(\R^n\)
+\end{example}
+
+\begin{example}[Graphs]
+    Let \(U\subseteq \R^n\) open, let \(f:U\to\R^n\) be a continuous function. We set 
+    \[M\coloneqq\text{graph}(f)\coloneqq \{(x,y)\in U\times \R^n\mid y=f(x)\}.\]
+    Then \(M\) is a manifold. The map \(M\to U\) by \((x,y)\mapsto U\) gives a global chart.
+\end{example}
+
+\begin{example}[Spheres]
+    Let \(S^n\coloneqq \{x_0^2+\dots+x_n^2=1\}\subset \R^{n+1}\). Then \(S^n\) is a manifold\marginnote{Here we no longer have a global chart (for topological reasons)}.
+    We define charts \[\phi_i^{\pm}:U_i^\pm = \{(x_0,\dots,x_n)\in S^n\mid \pm x_i>0\}\to B_1^n(0)\]
+    by \((x_0,\dots,x_n)\mapsto (x_0,\dots,\hat{x}_i,\dots,x_n)\coloneqq (x_0,\dots,x_{i-1},x_{i+1},\dots,x_n)\)
+    %Sketch 1.08
+\end{example}
+
+\begin{example}[spheres']
+    Let \(C^n\coloneqq \partial([-1,1]^{n+1})=[-1,1]^{n+1}\setminus\interior([-1,1]^{n+1})\).
+    Homework: \(C^n\simeq S^n\) (homeomorphic)
+\end{example}
+
+\begin{example}[\(n\)-torus]
+    Let \(\Pi^n\coloneqq \R^n/\Z^n\) with the quotient topology. Then this is a manifold (exercise).
+    %Sketch 1.09
+\end{example}
+
+\begin{example}[\(\R\bP^n\coloneqq S^n/\{x\sim -x\}\)]
+    \(\R\bP^n\) are also manifolds (called the real projective spaces).
+\end{example}
+
+\begin{example}[Klein bottle]
+    %Sketch 1.10
+\end{example}
+
+\begin{remark}
+    \(\R\bP^2\) or generally \(\R\bP^{2n}\) and the Klein bottle are not orientable.
+\end{remark}
 
 
+Brief interlude: Section? %TODO
 
+Why do we need Hausdorffness?
+
+\begin{itemize}
+    \item Back in the day (Riemann) %Sketch 1.11 
+    \item There is no hope to classify even 1d locally Euclidean, second-countable NOT Hausdorff spaces (See the line with two origins)
+    \item With Hausdorff: Only 1d manifolds are \(\R,S^1\) (see website) 
+\end{itemize}
+Why do we need second countability? 
+\begin{itemize}
+    \item Subspaces of \(\R^n\) are second countable 
+    \item We want partitions of unity (paracompactness suffices for that)
+\end{itemize}
+
+\subsection{Manifolds with boundary}
+
+Let \(\bH^n\coloneqq \{(x_1,\dots,x_n)\in\R^n\mid x_n\geq 0\}\).
+\begin{definition}
+    A \dhighlight{manifold with boundary} is a topological space with the following properties:
+    \begin{enumerate}
+        \item[(i)] Every point has a neighborhood homeomorphic to an open subset of \(\bH^n\)
+        \item[(ii)] Hausdorff
+        \item[(iii)] second countable   
+    \end{enumerate}
+\end{definition}
+
+Clearly every manifold is also a manifold with boundary.
+
+\begin{example}
+    \(\bH^n\) is a manifold with boundary, but not a manifold. Since for points on the boundary, there are no neighborhoods homeomorphic to Euclidean space.
+\end{example}
+
+\begin{example}
+    \(S^n\cap \cH^{n+1},S^n\subset\R^{n+1}\), \([a,b],[0,\infty)\) % sketch 1.12
+\end{example}
+
+\begin{definition}
+    If \(M\) manifold with boundary, we say \(x\) is a \dhighlight{boundary point}, if \(x\in M\setminus\interior(M)\) (i.e. it has no neighborhood homeomorphic to Euclidean space?), otherwise \(x\) is an iterior point. We let \(\partial M \coloneqq \{\text{boundary points}\}\).
+\end{definition}
 
