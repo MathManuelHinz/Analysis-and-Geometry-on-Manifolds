@@ -270,10 +270,9 @@ Whats up with the word \highlight{para}compact? It's like compact, but weaker! I
 \begin{proof}
     By lemma \ref{lem:1.6} (exhaustion by compact subsets) and lemma \ref{lem:1.7} \(\implies\) paracompact.
 \end{proof}
-\setcounter{theorem}{7}
-\begin{corollary}[1.8']\label{cor:1.8'} % TODO
+\begin{customclr}{1.8'}\label{cor:1.8'} % TODO
     Let \(X\) be Euclidean amd Hausdorff. Then \(X\) is second countable iff \(X\) has countably many components and \(X\) is paracompact.
-\end{corollary}
+\end{customclr}
 \begin{remark}
     There are different definitions of manifolds. They differ in either forcing second countability or paracompactness. This lemma shows 
     that there only is a difference if there are uncountably many components.
@@ -299,7 +298,7 @@ Whats up with the word \highlight{para}compact? It's like compact, but weaker! I
 \end{definition*}    
 
 Morally we only really need condition (i). Why do we need the others? 
-For (ii) you will not get a useful theor without it, while (iii) can be replaced by paracompactness (see corollary \ref{cor:1.8'}).
+For (ii) you will not get a useful theory without it, while (iii) can be replaced by paracompactness (see corollary \ref{cor:1.8'}).
 
 \begin{definition*}
     Let Man$^0$ be the category of topological manifolds with 
@@ -375,10 +374,7 @@ For (ii) you will not get a useful theor without it, while (iii) can be replaced
     \(\R\bP^2\) or generally \(\R\bP^{2n}\) and the Klein bottle are not orientable.
 \end{remark}
 
-
-Brief interlude: Section? %TODO
-
-Why do we need Hausdorffness?
+\subsection{Brief interlude: Why do we need Hausdorffness?}
 
 \begin{itemize}
     \item Back in the day (Riemann) 
@@ -394,14 +390,14 @@ Why do we need second countability?
 \subsection{Manifolds with boundary}
 
 Let \(\bH^n\coloneqq \{(x_1,\dots,x_n)\in\R^n\mid x_n\geq 0\}\).
-\begin{definition}
+\begin{definition*}
     A \dhighlight{manifold with boundary} is a topological space with the following properties:
     \begin{enumerate}
         \item[(i)] Every point has a neighborhood homeomorphic to an open subset of \(\bH^n\)
         \item[(ii)] Hausdorff
         \item[(iii)] second countable   
     \end{enumerate}
-\end{definition}
+\end{definition*}
 
 Clearly every manifold is also a manifold with boundary.
 
@@ -418,7 +414,7 @@ Clearly every manifold is also a manifold with boundary.
     \end{figure}
 \end{example}
 
-\begin{definition}
+\begin{definition*}
     If \(M\) manifold with boundary, we say \(x\) is a \dhighlight{boundary point}, if \(x\in M\setminus\interior(M)\) (i.e. it has no neighborhood homeomorphic to Euclidean space?), otherwise \(x\) is an iterior point. We let \(\partial M \coloneqq \{\text{boundary points}\}\).
-\end{definition}
+\end{definition*}
 
