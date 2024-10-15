@@ -1,0 +1,61 @@
+\chapter{Smooth manifolds}
+\section{Basic theory}
+\subsection{Charts and atlases}
+\begin{definition*}
+    Given \(U\subset\R^n\) open, a function \(f:U\to \R^m, f=(f_1,\dots,f_m)\) is called 
+    \dhighlight{smooth} (or \dhighlight{\(\C^\infty\)} or \dhighlight{infinitely differentiable}), if the 
+    \dhighlight{component functions} \(f_i\) admit all partial derivatives of all orders.
+\end{definition*}
+In other words \(f\) smooth: \(\iff\forall 1\leq i\leq m,\alpha=(\alpha_1,\dots,\alpha_n)\in\N^n,\partial_{\alpha} f\coloneqq \partial_{x_1}^{\alpha_1} \dots \partial_{x_n}^{\alpha_n} f\) exists.
+
+\begin{remark}
+    Given \(k\geq 0\), we can similarly say hat \(f\) is \dhighlight{\(k\)-times continuously differentiable} and write \((f\in)\) and write \(f\in C^k(U,\R^m)\), if 
+    for all \(\alpha=(\alpha_1,\dots,\alpha_n)\in\N^n,\sum\alpha_i \leq k\) \(\partial_x^\alpha f_i\) is continuous for all \(i\).
+\end{remark}
+
+% TODO Tausche corollary und def farbe!
+
+\begin{definition*}
+    Let \(M\) be a topological manifold. We say that two charts \((U_1,\phi_1)\), \((U_2,\phi_2)\)
+    are \dhighlight{smoothly compatible} if the map \(\phi_2\circ \phi_1^{-1}:\phi_1(U_1\cap U_2)\to\phi_2(U_1\cap U_2)\)
+    is smooth. We call \(\phi_2\circ\phi_1^{-1}\) a \dhighlight{transition function}.
+    % Sketch 1.17
+\end{definition*}
+
+\begin{definition*}
+    Let \(M\) be a topological manifold. An \dhighlight{(smooth) atlas} \(\cA\) of \(M\) is a collection of charts 
+    \(\{U_\alpha,\phi_\alpha\}_{\alpha\in\cA}\) such that 
+    \begin{itemize}
+        \item the \(\{U_\alpha\}\) cover \(M\)
+        \item the charts are pairwise smoothly compatible (i.e. for all \(\alpha,\beta\in\cA (U_\alpha,\phi_\alpha),(U_\beta,\phi_\beta)\) are smoothly compatible).
+    \end{itemize}
+\end{definition*}
+
+\begin{definition*}
+    We say that two atlases \(\cA,\cA'\) (on a fixed topological manifold) are \dhighlight{equivalent}, if their union 
+    \(\cA\cup\cA'\) is still an atlas.
+\end{definition*}
+
+\dhighlight{Fact(Sheet 03):}
+This defines an equivalence relation.
+
+\begin{definition*}
+    A \dhighlight{smooth manifold} \(M=(M,[\cA])\) consists of the following data:
+    \begin{enumerate}
+        \item[(i)] a topological manifolds \(M\)
+        \item[(ii)] an equivalence class of smooth atlases 
+    \end{enumerate}
+\end{definition*}
+
+
+\begin{remark}
+    \begin{itemize}
+        \item typically, we will designate smooth manifolds by a capital letter, e.g. \(M\). But we always mean \((M,[\cA])\).
+              \dhighlight{Note} being a smooth manifolds is \dhighlight{extra} structure on a topological space, while being a topological manifold is a property
+        \item Using Zorn's lemma, it can be shown that any atlas is contained in a \dhighlight{unique maximal atlas}. Uniqueness here does not use Zorn's lemma, only existence needs that! Equally well define a smooth manifold to 
+              be a topological manifold and a maximal atlas.\marginnote{Typically we are given an atlas, since the maximal atlases have uncountably mani charts, which is why we work with equivalence classes, rather than maximal atlases}
+        \item \(\forall 0\leq k\leq \infty\), we can define the notion of a \(C^k\)-atlas, simply by requiring that the transition functions are 
+              \(C^k\) functions. This yields the definition of \(C^k\)-Manifolds. Two extreme cases: \(C^0\)-manifold (topological manifolds) and \(C^\infty\)-manifolds. Any \(k\geq 1\) is not more interesting than \(C^\infty\)!
+    \end{itemize}
+\end{remark}
+

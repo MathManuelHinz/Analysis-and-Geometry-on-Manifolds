@@ -418,3 +418,114 @@ Clearly every manifold is also a manifold with boundary.
     If \(M\) manifold with boundary, we say \(x\) is a \dhighlight{boundary point}, if \(x\in M\setminus\interior(M)\) (i.e. it has no neighborhood homeomorphic to Euclidean space?), otherwise \(x\) is an iterior point. We let \(\partial M \coloneqq \{\text{boundary points}\}\).
 \end{definition*}
 
+\beginlecture{03}{15.10.2024} 
+
+\dhighlight{Addendum to the last lecture:}
+
+\begin{itemize}
+    \item \(\bH^n\not \simeq \R^n\) If you remove a point from \(\bH^n\) on the boundary, it is still contractable, while removing an point from \(\R^n\) yields an uncontractable space.
+    \item Given \(M\) a manifold with \(\partial\), a point \(p\in M\) is an \dhighlight{interior point}, if it admits a neighborhood homeomorphic to \(\R^n\). Otherwise 
+          \(p\) is a boundary point. (Already specified in my notes)  
+\end{itemize}
+
+\begin{remark}
+    Most of what he says in the course can be generalized to manifolds with boundary (unless it makes no sense).
+    Those results are only stated (and proofed) for manifolds. it might be a good exercise to go through the notes and generalize the statements to manifolds with boundary.
+\end{remark}
+
+\subsection{Elementary topological properties of topological manifolds}
+
+\marginnote{Not proved here, but we are welcome to use}
+
+\begin{itemize}
+    \item A manifold is connected iff it is path connected 
+    \item For manifolds, all forms of compactness (ordinary compactness (every open cover has a finite subcover), limit point compactness, sequential compactness) are equivalent
+    \item All manifolds are metrizable (Urysohn metrization theorem + second countable \(\implies\) metrizable) 
+    \marginnote{The first two point were proven on the first sheet. The last two use countability}    
+    \item Any manifold is homotopy equivalent to a countable CW complex (Milner?) \(\pi_k(M)\) are countable
+\end{itemize}
+
+\section{Classification of topological manifolds (proofs are not examable)}
+\subsection{Classification of 1-dimensional manifolds}
+\begin{theorem}\label{thm:1.9}
+    Any connected one dimensional manifold is homeomorphic to  
+    \begin{itemize}
+        \item \(\R^1\) or
+        \item \(\bH^1\)
+    \end{itemize}
+\end{theorem}
+
+\begin{proof}
+    See Course website: proof in the style of an exercise with hints. 
+\end{proof}
+
+\begin{remark}
+    If you allow a boundary, then you also have \([0,1],[0,1)\). 
+\end{remark}
+
+\subsection{Classification of 2-dimensional manifolds}
+\marginnote{2-dimensional manifolds are often called surfaces}
+\begin{itemize}
+    \item \(S^2=\{(x_0,x_1,x_2)\in\R^3\mid \sum_{i=0}^2 x_i^2=1\}\)
+    \item \(\Pi^2 \coloneqq \R^2/\Z^2\)
+    \item \(\R\bP^2=S^2/\{x\sim -x\}\)
+\end{itemize}
+
+\dhighlight{Construction}(Connected sum of surfaces):
+%TODO FIX
+% Sketch 1.14
+Let \(M_1,M_2\) be surfaces (i.e. 2-dimensional manifolds). Choose charts \(M_i\supset U_i\stackrel{\phi_i}{\to} B_1\subset \R^2\).
+Let \(M_i^\circ = M_i \setminus \phi_i^{-1}(B_{\frac{1}{2}})\). Let \(M_1 \# M_2 \coloneqq M_1^\circ \perp M_2^\circ /\sim\),
+where \(X\in M_1^\circ \sim y\in M_2^\circ\) if \(x\in \phi_1^{-1}(\partial \overline{B_{\frac{1}{2}}})\) and \(y=(\phi_2^{-1}\circ \phi_1) (x)\)
+%sketch 1.15
+\dhighlight{Fact:s}
+\begin{itemize}
+    \item If \(M_1,M_2\) are connected, then \(M_1\# M_2\) is well defined up to 
+    homeomorphism.
+    \item The operation of connected sum is also well defined for connected \(n\)-manifolds 
+    \item (for the future) The operation of connected sum also works in the smooth category.
+\end{itemize} 
+
+\begin{theorem}[Classification of surfaces]\label{thm:1.10}
+    Every compact, connected surface is homeomorphic to one of the following manifolds:
+    \begin{itemize}
+        \item \(S^2\)
+        \item \(\underbrace{\Pi^2\# \dots \# \Pi^2}_{k\text{ times}}\)
+        \item \(\underbrace{\R\bP^2\# \dots \# \R\bP^2}_{l\text{ times}}\) (non-orientable)
+    \end{itemize}
+    % Sketch 1.16
+\end{theorem}
+
+\begin{remark}
+    Surfaces are classified by the following invariants:
+    \begin{enumerate}
+        \item[(a)] orientability
+        \item[(b)] Euler characteristic   
+    \end{enumerate}
+    For later: This classification also works in the smooth category.
+\end{remark}
+
+\subsection{Classification of high dimensional manifolds (not examable at all)}
+
+\dhighlight{Poincaré conjecture} (now theorem of G. Perelman (2003), W. Thurston (1980s)):
+Any compact connected \(3\) dimensional manifold which is \dhighlight{simply connected }
+is homeomorphic to \(S^3\). This paper is all about PDEs and Ricci flows. 
+
+\dhighlight{Generalized Poincaré conjecture}: Any \(n\)-manifold, which is homotopy equivalent to \(S^n\) 
+is homeomorphic to \(S^n\). This is true in all dimensions. for \(n\geq 5\) Smale in the 1960s,
+for \(n=4\) Freedsen in the 1980s.
+
+Unlike in dimension 1,2,3 the classification of \(n\geq 3\)-dimensional manifolds is 
+complicated and not complete.
+
+\begin{example}
+    Any finitely presented group arises as the fundamental group of a compact 
+    connected \(4\)-manifold. Which is provably to hard?
+\end{example}
+
+
+
+
+
+
+
