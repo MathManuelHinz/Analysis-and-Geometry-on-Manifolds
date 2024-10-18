@@ -4,7 +4,7 @@
 \begin{definition*}
     Given \(U\subset\R^n\) open, a function \(f:U\to \R^m, f=(f_1,\dots,f_m)\) is called 
     \dhighlight{smooth} (or \dhighlight{\(\C^\infty\)} or \dhighlight{infinitely differentiable}), if the 
-    \dhighlight{component functions} \(f_i\) admit all partial derivatives of all orders.
+    \dhighlight{component functions} \(f_i\) admit all partial derivatives of all orders and all these partial derivatives are continuous.
 \end{definition*}
 In other words \(f\) smooth: \(\iff\forall 1\leq i\leq m,\alpha=(\alpha_1,\dots,\alpha_n)\in\N^n,\partial_{\alpha} f\coloneqq \partial_{x_1}^{\alpha_1} \dots \partial_{x_n}^{\alpha_n} f\) exists.
 
@@ -58,4 +58,207 @@ This defines an equivalence relation.
               \(C^k\) functions. This yields the definition of \(C^k\)-Manifolds. Two extreme cases: \(C^0\)-manifold (topological manifolds) and \(C^\infty\)-manifolds. Any \(k\geq 1\) is not more interesting than \(C^\infty\)!
     \end{itemize}
 \end{remark}
+
+\beginlecture{04}{18.10.2024}
+
+\dhighlight{Correction}
+
+\begin{itemize}
+    \item Definition of smoothness was corrected, s.t. derivatives are continuous. (Corrected in my notes)
+\end{itemize}
+
+\begin{remark}
+    Fine in dimension \(n=1\), but necessary for \(n>1\). See website for a counterexample.
+\end{remark}
+
+\subsection{First examples of smooth manifolds}
+
+\begin{example}[Example 1: The cannoical smooth manifold]
+    \(\R^n,n\geq 0\) is \dhighlight{canonically} a smooth manifold. The \dhighlight{canonical atlas} is induced by 
+    the topological chart \(U=\R^n,\phi:U\stackrel{\text{id}}{\to}\R^n\).
+\end{example}
+
+\begin{example}[Example 2: Another canonical smooth manifold]
+    Let \(V\) be a finite dimensional real vector space . Then \(V\) is canonically a smooth manifold. Pick 
+    a vector space basis \(\cB\). This basis induces a homeomorphism \(\phi_\cB: V\to\R^n\). If we had picked another basis \(\cB'\), then 
+    then the transition map \(\phi_{\cB'}\circ \phi_\cB^{-1}\in\text{GL}(n,\R)\). Hence \(\phi_{\cB'}\circ \phi_\cB^{-1}\)
+    is smooth.
+\end{example}
+
+\begin{example}[Example 3: Spheres]
+    We have \(S_c^n\coloneqq\{(x_0,\dots,x_n)\in\R^{n+1}\mid \sum_{i=0}^n x_i^2=c^2\}\) for \(c>0\).
+    Let \(\phi_i^{\pm}:\underbrace{U_i^{\pm}}_{\coloneqq \{(x_0,\dots,x_n)\in S_c^n\mid \pm x_i>0\}}\to B_c^n\).
+    Then \(\phi_j^{\pm}\circ \left(\phi_{i}^{pm}\right)^{-1}(y_1,\dots,y_n)=\phi_j^\pm\left(y_1,\dots,\pm\sqrt{c^2-\sum y_i},\dots,y_n\right)\), where \((y_1,\dots,y_n)\in B_c^n\).
+    \begin{align}
+        =\begin{cases}
+           (y_1,\dots,y_n) &i=j\\
+            (y_1,\dots,\sqrt{c^2-\sum y_k},\dots,\hat{y_j},\dots,y_n) & j>i\\
+            (y_1,\dots,\hat{y_{j+1}},\dots,\sqrt{c^2-\sum y_k},\dots,y_n) & j<i
+        \end{cases}
+    \end{align}
+    We conclude \(\{U_{i}^\pm,\phi_i^\pm\}\) is a smooth atlas.
+\end{example}
+
+\begin{example}[Example 4: Level sets]
+    Let \(\Phi:\R^{n+1}\to\R\) be a smooth function. Fix \(c\in\R\). Recall that the set \(\Phi^{-1}(c)=\{x\in\R^{n+1}\mid \Phi(x)=c\}\)
+    is called a \dhighlight{level set} of value \(c\). \highlight{Suppose} that, \(\forall p\in \Phi^{-1}(c):D\underbrace{\Phi(p)}_{=(\partial_{x_0}\Phi(p),\dots,\partial_{x_n}\Phi(p))}\neq 0\).
+    This means that \(\exists 0\leq i\leq n\) s.t. \(\partial_{x_i}\Phi(c)\neq0\). By the \dhighlight{implicit function theorem} (Lee, Theorem C.40, Course website),
+    there exists a neighborhood \(U\) of \(p\) such that \(U\cap\Phi^{-1}(p)=\{(x_0,\dots,f(x_0,\dots,\hat{x_i},\dots,x_n),x_n)\}\).
+    %Sketch 1.18
+
+    Let \(M=\phi^{-1}(c)\). We define \(\hat{\pi_i}:\R^{n+1}\to\R^n,(x_0,\dots,x_n)\mapsto (x_0,\dots,\hat{x_i},\dots,x_n)\).
+    \[\{(U,\hat{\pi_i})\mid U\subset M, \hat{\pi_i}\mid_U\text{ homeomorphism, } \partial_{x_i}\Phi\neq 0\text{ on } U\}\]
+
+    Remains to check the formula:
+    \[\hat{\pi_j}\circ \hat{\pi_i}^{-1}(y_1,\dots,y_n)=\begin{cases}
+        (y_1,\dots,f,\dots,\hat{y_j},\dots,y_n)& j>i\\
+        (y_1,\dots,\hat{y_{j+1}},\dots,f,\dots, y_n)& i<j\\
+        (y_1,\dots,y_n) & i=j 
+    \end{cases}\]
+\end{example}
+
+\begin{remark}
+    The condition \(D\Phi\neq 0\) is very explicit! It is very easy to generate lots of manifolds. For example: \(\Phi(x)=\sum \lambda_i x_i^2\)
+\end{remark}
+
+\begin{example}[Example 5: Subset of smooth manifold] Let \(M\) be a smooth manifold. Then 
+     \(U\subset M\) open, is also a smooth manifold. (Take charts of \(M\) and intersect / restrict each chart)
+\end{example}
+
+\begin{example}[Example 6: Product of manifolds] Let \(M,N\) be smooth manifolds. Then \(M\times N\) is also a 
+    smooth manifolds. Take as charts \marginnote{This takes care of the torus!}
+    \[\{(U\times V, (\phi,\psi))\mid (U,\phi),(V,\psi)\text{ charts of M,N respectively}\}\]
+\end{example}
+
+\begin{example}[Example 7: ]\marginnote{This is one to pay \dhighlight{attention} to!}
+    Let's consider \(\R\). We define a chart \(\R\to\R,x\mapsto x^3\). Observe that 
+    \[M=(U=\R,U\stackrel{\text{id}}{\to}\R)\]
+    and 
+    \[N=(U=\R,U\stackrel{x\mapsto x^3}{\to}\R)\]
+    are smooth manifolds, which are different! Since the transition functions between them are not smooth:
+
+    Indeed \(\text{id}\circ (x\mapsto x^3)^{-1}=(x\mapsto x^{\frac{1}{3}})\), which is not smooth!
+\end{example}
+
+\subsection{Smooth maps}
+
+\begin{definition*}
+    Let \(M\) be a smooth manifold. A map \(f:M\to\R^m\) is said to be \dhighlight{smooth}, if for all 
+    \(p\in M\), there exists a chart \((U,\phi)\) containing \(p\), such that
+    \[f\circ \phi^{-1}:\underbrace{\phi(U)}_{\subset\R^n}\to\R^m\] 
+    is smooth. 
+\end{definition*}
+
+\begin{definition*}\marginnote{manifolds \(=\) smooth manifolds as always (unless otherwise stated)}
+    Let \(M,N\) be manifolds. We say \(f:M\to N\) is \dhighlight{smooth} if, for all \(p\in M\) 
+    there exists charts \((U,\phi)\) with \(p\in U\subset M\) and \((V,\psi)\) with \(V\subset N\) such that: 
+    \begin{itemize}
+        \item \(V\supset f(U)\)
+        \item \(\psi\circ f\circ \phi^{-1}:\underbrace{\phi(U)}_{\subset\R^n}\to\R^m\) is smooth
+    \end{itemize}
+\end{definition*}
+
+Reality check.
+
+\begin{lemma}
+    Smooth maps are continuous.
+\end{lemma}
+
+\begin{proof}
+    Enough to show that \(\forall p\in M\), there exists a neighborhood of \(p\) on which \(f:M\to N\) is 
+    continuous, for \(f\) smooth. By definition \(\exists (U,\phi),p\in U,(V,\psi),V\subset N\) s.t. 
+    \(\psi \circ f\circ \phi^{-1}:\phi(U)\to\R^m\) smooth.
+
+    Observe \(f=\psi^{-1}\circ (\psi \circ f\circ \phi^{-1})\circ \phi\) on \(U\).
+\end{proof}
+
+\begin{lemma}
+    \(f:M\to N\) is smooth if and only if each \(p\in M\) has a neighborhood \(U\) suhc that \(f\mid_U\) is smooth.
+\end{lemma}
+
+\begin{proof}
+    Sheet 03.
+\end{proof}
+
+\begin{lemma}[Properties of smooth maps]
+    \begin{enumerate}
+        \item[(i)] Any constant map \(c:M\to N\) is smooth\footnote{Since it sends \(M\) to a point in \(N\)}
+        \item[(ii)] The identity map \(\text{id}:M\to M\) is smooth 
+        \item[(iii)] If \(U \circ M\) open, then the inclusion \(i:U\to M\) is smooth % todo: richtiger pfeil
+        \item[(iv)] Compositions of smooth functions are smooth
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Sheet 03.
+\end{proof}
+
+\begin{definition*}\marginnote{In particular, diffeomorphisms are homeomorphism!}
+    Let \(M,N\) be manifolds. A \dhighlight{diffeomorphism} \(f:M\to N\) is a smooth 
+    map, which is bijective and admits a smooth inverse.
+\end{definition*}
+
+\begin{example}
+    \(f:\R\to\R,x\mapsto x+3\) is a diffeomorphism with inverse \(x\mapsto x-3\).  
+\end{example}
+
+\begin{example}
+    Let \(A\in\text{GL}(n,\R)\). Define a map \[f_A:\R^n\to\R^n,x\mapsto Ax.\]
+    This is a diffeomorphism (smooth, since linear) with inverse \(f_A^{-1}=f_{A^{-1}}\).  
+\end{example}
+
+\begin{example}
+    Let \(S_c^n\coloneqq \{(x_0,\dots,x_n)\mid \sum_{i=0}^n x_i^2=c^2\}\subset\R^{n+1}\). Given 
+    \(d>c>0\), we define a diffeomorphism. 
+    \[S_c^n\to S_d^n, (x_0,\dots,x_n)\mapsto \frac{d}{c}(x_0,\dots,x_n).\]
+\end{example}
+
+\begin{example}
+    \(M=(\R,\text{id}),N=(\R,x\mapsto x^3)\). The map \(M\to N, x\mapsto x^{\frac{1}{3}}\)
+    is a diffeomorphism. Indeed, 
+    \begin{align*}
+        (x\mapsto x^3)\circ (x\mapsto x^{\frac{1}{3}}) \circ\text{id}^{-1}=\text{id}
+    \end{align*}
+\end{example}
+
+\subsection{The category of smooth manifolds}
+
+\begin{definition*}
+    Let \(\text{Man}^\infty\) be the category of smooth manifolds. The objects are the smooth manifolds. 
+    The morphisms are the smooth maps.
+\end{definition*}
+
+\dhighlight{Exercise}: \(M,N\) objects in \(\text{Man}^\infty\) are isomorphic if and only if they are diffeomorphic.
+
+Observe that there is a forgetful functor: \(\maninf\to\man0\) by \( (M,[\cA])\to M\) and \(f:M\to N\mapsto f\).
+
+In general:\begin{itemize}
+    \item not full 
+    \item not essentially surjective
+\end{itemize}
+
+\begin{remark}[Hierarchy of categories]
+    \begin{itemize}
+        \item for \(k=0,\dots,\infty\), we can consider the category \(\mank\) with objects \(C^k\)-Manifolds, and morphisms \(C^k\)-maps. 
+              for \(k\leq l\) there is a forgetful functor \(\text{Man}^l\to\mank\)
+        \item if \(k\geq 1\),then the forgetful functor \(\maninf\to\mank\) is essentially surjective. This is different from the \(C^0\) case. For this reason, we mainly focus on \(\man0,\maninf\). This is a theorem by Whitney
+        \item there are other interesting categories: \(\text{Man}^{\text{Real-analytic}},\text{Man}^{\text{Cplx-analytic}},\dots\), which both come with a forgetful functor to \(\maninf\)
+    \end{itemize}
+\end{remark}
+
+\begin{remark}[Classification of manifolds (not examinable)] %TODO fix examable to examinable
+    \begin{itemize}
+        \item all topological manifolds of dimension \(\leq 3\) admit a unique smooth structure
+        \item \(S^7\), as a topological manifold, admits 15 pairwise non-diffeomorphic smooth structures. These are called \dhighlight{exotic spheres}. They also exist 
+            in higher dimensions (Milan-Kervaire?)
+        \item \(\R^4\) admits uncountably many pairwise non-diffeomorphic smooth structures (Taubes~1980s)
+        \item Open problem(\dhighlight{Smooth 4 dimensional Poincaré conjecture}): Prove or disprove: any smooth 
+              4-manifold, which is homeomorphic to \(S^4\) is diffeomorphic to \(S^4\). Most experts believe this is false!  
+    \end{itemize}
+\end{remark}
+
+
+
+
+
 
