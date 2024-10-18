@@ -41,7 +41,7 @@ Some (set theoretical) conventions for the whole course:
 \end{lemma}
 
 \begin{proof}
-    2. and 3. are equivalent, since \(B_1 \simeq \R^n\) are homeomorphic (\(B_1^n\ni x\mapsto \frac{x}{1-\Vert x\Vert}\)) % TODO: FIX 
+    2. and 3. are equivalent, since \(B_1 \simeq \R^n\) are homeomorphic (\(B_1^n\ni x\mapsto \frac{x}{1-\Vert x\Vert}\))
     
     2. \(\implies \) 1. is tautological
 
@@ -190,13 +190,6 @@ Recall given \(A\subset X\). \(\interior(A)\coloneqq \{x\in A\mid x \text{ in a 
     is compact, \(K_k\subset \interior(K_{k+1})\). We get \(\{K_j\}_{j=1}^\infty\), \(U_j\subset K_j\) (because \(m_j\geq j\)) \(\implies \bigcup_{i=1}^\infty U_i=\bigcup_{i=1}^\infty K_i\)
 \end{proof}
 \beginlecture{02}{11.10.2024}
-\subsection*{Some remarks and apologies}
-\begin{itemize}
-    \item Homework 01, apology for paracompactness (if this happens again, feel free to complain)
-    \item Lemma \ref{lem:1.4} should be countable disjoint unions (already corrected in my notes)
-    \item In lemma \ref{lem:1.6}, Hausdorff assumption not needed (already corrected in my notes)
-    \item For questions about exercises, email Koen von der Dungen or your TA\footnote{tutor} directly
-\end{itemize}
 
 \begin{definition*}\label{def:local_finiteness}
     Let \(X\) be a topological space. Let \(\cC\) be a collection of subsets of \(X\). We say that \(\cC\) 
@@ -270,7 +263,7 @@ Whats up with the word \highlight{para}compact? It's like compact, but weaker! I
 \begin{proof}
     By lemma \ref{lem:1.6} (exhaustion by compact subsets) and lemma \ref{lem:1.7} \(\implies\) paracompact.
 \end{proof}
-\begin{customclr}{1.8'}\label{cor:1.8'} % TODO
+\begin{customclr}{1.8'}\label{cor:1.8'}
     Let \(X\) be Euclidean amd Hausdorff. Then \(X\) is second countable iff \(X\) has countably many components and \(X\) is paracompact.
 \end{customclr}
 \begin{remark}
@@ -422,12 +415,6 @@ Clearly every manifold is also a manifold with boundary.
 
 \dhighlight{Addendum to the last lecture:}
 
-\begin{itemize}
-    \item \(\bH^n\not \simeq \R^n\) If you remove a point from \(\bH^n\) on the boundary, it is still contractable, while removing an point from \(\R^n\) yields an uncontractable space.
-    \item Given \(M\) a manifold with \(\partial\), a point \(p\in M\) is an \dhighlight{interior point}, if it admits a neighborhood homeomorphic to \(\R^n\). Otherwise 
-          \(p\) is a boundary point. (Already specified in my notes)  
-\end{itemize}
-
 \begin{remark}
     Most of what he says in the course can be generalized to manifolds with boundary (unless it makes no sense).
     Those results are only stated (and proofed) for manifolds. it might be a good exercise to go through the notes and generalize the statements to manifolds with boundary.
@@ -445,7 +432,7 @@ Clearly every manifold is also a manifold with boundary.
     \item Any manifold is homotopy equivalent to a countable CW complex (Milner?) \(\pi_k(M)\) are countable
 \end{itemize}
 
-\section{Classification of topological manifolds (proofs are not examable)}
+\section{Classification of topological manifolds (proofs are not examinable)}
 \subsection{Classification of 1-dimensional manifolds}
 \begin{theorem}\label{thm:1.9}
     Any connected one dimensional manifold is homeomorphic to  
@@ -472,13 +459,16 @@ Clearly every manifold is also a manifold with boundary.
 \end{itemize}
 
 \dhighlight{Construction}(Connected sum of surfaces):
-%TODO FIX
-% Sketch 1.14
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\textwidth]{sketch_1_14.png}
+    \caption{Sketch 1.14}
+\end{figure}
 Let \(M_1,M_2\) be surfaces (i.e. 2-dimensional manifolds). Choose charts \(M_i\supset U_i\stackrel{\phi_i}{\to} B_1\subset \R^2\).
-Let \(M_i^\circ = M_i \setminus \phi_i^{-1}(B_{\frac{1}{2}})\). Let \(M_1 \# M_2 \coloneqq M_1^\circ \perp M_2^\circ /\sim\),
-where \(X\in M_1^\circ \sim y\in M_2^\circ\) if \(x\in \phi_1^{-1}(\partial \overline{B_{\frac{1}{2}}})\) and \(y=(\phi_2^{-1}\circ \phi_1) (x)\)
-%sketch 1.15
-\dhighlight{Fact:s}
+Let \(\acirc{M}_i = M_i \setminus \phi_i^{-1}(B_{\frac{1}{2}})\). Let \(M_1 \# M_2 \coloneqq \acirc{M}_1 \perp \acirc{M}_2 /\sim\),
+where \(X\in \acirc{M}_1 \sim y\in \acirc{M}_2\) if \(x\in \phi_1^{-1}(\partial \overline{B_{\frac{1}{2}}})\) and \(y=(\phi_2^{-1}\circ \phi_1) (x)\)
+
+\dhighlight{Facts:}
 \begin{itemize}
     \item If \(M_1,M_2\) are connected, then \(M_1\# M_2\) is well defined up to 
     homeomorphism.
@@ -493,7 +483,11 @@ where \(X\in M_1^\circ \sim y\in M_2^\circ\) if \(x\in \phi_1^{-1}(\partial \ove
         \item \(\underbrace{\Pi^2\# \dots \# \Pi^2}_{k\text{ times}}\)
         \item \(\underbrace{\R\bP^2\# \dots \# \R\bP^2}_{l\text{ times}}\) (non-orientable)
     \end{itemize}
-    % Sketch 1.16
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.4\textwidth]{sketch_1_15.png}
+        \caption{Sketch 1.15}
+    \end{figure}
 \end{theorem}
 
 \begin{remark}
@@ -505,7 +499,7 @@ where \(X\in M_1^\circ \sim y\in M_2^\circ\) if \(x\in \phi_1^{-1}(\partial \ove
     For later: This classification also works in the smooth category.
 \end{remark}
 
-\subsection{Classification of high dimensional manifolds (not examable at all)}
+\subsection{Classification of high dimensional manifolds (not examinable at all)}
 
 \dhighlight{Poincaré conjecture} (now theorem of G. Perelman (2003), W. Thurston (1980s)):
 Any compact connected \(3\) dimensional manifold which is \dhighlight{simply connected }
@@ -520,7 +514,7 @@ complicated and not complete.
 
 \begin{example}
     Any finitely presented group arises as the fundamental group of a compact 
-    connected \(4\)-manifold. Which is provably to hard?
+    connected \(4\)-manifold(Which is provably too hard). 
 \end{example}
 
 

@@ -24,11 +24,11 @@
 \usepackage{tocloft}
 \usepackage{lastpage}
 \usepackage{fancyhdr}
-\usepackage{tocloft}
 \usepackage{hyperref}
 \usepackage{etoolbox}
 \usepackage{xstring}
-
+\usepackage{accents}
+\usepackage{footnotehyper}
 
 \definecolor{mygray}{RGB}{239,240,241}
 \definecolor{mycolor}{RGB}{1,50,32}
@@ -130,6 +130,7 @@
 \def\KL{{\text{KL}}}
 \DeclareMathOperator*{\argmin}{\text{argmin}}
 
+\newcommand{\acirc}[1]{\accentset{\circ}{#1}}
 
 \counterwithout*{equation}{equation}
 \renewcommand{\theequation}{\arabic{equation}}
@@ -202,8 +203,10 @@
 \renewcommand{\labelitemiii}{$\textcolor{mycolor}{\diamond}$}
 \renewcommand{\labelitemiv}{$\textcolor{mycolor}{\ast}$}
 
+\makesavenoteenv{tcolorbox}
+
 \tcolorboxenvironment{corollary}{
-  colback=blue!5!white,
+  colback=green!5!white,
   boxrule=0pt,
   boxsep=1pt,
   left=2pt,right=2pt,top=2pt,bottom=2pt,
@@ -214,7 +217,7 @@
   breakable
 }
 \tcolorboxenvironment{innercustomcorollary}{
-  colback=blue!5!white,
+  colback=green!5!white,
   boxrule=0pt,
   boxsep=1pt,
   left=2pt,right=2pt,top=2pt,bottom=2pt,
@@ -262,7 +265,7 @@
 }
 
 \tcolorboxenvironment{definition*}{
-  colback=green!5!white,
+  colback=blue!5!white,
   boxrule=0pt,
   boxsep=1pt,
   left=2pt,right=2pt,top=2pt,bottom=2pt,

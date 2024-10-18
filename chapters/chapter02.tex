@@ -13,13 +13,15 @@ In other words \(f\) smooth: \(\iff\forall 1\leq i\leq m,\alpha=(\alpha_1,\dots,
     for all \(\alpha=(\alpha_1,\dots,\alpha_n)\in\N^n,\sum\alpha_i \leq k\) \(\partial_x^\alpha f_i\) is continuous for all \(i\).
 \end{remark}
 
-% TODO Tausche corollary und def farbe!
-
 \begin{definition*}
     Let \(M\) be a topological manifold. We say that two charts \((U_1,\phi_1)\), \((U_2,\phi_2)\)
     are \dhighlight{smoothly compatible} if the map \(\phi_2\circ \phi_1^{-1}:\phi_1(U_1\cap U_2)\to\phi_2(U_1\cap U_2)\)
     is smooth. We call \(\phi_2\circ\phi_1^{-1}\) a \dhighlight{transition function}.
-    % Sketch 1.17
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_2_01.png}
+        \caption{Sketch 2.01}
+    \end{figure}
 \end{definition*}
 
 \begin{definition*}
@@ -61,16 +63,6 @@ This defines an equivalence relation.
 
 \beginlecture{04}{18.10.2024}
 
-\dhighlight{Correction}
-
-\begin{itemize}
-    \item Definition of smoothness was corrected, s.t. derivatives are continuous. (Corrected in my notes)
-\end{itemize}
-
-\begin{remark}
-    Fine in dimension \(n=1\), but necessary for \(n>1\). See website for a counterexample.
-\end{remark}
-
 \subsection{First examples of smooth manifolds}
 
 \begin{example}[Example 1: The cannoical smooth manifold]
@@ -104,7 +96,11 @@ This defines an equivalence relation.
     is called a \dhighlight{level set} of value \(c\). \highlight{Suppose} that, \(\forall p\in \Phi^{-1}(c):D\underbrace{\Phi(p)}_{=(\partial_{x_0}\Phi(p),\dots,\partial_{x_n}\Phi(p))}\neq 0\).
     This means that \(\exists 0\leq i\leq n\) s.t. \(\partial_{x_i}\Phi(c)\neq0\). By the \dhighlight{implicit function theorem} (Lee, Theorem C.40, Course website),
     there exists a neighborhood \(U\) of \(p\) such that \(U\cap\Phi^{-1}(p)=\{(x_0,\dots,f(x_0,\dots,\hat{x_i},\dots,x_n),x_n)\}\).
-    %Sketch 1.18
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_2_02.png}
+        \caption{Sketch 2.02}
+    \end{figure}
 
     Let \(M=\phi^{-1}(c)\). We define \(\hat{\pi_i}:\R^{n+1}\to\R^n,(x_0,\dots,x_n)\mapsto (x_0,\dots,\hat{x_i},\dots,x_n)\).
     \[\{(U,\hat{\pi_i})\mid U\subset M, \hat{\pi_i}\mid_U\text{ homeomorphism, } \partial_{x_i}\Phi\neq 0\text{ on } U\}\]
@@ -246,7 +242,7 @@ In general:\begin{itemize}
     \end{itemize}
 \end{remark}
 
-\begin{remark}[Classification of manifolds (not examinable)] %TODO fix examable to examinable
+\begin{remark}[Classification of manifolds (not examinable)]
     \begin{itemize}
         \item all topological manifolds of dimension \(\leq 3\) admit a unique smooth structure
         \item \(S^7\), as a topological manifold, admits 15 pairwise non-diffeomorphic smooth structures. These are called \dhighlight{exotic spheres}. They also exist 
@@ -256,9 +252,5 @@ In general:\begin{itemize}
               4-manifold, which is homeomorphic to \(S^4\) is diffeomorphic to \(S^4\). Most experts believe this is false!  
     \end{itemize}
 \end{remark}
-
-
-
-
 
 
