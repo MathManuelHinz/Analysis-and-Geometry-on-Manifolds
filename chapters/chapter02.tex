@@ -180,7 +180,7 @@ Reality check.
     \begin{enumerate}
         \item[(i)] Any constant map \(c:M\to N\) is smooth\footnote{Since it sends \(M\) to a point in \(N\)}
         \item[(ii)] The identity map \(\text{id}:M\to M\) is smooth 
-        \item[(iii)] If \(U \circ M\) open, then the inclusion \(i:U\to M\) is smooth % todo: richtiger pfeil
+        \item[(iii)] If \(U \circ M\) open, then the inclusion \(i:U\hookrightarrow  M\) is smooth
         \item[(iv)] Compositions of smooth functions are smooth
     \end{enumerate}
 \end{lemma}
@@ -253,4 +253,185 @@ In general:\begin{itemize}
     \end{itemize}
 \end{remark}
 
+\beginlecture{05}{22.10.2024}
 
+\subsection{Smooth manifolds with boundary} % TODO: Wrong number?
+
+\begin{definition*}
+    A function \(f:\bH^n\supset U \to \R^k\) is \dhighlight{smooth} if every \(p\in U\)
+    admits an open neighborhood \(p\in U_p\subset\R^n\) on which \(f\) extends to a smooth function. (i.e. there exists \(\tilde{f}_p:U_p\to\R^k,\tilde{f}_p\) smooth and \(\tilde{f}_p\mid_{\bH^n\cap U}=f\))
+\end{definition*}
+
+\begin{example}
+    \(n=1,\bH^1=[0,\infty), f(x)=x^2\)
+\end{example}
+\begin{example}[Non-Example]
+    \(n=1,\bH^1=[0,\infty), f(x)=\sqrt{x}\) has no smooth extension to \(0\), since the derivative goes to \(\infty\).
+\end{example}
+
+Give a topological manifold with boundary, we can define unproblematically the notions of 
+\begin{itemize}
+    \item smoothly compatible charts: \((U,\phi):M\to\bH^n\), \(\phi_\alpha\circ \phi_\beta^{-1}:\phi_\beta(U_\alpha\cap u_\beta)\to\bH^n\)
+    \item smooth atlases
+\end{itemize}
+
+\begin{definition*}
+    A smooth manifold with boundary \(M=(M,[\cA])\) is the data of 
+    \begin{itemize}
+        \item a topological manifold with boundary 
+        \item an equivalence class of atlases 
+    \end{itemize}    
+\end{definition*}
+
+\begin{remark}\marginnote{Similarly we cna generalise even more to manifolds with corners ...}
+    Every smooth manifold is a smooth manifold with boundary. This is an enlargement of 
+    \(\maninf\).
+\end{remark}
+
+\section{Partitions of unity}\marginnote{This section is technical, but also very important!}
+
+\subsection{Preparatory lemmas}
+
+\begin{lemma}\label{lem:2.4}
+    The function \(f:\R\to\R,\)
+    \[f(t)=\begin{cases}
+        e^{-\frac{1}{t}} & t>0\\
+        0 & t\leq 0
+    \end{cases}\]
+\end{lemma}
+
+\begin{proof}
+    It is enough to proof, that \(f\) has well defined derivatives of all orders, since \(f\) is a function on \(\R\).
+
+    \(f^0=f\), for  \(k\geq 1\), assume \begin{enumerate}
+        \item \(f^{(k-1)}\) exists
+        \item \(f^{(k-1)}\mid_{(-\infty,0]}=0\) 
+        \item \(f^{(k-1)}\mid_{(-\infty,0]}(t)=P_{k-1}(\frac{1}{t})e^{-\frac{1}{t}}\) for some polynomial \(P_{(k-1)}\).
+    \end{enumerate}
+    Clearly this holds for \(k=1\). 
+    
+    We have \begin{align*}
+        \lim_{t\to0^+}\frac{f^{(k-1)}(t)-f^{(k-1)}(0)}{t}&=\lim_{t\to 0^+}\frac{f^{(k-1)}(t)}{t}\\
+        &=\lim_{t\to 0^+}P_{(k-1)}(\frac{1}{t})\frac{1}{t}e^{-\frac{1}{t}}\\
+        &= \lim_{x\to\infty} P_{(k-1)}(x)\cdot x\cdot e^{-x}=0
+    \end{align*}
+    Therefore \(f^{(k-1)}\) is differentiable at the origin, the derivative \(f^{(k-1)'}(0)=0\).
+    and \(f^{(k-1)}\mid_{(-\infty,0]}=0\). Therefore \(f^{(k-1)}\) is differentiable.
+    Therefore we only have to check 3., which only takes place on \(\R_+\)! 
+
+    Finally \(f^{(k-1)}\mid_{(0,\infty)}(t)=P_{(k-1)}(\frac{1}{t})e^{-\frac{1}{t}}\implies P_{(k-1)}'(\frac{1}{t})\left(\frac{-1}{t^2}e^{-\frac{1}{t}}+P_{(k-1)}(\frac{1}{t})e^{-\frac{1}{t}}\right)\eqqcolon P_{(k)}(\frac{1}{t})e^{-\frac{1}{t}}\).
+\end{proof}
+
+\begin{lemma}\label{lem:2.5}
+   Fix real numbers \(r_1<r_2\). Then there exists a smooth function \(h:\R\to\R\) such that 
+   \begin{enumerate}
+    \item \(h=1\) on\((-\infty,r_1]\)
+    \item\(0<h<1\) on \(r_1,r_2\)
+    \item \(h=0\) on \([r_2,\infty)\)
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \(h(t)\coloneqq \frac{f(s_2-t)}{f(s_2-t)+f(t-s_1)}\), since the denominator never goes to \(0\).
+\end{proof}
+
+\begin{lemma}[Existence of \dhighlight{cutoff functions}]\label{lem:2.6}
+    Given \(0<r_1<r_2\), there exists a smooth function \(H:\R^n\to\R\) such that 
+    \begin{enumerate}
+        \item \(H=1\) on \(\overline{B_{r_1}}\)
+        \item \(0<H<1\) on \(B_{r_2}\setminus \overline{B_{r_1}}\)
+        \item \(H=0\) on \(\R^n\setminus B_{r_2}\)
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Set \(H(x)\coloneqq h(|x|)\), where \(h\) is defined as in lemma \ref{lem:2.5}. (Recall: \(|x|\coloneqq \sqrt{x_1^2+\dots+x_n^2}\)).
+    Then \(H\) is smooth, since it is a composition of smooth functions on \(\R^n\setminus \overline{B_{r_1}}\) and constant on \(\overline{B_{r_1}}\).
+\end{proof}
+
+\subsection{Partitions of unity}
+
+\begin{definition*}
+    Given a topological space \(X\) and a function \(f:X\to\R\), the \dhighlight{support} of \(f\) is the set 
+    \[\supp(f)\coloneqq\overline{ \{x\in X\mid f(x)\neq 0\}}\subset X\]
+\end{definition*}
+
+\begin{example}
+    If \(f:\R\to\R\) has the form \(f(x)=a_0+a_1x+\dots,a_nx^n\implies \supp(f)=\R\).
+    In fact, by Taylor's theorem, if \(f\) analytic, then \(\supp(f)\) either \(\R\) or \(\emptyset\).
+    In contrast, the function \(h:\R\to\R\) defined in lemma \ref{lem:2.5} has support \((-\infty,r_2]\subsetneqq\R\).
+\end{example}
+
+% TODO: Fix = to ---
+
+\begin{definition*}
+    Let \(M\) be a smooth manifold. Let \(\{U_\alpha\}_{\alpha\in \cA}\) be an open cover. 
+    A \dhighlight{partition of unity subordinate to the cover} is the data of a collection of smooth functions \(\{\psi_\alpha\}_{\alpha\in\cA},\psi_\alpha:M\to\R\)
+    such that 
+    \begin{enumerate}
+        \item[(1)] \(0<\psi_\alpha<1\)
+        \item[(2)] \(\supp(\psi_\alpha)\subset U_\alpha\)
+        \item[(3)] \(\{\supp(\psi_\alpha)\}_{\alpha\in\cA}\) is locally finite 
+        \item[(4)] \(\sum_{\alpha\in\cA} \psi_\alpha=1\)    
+    \end{enumerate}
+\end{definition*}
+
+\begin{remark}
+    There is an analogous notion in the category Top,\(\man0,\mank\), etc.,\dots
+\end{remark}
+
+\begin{example}
+    \(M=\R\), \(U_1=(-\infty,r_2+1),U_2=(r_1-1,\infty)\), where \(r_1<r_2\) as in lemma \ref{lem:2.5}.
+    Similarly let \(h\) as in lemma \ref{lem:2.5}. and set \(\psi_1=h,\psi_2=1-h\)
+\end{example}
+
+\begin{theorem}[Existence of partitions of unity]\label{thm:2.7}
+    Let \(M\) be a smooth manifold. Let \(\{U_{\alpha}\}_{\alpha\in\cA}\) be an open cover. 
+    Then there exists a partition of unity subordinate to this cover. 
+\end{theorem}
+
+\begin{remark}
+    The same theorem works in Top, \(\man0,\mank\). It will not work in \(\text{Man}^{\text{Analytic}},\text{Man}^{\text{Cplx-Analytic}},\) Varieties \(/\C\).
+\end{remark}
+
+\begin{proof}
+    \dhighlight{Step 1: Construction of the \(V_i\)} An open supset \(U\subset M\) is called a \dhighlight{regular coordinate ball} if there 
+    exists \(\overline{U}\subset\tilde{U},(\tilde{U},\tilde{\phi})\) a chart such that 
+    \(\tilde{\phi}(U)=B_{r_1},\tilde{\phi}(\tilde{U})=B_{r_2}\). 
+    % skecth 2.06
+
+    By lemma \ref{lem:1.6} \(M\) admits an exhaustion by compact sets. By lemma \ref{lem:1.7}, given 
+    any basis, any open cover, one can find a locally finite, countable basis refinement of this cover by basis elements.
+
+    Claim: \(\{\text{regular coordinate balls}\}\) basis of \(M\) \marginnote{The claim is easy to verify}
+
+    These tree points imply that \(\{U_\alpha\}_{\alpha\in\cA}\) admits a countable, locally finite refinement by regular coordinate balls \(\{V_i\}_{i\in I}\).
+
+    By sheet 2, exercise 1 (a) \(\{\overline{V_i}\}\) is still locally finite.
+
+    \dhighlight{Step 2: Construction of the \(f_i\)} For each \(V_i\exists V_i\supset \tilde{V_i},\tilde{\phi_i}:\tilde{V_i}\to \R^n\) such that 
+    \(\tilde{\psi_i}(V_i)=B_{s_1^i},\tilde{\psi_i}(\tilde{V_i})=B_{s_2^i}\) with \(0<r_1^i<r_2^i\), \(\tilde{V_i}\subset U_\alpha\) for some \(\alpha\).
+    Using lemma \ref{lem:2.6}, let \(H_i:\R^n\to \R\) be a cutoff function, i.e. \(H_i\mid_{{B_{r_1}}}>0,H=0\) on \(\R\setminus B_{s_1^i}\).
+
+    Let us set \(f_i:M\to\R, f_i=\begin{cases}
+        H_i\circ \tilde{\phi_i} & \text{ on } \tilde{V_i}\\
+        0 & M\setminus \overline{{V_i}}
+    \end{cases}\)
+
+    \dhighlight{Step 3: Construction of the \(g_i\)} Let us set \(f=\sum_{i\in I} f_i\). This is well defined by local finiteness of the \(\overline{V_i}\) Note also that \(f>0\)..
+    We set \(g_i=f_i/f\). Then clearly we have \(0\leq g_i\leq 1, \sum_{i\in I} g_i=1\)
+
+    \dhighlight{Step 4: Reindexing and conformation} Since \(\tilde{V_i}\subset U_\alpha\), for some \(\alpha\), we can choose for each \(i\in I, \alpha(i)\in \cA\) s.t. \(V_i\in U_{\alpha(i)}\).
+    Let us set \marginnote{Here the empty sum is \(0\)}\[\psi_{\alpha}\coloneqq \sum_{i\mid \alpha=\alpha(i)}g_i\]
+    Observe for \dhighlight{(2)}: \[\supp(\psi_\alpha)=\overline{\bigcup_{\alpha(i)=\alpha} V_i}\stackrel{\text{Exercise 2.1}}{=}\bigcup_{\alpha(i)\alpha}\overline{V_i}\subset U_\alpha\]
+    We still have \(0\leq \psi_\alpha\leq 1\), which is \dhighlight{(1)}
+    
+    and 
+    \(\supp(\psi_\alpha)\) are locally finite: for each \(op\in M\), since \(\{\overline{V_i}\}\) locally finite,
+    there exists a neighborhood \(U_p\) of \(p\)  which only intersects finitely many of the \(\{\overline{V_i}\}\), call 
+    them \(V_1,\dots,V_k\). Then the only \(\psi_\alpha\) which have a chance of being non-zero must satisfy \(\alpha\in\{\alpha(1),\dots,\alpha(k)\}\) (this is \dhighlight{(3)}).
+
+    Lastly \[\sum_{\alpha\in\cA}\psi_\alpha=\sum_{\alpha}\left(\sum_{i: \alpha=\alpha(i)} g_i\right)=\sum_{i\in I} g_i=1,\]
+    which confirms \dhighlight{(4)}.
+
+\end{proof}
