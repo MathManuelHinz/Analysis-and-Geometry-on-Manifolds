@@ -156,7 +156,7 @@ This defines an equivalence relation.
 
 Reality check.
 
-\begin{lemma}
+\begin{lemma}\label{lem:2.1}
     Smooth maps are continuous.
 \end{lemma}
 
@@ -168,8 +168,8 @@ Reality check.
     Observe \(f=\psi^{-1}\circ (\psi \circ f\circ \phi^{-1})\circ \phi\) on \(U\).
 \end{proof}
 
-\begin{lemma}
-    \(f:M\to N\) is smooth if and only if each \(p\in M\) has a neighborhood \(U\) suhc that \(f\mid_U\) is smooth.
+\begin{lemma}\label{lem:2.2}
+    \(f:M\to N\) is smooth if and only if each \(p\in M\) has a neighborhood \(U\) such that \(f\mid_U\) is smooth.
 \end{lemma}
 
 \begin{proof}
@@ -262,6 +262,12 @@ In general:\begin{itemize}
     admits an open neighborhood \(p\in U_p\subset\R^n\) on which \(f\) extends to a smooth function. (i.e. there exists \(\tilde{f}_p:U_p\to\R^k,\tilde{f}_p\) smooth and \(\tilde{f}_p\mid_{\bH^n\cap U}=f\))
 \end{definition*}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\textwidth]{sketch_2_03.png}
+    \caption{Sketch 2.03}
+\end{figure}
+
 \begin{example}
     \(n=1,\bH^1=[0,\infty), f(x)=x^2\)
 \end{example}
@@ -300,6 +306,12 @@ Give a topological manifold with boundary, we can define unproblematically the n
     \end{cases}\]
 \end{lemma}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\textwidth]{sketch_2_04.png}
+    \caption{Sketch 2.04}
+\end{figure}
+
 \begin{proof}
     It is enough to proof, that \(f\) has well defined derivatives of all orders, since \(f\) is a function on \(\R\).
 
@@ -325,9 +337,9 @@ Give a topological manifold with boundary, we can define unproblematically the n
 \begin{lemma}\label{lem:2.5}
    Fix real numbers \(r_1<r_2\). Then there exists a smooth function \(h:\R\to\R\) such that 
    \begin{enumerate}
-    \item \(h=1\) on\((-\infty,r_1]\)
+    \item \(h\equiv 1\) on\((-\infty,r_1]\)
     \item\(0<h<1\) on \(r_1,r_2\)
-    \item \(h=0\) on \([r_2,\infty)\)
+    \item \(h\equiv 0\) on \([r_2,\infty)\)
     \end{enumerate}
 \end{lemma}
 
@@ -338,9 +350,9 @@ Give a topological manifold with boundary, we can define unproblematically the n
 \begin{lemma}[Existence of \dhighlight{cutoff functions}]\label{lem:2.6}
     Given \(0<r_1<r_2\), there exists a smooth function \(H:\R^n\to\R\) such that 
     \begin{enumerate}
-        \item \(H=1\) on \(\overline{B_{r_1}}\)
+        \item \(H\equiv 1\) on \(\overline{B_{r_1}}\)
         \item \(0<H<1\) on \(B_{r_2}\setminus \overline{B_{r_1}}\)
-        \item \(H=0\) on \(\R^n\setminus B_{r_2}\)
+        \item \(H\equiv 0\) on \(\R^n\setminus B_{r_2}\)
     \end{enumerate}
 \end{lemma}
 
@@ -362,8 +374,6 @@ Give a topological manifold with boundary, we can define unproblematically the n
     In contrast, the function \(h:\R\to\R\) defined in lemma \ref{lem:2.5} has support \((-\infty,r_2]\subsetneqq\R\).
 \end{example}
 
-% TODO: Fix = to ---
-
 \begin{definition*}
     Let \(M\) be a smooth manifold. Let \(\{U_\alpha\}_{\alpha\in \cA}\) be an open cover. 
     A \dhighlight{partition of unity subordinate to the cover} is the data of a collection of smooth functions \(\{\psi_\alpha\}_{\alpha\in\cA},\psi_\alpha:M\to\R\)
@@ -372,7 +382,7 @@ Give a topological manifold with boundary, we can define unproblematically the n
         \item[(1)] \(0<\psi_\alpha<1\)
         \item[(2)] \(\supp(\psi_\alpha)\subset U_\alpha\)
         \item[(3)] \(\{\supp(\psi_\alpha)\}_{\alpha\in\cA}\) is locally finite 
-        \item[(4)] \(\sum_{\alpha\in\cA} \psi_\alpha=1\)    
+        \item[(4)] \(\sum_{\alpha\in\cA} \psi_\alpha\equiv 1\)    
     \end{enumerate}
 \end{definition*}
 
@@ -383,6 +393,11 @@ Give a topological manifold with boundary, we can define unproblematically the n
 \begin{example}
     \(M=\R\), \(U_1=(-\infty,r_2+1),U_2=(r_1-1,\infty)\), where \(r_1<r_2\) as in lemma \ref{lem:2.5}.
     Similarly let \(h\) as in lemma \ref{lem:2.5}. and set \(\psi_1=h,\psi_2=1-h\)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_2_05.png}
+        \caption{Sketch 2.05}
+    \end{figure}
 \end{example}
 
 \begin{theorem}[Existence of partitions of unity]\label{thm:2.7}
@@ -398,8 +413,11 @@ Give a topological manifold with boundary, we can define unproblematically the n
     \dhighlight{Step 1: Construction of the \(V_i\)} An open supset \(U\subset M\) is called a \dhighlight{regular coordinate ball} if there 
     exists \(\overline{U}\subset\tilde{U},(\tilde{U},\tilde{\phi})\) a chart such that 
     \(\tilde{\phi}(U)=B_{r_1},\tilde{\phi}(\tilde{U})=B_{r_2}\). 
-    % skecth 2.06
-
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_2_06.png}
+        \caption{Sketch 2.06}
+    \end{figure}
     By lemma \ref{lem:1.6} \(M\) admits an exhaustion by compact sets. By lemma \ref{lem:1.7}, given 
     any basis, any open cover, one can find a locally finite, countable basis refinement of this cover by basis elements.
 
@@ -419,7 +437,7 @@ Give a topological manifold with boundary, we can define unproblematically the n
     \end{cases}\)
 
     \dhighlight{Step 3: Construction of the \(g_i\)} Let us set \(f=\sum_{i\in I} f_i\). This is well defined by local finiteness of the \(\overline{V_i}\) Note also that \(f>0\)..
-    We set \(g_i=f_i/f\). Then clearly we have \(0\leq g_i\leq 1, \sum_{i\in I} g_i=1\)
+    We set \(g_i=f_i/f\). Then clearly we have \(0\leq g_i\leq 1, \sum_{i\in I} g_i\equiv 1\)
 
     \dhighlight{Step 4: Reindexing and conformation} Since \(\tilde{V_i}\subset U_\alpha\), for some \(\alpha\), we can choose for each \(i\in I, \alpha(i)\in \cA\) s.t. \(V_i\in U_{\alpha(i)}\).
     Let us set \marginnote{Here the empty sum is \(0\)}\[\psi_{\alpha}\coloneqq \sum_{i\mid \alpha=\alpha(i)}g_i\]
@@ -431,7 +449,7 @@ Give a topological manifold with boundary, we can define unproblematically the n
     there exists a neighborhood \(U_p\) of \(p\)  which only intersects finitely many of the \(\{\overline{V_i}\}\), call 
     them \(V_1,\dots,V_k\). Then the only \(\psi_\alpha\) which have a chance of being non-zero must satisfy \(\alpha\in\{\alpha(1),\dots,\alpha(k)\}\) (this is \dhighlight{(3)}).
 
-    Lastly \[\sum_{\alpha\in\cA}\psi_\alpha=\sum_{\alpha}\left(\sum_{i: \alpha=\alpha(i)} g_i\right)=\sum_{i\in I} g_i=1,\]
+    Lastly \[\sum_{\alpha\in\cA}\psi_\alpha=\sum_{\alpha}\left(\sum_{i: \alpha=\alpha(i)} g_i\right)=\sum_{i\in I} g_i\equiv 1,\]
     which confirms \dhighlight{(4)}.
 
 \end{proof}

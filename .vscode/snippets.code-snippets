@@ -1,0 +1,10 @@
+{
+
+	"Figure": {
+	 	"prefix": "sketch",
+	 	"body": [
+	 		"\\begin{figure}[H]\n    \\centering\n    \\includegraphics[width=.7\\textwidth]{example-image}\n    \\caption{Sketch 2.01}\n\\end{figure}"
+	 	],
+	 	"description": "Insert figure of a sketch"
+	}
+}
