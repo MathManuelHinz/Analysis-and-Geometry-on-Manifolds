@@ -429,9 +429,9 @@ Give a topological manifold with boundary, we can define unproblematically the n
     By sheet 2, exercise 1 (a) \(\{\overline{V_i}\}\) is still locally finite.
 
     \dhighlight{Step 2: Construction of the \(f_i\)} For each \(V_i\exists V_i\supset \tilde{V_i},\tilde{\phi_i}:\tilde{V_i}\to \R^n\) such that 
-    \(\tilde{\psi_i}(V_i)=B_{s_1^i},\tilde{\psi_i}(\tilde{V_i})=B_{s_2^i}\) with \(0<r_1^i<r_2^i\), \(\tilde{V_i}\subset U_\alpha\) for some \(\alpha\).
-    Using lemma \ref{lem:2.6}, let \(H_i:\R^n\to \R\) be a cutoff function, i.e. \(H_i\mid_{{B_{r_1}}}>0,H=0\) on \(\R\setminus B_{s_1^i}\).
-    \marginnote{\(\tilde{V}_i\subset U_\alpha\) really needs, that the closure}
+    \(\tilde{\psi_i}(V_i)=B_{r_1^i},\tilde{\psi_i}(\tilde{V_i})=B_{r_2^i}\) with \(0<r_1^i<r_2^i\), \(\tilde{V_i}\subset U_\alpha\) for some \(\alpha\).
+    Using lemma \ref{lem:2.6}, let \(H_i:\R^n\to \R\) be a cutoff function, i.e. \(H_i\mid_{{B_{r_1}}}>0,H=0\) on \(\R\setminus B_{r_1^i}\).
+    \marginnote{Finging \(\tilde{V}_i\) s.t. \(\tilde{V}_i\subset U_\alpha\) is the reason we considered regular coordinate balls whose \dhighlight{closure is contained} in some \(U_\alpha\)}
     Let us set \(f_i:M\to\R, f_i=\begin{cases}
         H_i\circ \tilde{\phi_i} & \text{ on } \tilde{V_i}\\
         0 & M\setminus \overline{{V_i}}
