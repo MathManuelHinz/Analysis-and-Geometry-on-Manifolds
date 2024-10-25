@@ -304,6 +304,7 @@ Give a topological manifold with boundary, we can define unproblematically the n
         e^{-\frac{1}{t}} & t>0\\
         0 & t\leq 0
     \end{cases}\]
+    is smooth.
 \end{lemma}
 
 \begin{figure}[H]
@@ -409,7 +410,7 @@ Give a topological manifold with boundary, we can define unproblematically the n
     The same theorem works in Top, \(\man0,\mank\). It will not work in \(\text{Man}^{\text{Analytic}},\text{Man}^{\text{Cplx-Analytic}},\) Varieties \(/\C\).
 \end{remark}
 
-\begin{proof}
+\begin{proof} % TODO: correct step 01
     \dhighlight{Step 1: Construction of the \(V_i\)} An open supset \(U\subset M\) is called a \dhighlight{regular coordinate ball} if there 
     exists \(\overline{U}\subset\tilde{U},(\tilde{U},\tilde{\phi})\) a chart such that 
     \(\tilde{\phi}(U)=B_{r_1},\tilde{\phi}(\tilde{U})=B_{r_2}\). 
@@ -421,7 +422,7 @@ Give a topological manifold with boundary, we can define unproblematically the n
     By lemma \ref{lem:1.6} \(M\) admits an exhaustion by compact sets. By lemma \ref{lem:1.7}, given 
     any basis, any open cover, one can find a locally finite, countable basis refinement of this cover by basis elements.
 
-    Claim: \(\{\text{regular coordinate balls}\}\) basis of \(M\) \marginnote{The claim is easy to verify}
+    Claim: \(\{\text{regular coordinate balls whose closure is contained in some }U_\alpha\}\) basis of \(M\) \marginnote{The claim is easy to verify}
 
     These tree points imply that \(\{U_\alpha\}_{\alpha\in\cA}\) admits a countable, locally finite refinement by regular coordinate balls \(\{V_i\}_{i\in I}\).
 
@@ -430,7 +431,7 @@ Give a topological manifold with boundary, we can define unproblematically the n
     \dhighlight{Step 2: Construction of the \(f_i\)} For each \(V_i\exists V_i\supset \tilde{V_i},\tilde{\phi_i}:\tilde{V_i}\to \R^n\) such that 
     \(\tilde{\psi_i}(V_i)=B_{s_1^i},\tilde{\psi_i}(\tilde{V_i})=B_{s_2^i}\) with \(0<r_1^i<r_2^i\), \(\tilde{V_i}\subset U_\alpha\) for some \(\alpha\).
     Using lemma \ref{lem:2.6}, let \(H_i:\R^n\to \R\) be a cutoff function, i.e. \(H_i\mid_{{B_{r_1}}}>0,H=0\) on \(\R\setminus B_{s_1^i}\).
-
+    \marginnote{\(\tilde{V}_i\subset U_\alpha\) really needs, that the closure}
     Let us set \(f_i:M\to\R, f_i=\begin{cases}
         H_i\circ \tilde{\phi_i} & \text{ on } \tilde{V_i}\\
         0 & M\setminus \overline{{V_i}}
@@ -453,3 +454,117 @@ Give a topological manifold with boundary, we can define unproblematically the n
     which confirms \dhighlight{(4)}.
 
 \end{proof}
+
+\beginlecture{06}{25.10.2024}
+
+\subsection{Applications of partitions of unity}
+
+\begin{definition*}
+    Let \(X\) be a topological space. Let \(A\subset X\) be closed, \(U\subset X\), \(A\subset U\) be open. 
+    A \dhighlight{bump function for \(A\)} supported in \(U\) is a function \[\phi:X\to\R\]
+    such that \(\psi\mid_A \equiv1, \supp(\phi)\subset U\). 
+\end{definition*}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 2.07}
+\end{figure}
+
+\begin{proposition}\label{prop:2.8}
+    Let \(M\) be a smooth manifold. Fix \(A\subset M\) closed, \(U\subset M,A\subset U\subset M\) open.
+    Then there exists a smooth bump function for \(A\) supported in \(U\)
+\end{proposition}
+
+\begin{proof}
+    Let \(V=M\setminus A\). Then \(\{U,V\}\) is a covering and  by theorem \ref{thm:2.7}, there exist 
+    \(\{\Psi_U,\Psi_V\}\) partitions of unity subordinate to this cover. Now \(\Psi_U\) does the job.
+\end{proof}
+
+\begin{definition*}
+    Let \(M,N\) be smooth manifolds. Let \(A\subset M\) be closed. We say that \(f:A\to N\) is smooth 
+    if it admits a smooth extension in a neighborhood of each point \(p\in A\). \marginnote{I.e. for any \(p\in A\) there exists \(U_p\ni p,\) a smooth function \(\tilde{f}_p:U_p\to N\) s.t. \(\tilde{f}_p\mid_{U_p\cap A} = f\mid_{U_p\cap A}\)}
+\end{definition*}
+
+\begin{proposition}\label{prop:2.9}
+    Let \(M\) be a smooth manifold. Let \(A\subset M\) be closed and \(f:A\to\R^k, k\geq 0\) be smooth.
+    Then for any open \(U \subset M, A\subset U\), there exists \(\tilde{f}:M\to\R^k\), such that \(\tilde{f}\mid_{A}=f\) and \(\supp(\tilde{f})\subset U\)
+\end{proposition}
+
+\begin{remark}
+    This would be \dhighlight{false} if we replaced \(\R^k\) by an arbitrary smooth manifold \(N\). E.g. 
+    take \(\R^2\hookleftarrow A=S^1\stackrel{f=\text{id}}{\to}S^1\)
+\end{remark}
+
+\begin{proof} % TODO: Fix restrictions
+    For each \(p\in A\), choose a neighborhood \(p\in W_p\subset U\)\marginnote{We maybe need \(\overline{W_p}\subset U\)? Prob. not?}, \(\tilde{f}_p:W_p\to\R^k\) smooth 
+    extension of \(f\mid_{A\cap W_p}\). Then observe that \(\{W_p\}_{p\in A}\cup (M-A)\) forms an open cover of \(M\).
+    \(\{\psi_p\}_{p\in A}\cup \psi_0\) be a partition of unity subordinate to the cover. Now we set 
+    \(\tilde{f}=\sum_{p\in A}\psi_p \tilde{f}_p\). By local finiteness \(\tilde{f}\) is smooth. Also 
+    \begin{align*}
+        \tilde{f}\mid_A&=\sum_{p\in A} \psi_p\mid_A \underbrace{\tilde{f_p}\mid_A}_{=f}\\
+        &=f\sum_{p\in A} \psi_p\mid_A = f\mid_A \cdot 1 = f\mid_A .\qedhere
+    \end{align*}
+\end{proof}
+
+\begin{definition*}
+    Let \(X\) be a topological space. An \dhighlight{exhaustion function} \(f:X\to\R\) is a 
+    continuous function such that \(\forall C\in \R,f^{-1}(-\infty,c]\) is compact. \marginnote{If \(X\) is compact every \(f\) is an exhaustion function \dots}
+\end{definition*}
+
+\begin{example}
+    \(X=\R,f:\R\to\R,x\stackrel{f}{\mapsto} x^2\)
+\end{example}
+
+\begin{example}[NON-EXAMPLE]
+    \(X=\R,f(x)=x\)
+\end{example}
+
+\begin{proposition}\label{prop:2.10}
+    Every smooth manifold admits a smooth exhaustion function.
+\end{proposition}
+
+\begin{proof}
+    Pick a countable partition of unity \(\{U_i\}_{i\in N_+}\) by open subsets having compact closure\footnote{Like in the proof of \ref{thm:2.7}}.
+    Let \(\{\Psi_i\}_{i\in\N_+}\) be a subordinate partition of unity. Let \(f\coloneqq \sum_{i\in\N_+}i\psi_i\).
+    
+    Observe that for any \(c\in\R\), \(c<N\in \N\) that \[f^{-1}(-\infty,c]\subset f^{-1}(-\infty,c]\subset \bigcup_{i=1}^N \overline{U_i}\]
+
+    Why \(f^{-1}(-\infty,c]\subset\bigcup_{i=1}^N \overline{U_i}\)? Let \(q\not\in \bigcup_{i=1}^N \overline{U_i}\).
+    Then \begin{align*}
+        f(q)&=  \underbrace{\sum_{i=1}^{N} i \psi_i(q)}_{=0} + \sum_{i=N+1}^\infty i\psi_i(q)\\
+        & \geq (N+1)\sum_{i=N+1}^\infty\psi_i(q) = (N+1)\underbrace{\sum_{i=1}^\infty \psi_i(q)}_{=1}\\
+        &=N+1 
+    \end{align*} 
+\end{proof}
+
+ \begin{proposition}\label{prop:2.11}
+    Let \(M\) be a smooth manifold. Let \(A\subset M\) be a closed subset. Then 
+    there exists a smooth function \[f:M\to\R,f^{-1}(0)=A\]
+    \marginnote{In fact, the prove shows one can assume \(f\geq 0\)}
+ \end{proposition}
+
+ E.g. take \(M=\R,A=\) Cantor set, shows that this is non-trivial.
+
+ \begin{proof}
+    Assume \(M=\R^n\) (general case: Sheet 04).
+
+    Choose a countable cover of \(\R^n\setminus A\) by balls \(\{B_{r_i}(x_i)\}_{i=1}^\infty\) with \(r_i<1\).
+    By Lemma \ref{lem:2.6} there exists a cutoff function \[H:\R^n\to \R\]
+    s.t. \(H\equiv 1\) on \(\overline{B_{\frac{1}{2}}(0)}\) and \(0<H<1\) on \(B_1(0)\setminus \overline{B_{\frac{1}{2}}(0)}\)
+    and \(H\equiv 0\) on \(R^n\setminus B_1(0)\). For each \(i\geq 1\) let \(C_i\gg 1\) be large enough so that 
+    \[C_i>\sup \{\partial^\alpha_x H \mid \alpha=\overbrace{(\alpha_1,\dots,\alpha_n)}^{\in \N^n},|\alpha|\leq i\}\]  
+
+    Let \[f\coloneqq \sum_{i=1}^\infty \frac{r_i^i}{2^i c_i}H\left(\frac{x-x_i}{r_i}\right).\]
+    We need to argue that \(f\) is smooth. Observe that, since \(r_i<1\) \(\frac{r_i}{2^ic_i}H\left(\frac{x-x_i}{r_i}\right)\leq \frac{1}{2^i}\)
+    It follows from Analysis 2 that \(f\) is continuous. To prove that \(f\) is smooth assume for \(k\geq 1\)  
+    that all partial of order \(k<1\) exist and are continuous. If \(|\alpha|=k\), then \begin{align*}
+        \partial^\alpha\frac{r_i^i}{2^iC_i} H\left(\frac{x-x_i}{r_i}\right)=\frac{r_i^{i-k}}{2^iC_i}\partial^\alpha H \left(\frac{x-x_i}{r_i}\right)
+    \end{align*}
+    If \(i>k\), then 
+    \begin{align*}
+        \left\vert \frac{r_i^{i-k}}{2^iC_i} \partial^\alpha  H \left(\frac{x-x_i}{r_i}\right)\right\vert<\frac{1}{2^i}
+    \end{align*}
+    Again follows by Analysis 2 that \(\partial^\alpha f\) exists and equals \(\sum\partial^\alpha \left(\frac{r_i^i}{2^iC_i}H\left(\frac{x-x_i}{r_i}\right) \right)\).
+\end{proof}
+
