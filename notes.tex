@@ -3,6 +3,7 @@
 
 \author{Manuel Hinz}
 
+\addbibresource{Manifolds.bib}
 
 \begin{document}
 \newgeometry{left=15mm,right=15mm,bmargin=2cm}
@@ -76,4 +77,6 @@
     \renewcommand*{\do}[1]{\item \hyperlink{#1}{Lecture \StrBehind{#1}{c}:} \input{journal/#1}}
     \dolistloop{\lecturelist}
 \end{itemize}
+\addcontentsline{toc}{chapter}{Bibliography}
+\printbibliography
 \end{document}
