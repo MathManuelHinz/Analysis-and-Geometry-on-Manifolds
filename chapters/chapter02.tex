@@ -255,7 +255,7 @@ In general:\begin{itemize}
 
 \beginlecture{05}{22.10.2024}
 
-\subsection{Smooth manifolds with boundary} % TODO: Wrong number?
+\subsection{Smooth manifolds with boundary}
 
 \begin{definition*}
     A function \(f:\bH^n\supset U \to \R^k\) is \dhighlight{smooth} if every \(p\in U\)
@@ -496,14 +496,14 @@ Give a topological manifold with boundary, we can define unproblematically the n
     take \(\R^2\hookleftarrow A=S^1\stackrel{f=\text{id}}{\to}S^1\)
 \end{remark}
 
-\begin{proof} % TODO: Fix restrictions
+\begin{proof}
     For each \(p\in A\), choose a neighborhood \(p\in W_p\subset U\)\marginnote{We maybe need \(\overline{W_p}\subset U\)? Prob. not?}, \(\tilde{f}_p:W_p\to\R^k\) smooth 
-    extension of \(f\mid_{A\cap W_p}\). Then observe that \(\{W_p\}_{p\in A}\cup (M-A)\) forms an open cover of \(M\).
+    extension of \(f\restrict{A\cap W_p}\). Then observe that \(\{W_p\}_{p\in A}\cup (M-A)\) forms an open cover of \(M\).
     \(\{\psi_p\}_{p\in A}\cup \psi_0\) be a partition of unity subordinate to the cover. Now we set 
     \(\tilde{f}=\sum_{p\in A}\psi_p \tilde{f}_p\). By local finiteness \(\tilde{f}\) is smooth. Also 
     \begin{align*}
-        \tilde{f}\mid_A&=\sum_{p\in A} \psi_p\mid_A \underbrace{\tilde{f_p}\mid_A}_{=f}\\
-        &=f\sum_{p\in A} \psi_p\mid_A = f\mid_A \cdot 1 = f\mid_A .\qedhere
+        \tilde{f}\restrict{A}&=\sum_{p\in A} {\psi}_{p\mid_{A}} \underbrace{\tilde{f_p}\restrict{A}}_{=f}\\
+        &=f\sum_{p\in A} {\psi}_{p\mid_{A}} = f\restrict{A} \cdot 1 = f\restrict{A} .\qedhere
     \end{align*}
 \end{proof}
 
