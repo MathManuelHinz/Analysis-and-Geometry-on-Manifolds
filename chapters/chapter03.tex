@@ -247,7 +247,7 @@ Note that this commutes with \(dF^{(i)}\), i.e. \(dF^{(2)}\circ K_p=K_{F^{(1)}(p
     (1) Given a point \(p\in\R^n\) let \((\partial_{x_i})_p\in T_p\R^n\) be the vector represented by 
     the curve \(t\mapsto p+t\underbrace{(0,\dots,1,\dots,0)}_{e_i}\).
 
-    (2) Given \(p\in M\), we shall abusive notation by writing \((\partial_{x_i})_p\coloneqq d\varphi_{\varphi_p}^{-1}(\partial x_i)_p\) for some chart \(((U,\phi))\) 
+    (2) Given \(p\in M\), we shall abusenotation by writing \((\partial_{x_i})_p\coloneqq d\varphi_{\varphi_p}^{-1}(\partial x_i)_p\) for some chart \(((U,\phi))\) 
 \end{definition*}
 
 \begin{remark}
@@ -289,7 +289,7 @@ and therefore
     By abuse of notation we often write \(F\equiv \hat{F},p\equiv \hat{p},\partial_{x_i}f\equiv \partial_{x_i}\hat{F}, dF_p\equiv d\hat{F}_{\hat{p}}\)
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_3_08.png}
         \caption{Sketch 3.08}
     \end{figure}
 \end{remark}
@@ -307,6 +307,12 @@ and therefore
     \[\pi:\TM\to M, (p,v)\mapsto p.\]
 \end{definition*}
 
+\begin{remark}[Added by Manuel, was an answer to my question]
+    For \(p\in M\) the preimage of \(p\) under \(\pi\) is called a \dhighlight{fiber}. 
+    He also highlighted, the condition that \(\pi^{-1}(p)\) is a vector space (namely \(T_pM\)),
+    which seems to be important in our context, but not generally required for fibers. 
+\end{remark}
+
 A priori, TM is just a set. We will exhibit natural smooth manifold structure. 
 
 \dhighlight{Special case:} \(M\subset U\R^n\). Then \begin{align*}
@@ -317,7 +323,7 @@ A priori, TM is just a set. We will exhibit natural smooth manifold structure.
 \dhighlight{General construction} Given a smooth chart \((U,\phi)\) for a smooth manifold \(M\), we have a map \(d\phi\)
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{sketch_3_09.png}
     \caption{Sketch 3.09}
 \end{figure}
 where \[d\phi(p,v)\coloneqq (\phi(p),d\phi_p(v)).\]
@@ -332,12 +338,6 @@ Define a subset \(S\subset \TM\) to be open, if, for any chart \(U,\phi\), \(d\p
     \[d\psi\circ d\phi^{-1}:\phi(U\cap V)\times \R^n\to \psi(U\cap V)\times \R^n\]
     is it an elementary, but tedious proof. 
 \end{proof}
-
-\begin{figure}[H] % definition 3.10
-    \centering
-    \includegraphics[width=.7\textwidth]{example-image}
-    \caption{Sketch 3.10}
-\end{figure}
 
 \begin{remark}
     Alternatively define the same topology on TM by taking the basis the union over all charts \((U,\phi)\) in your atlas 
@@ -355,7 +355,7 @@ where \((U,\phi)\) runs over the smooth charts of \(M\).
     Fix charts \((U,\phi),(V,\psi)\). Then the transition functions take the form 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_3_11.png}
         \caption{Sketch 3.11}
     \end{figure}
     Check if both components are smooth:
@@ -374,7 +374,7 @@ where \((U,\phi)\) runs over the smooth charts of \(M\).
     In fact, we have 
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_3_12.png}
         \caption{Sketch 3.12}
     \end{figure}
     commutes. This can be restated as follows: There is a functor \(\maninf\to\text{Smooth vector bundles}\)

@@ -28,11 +28,16 @@ Smooth maps, which have full rank (highest possible rank, i.e. \(\text{rank} F=\
     there exists a submatrix \(M'\), obtained by deleting \(n-m\) columns, which is invertible.
     Now the map \marginnote{\(M\) is fixed and \(F\) depends on \(M\), but it does not matter here!}
     \begin{align*}
-        f\Mat(m\times n)\stackrel{F:M\mapsto M'}{\to} \Mat m\times m\stackrel{\text{det}(\cdot)}{\to} \R
+        \Mat(m\times n)\stackrel{F:M\mapsto M'}{\to} \Mat(m\times m)\stackrel{\text{det}(\cdot)}{\to} \R
     \end{align*}
     is continuous, since booth the forgetful \(F\) and det is smooth.
      \[M\in (\det\circ F)^{-1}(\underbrace{\R\setminus\{0\}}_{\text{open}})\subset \Mat(m\times n)^{\text{full rank}}\]
     since \(M\) was arbitrary this completes the proof.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{sketch_04_00.png}
+        \caption{Sketch 4.00}
+    \end{figure}
 \end{proof}
 
 \begin{lemma}\label{lem:4.2}\marginnote{The property of full rank is stable under small pertubation!}
@@ -56,10 +61,10 @@ Smooth maps, which have full rank (highest possible rank, i.e. \(\text{rank} F=\
     \begin{enumerate} % TOFIX
         \item If \(F:M\to N\) is both an immersion and a submersion, then we say that \(F\) is a \dhighlight{local diffeomorphism}. We will see (Rank theorem %TOFIX
         ) that \(F\) is a local diffeomorphism \(\iff\forall p\in M\exists p\in U: F\restrict{U}\) is a diffeomorphism.
-        \item be warned. local diffeomorphism need not be global: \begin{align*}
-            \R^2&\equiv \C\supset &S^1=\{|z|=1\}&\to S^1\\
-            (x,y)&\mapsto x+iy& z&\mapsto z^2
-        \end{align*}
+        \item be warned. local diffeomorphism need not be global: \begin{alignat*}{10}
+            \R^2&\equiv \C\supset& S^1=&\{|z|=1\}\to &S^1\\
+            (x,y)&\mapsto x+iy &z&\xmapsto{\phantom{\{|z|=1\}\to}}  &z^2
+        \end{alignat*}
     \end{enumerate}
 \end{remark}
 
@@ -71,7 +76,7 @@ Smooth maps, which have full rank (highest possible rank, i.e. \(\text{rank} F=\
 \begin{example}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_4_01.png}
         \caption{Sketch 4.01}
     \end{figure}
     Another example: \[S^n=\{(x_0,\dots,x_n)\in\R^{1+n}\mid\sum x_i^2=1\}\subset\R^{1+n}\]
@@ -80,7 +85,7 @@ Smooth maps, which have full rank (highest possible rank, i.e. \(\text{rank} F=\
     \dhighlight{Non-examples}
     \begin{figure}[H]
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_4_02.png}
         \caption{Sketch 4.02}
     \end{figure}
     parametrized by \[t\mapsto (\sin t,\sin 2t)\]
@@ -89,7 +94,7 @@ Smooth maps, which have full rank (highest possible rank, i.e. \(\text{rank} F=\
         \R&\mapsto \R^2/\Z^2&=S^1\times S^1\\
         t&\mapsto (t,\alpha t) & \alpha \in\R\setminus \Q 
     \end{align*}
-    Can show\footnote{not obvious, examable} that the image is dense. It is an immersion, but no a homeomorphism!
+    Can show\footnote{not obvious, non-examable} that the image is dense. It is an immersion, but no a homeomorphism!
 \end{example}
 
 
