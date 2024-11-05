@@ -243,12 +243,12 @@ Note that this commutes with \(dF^{(i)}\), i.e. \(dF^{(2)}\circ K_p=K_{F^{(1)}(p
 
 \section{Coordinates}
 
-\begin{definition}
+\begin{definition*}
     (1) Given a point \(p\in\R^n\) let \((\partial_{x_i})_p\in T_p\R^n\) be the vector represented by 
     the curve \(t\mapsto p+t\underbrace{(0,\dots,1,\dots,0)}_{e_i}\).
 
     (2) Given \(p\in M\), we shall abusive notation by writing \((\partial_{x_i})_p\coloneqq d\varphi_{\varphi_p}^{-1}(\partial x_i)_p\) for some chart \(((U,\phi))\) 
-\end{definition}
+\end{definition*}
 
 \begin{remark}
     \begin{enumerate}
@@ -282,6 +282,106 @@ and therefore
     \vdots & & \vdots \\
     \partial_{x_1} \hat{F}^n(\hat{p}) & \cdots &\partial_{x_m} \hat{F}^n(\hat{p})\\
 \end{pmatrix}.\]
+
+\beginlecture{08}{05.11.2024}
+
+\begin{remark}
+    By abuse of notation we often write \(F\equiv \hat{F},p\equiv \hat{p},\partial_{x_i}f\equiv \partial_{x_i}\hat{F}, dF_p\equiv d\hat{F}_{\hat{p}}\)
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 3.08}
+    \end{figure}
+\end{remark}
+
+\begin{remark}
+    \(d\hat{F}_{\cdot}:\underbrace{x}_{\in \phi(U)\subset \R^m}\mapsto d\hat{F}_x\in \text{Mat}(n\times m)\equiv \R^{n\times m}\). This it clearly 
+    a smooth map.
+\end{remark}
+
+\section{The tangent bundle}
+
+\begin{definition*}
+    Given a smooth manifold \(M\), let \(\TM\coloneqq \coprod_{p\in M} T_p M\). We write 
+    elements of \(\TM\) as pairs \((p,v)\), where \(v\in T_p M\). Note that we have a map 
+    \[\pi:\TM\to M, (p,v)\mapsto p.\]
+\end{definition*}
+
+A priori, TM is just a set. We will exhibit natural smooth manifold structure. 
+
+\dhighlight{Special case:} \(M\subset U\R^n\). Then \begin{align*}
+    TU&\coloneqq \coprod_{p\in U} T_p U\equiv U\times \R^n\\
+    & (t\mapsto  p+tv)\mapsto(p,v) % fix
+\end{align*}\marginnote{Remember that this is a canonical identification!}
+
+\dhighlight{General construction} Given a smooth chart \((U,\phi)\) for a smooth manifold \(M\), we have a map \(d\phi\)
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 3.09}
+\end{figure}
+where \[d\phi(p,v)\coloneqq (\phi(p),d\phi_p(v)).\]
+
+Define a subset \(S\subset \TM\) to be open, if, for any chart \(U,\phi\), \(d\phi(S\cap TU)\) open in \(T\phi(U)\equiv \phi(U)\times \R^n\).\marginnote{This is a pullback} % TODO:FIX 
+\begin{lemma}\label{lem:2.10}
+    This prescription defines a topological space on \(\TM\). Moreover, \(\TM\) is a topological manifold.
+\end{lemma}
+
+\begin{proof}
+    Omitted. Check transition maps 
+    \[d\psi\circ d\phi^{-1}:\phi(U\cap V)\times \R^n\to \psi(U\cap V)\times \R^n\]
+    is it an elementary, but tedious proof. 
+\end{proof}
+
+\begin{figure}[H] % definition 3.10
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 3.10}
+\end{figure}
+
+\begin{remark}
+    Alternatively define the same topology on TM by taking the basis the union over all charts \((U,\phi)\) in your atlas 
+    of \(\{d\phi^{-1}(V)\mid V\subset T(\psi(U)) \text{ open}\}\).
+\end{remark}
+
+To make TM into a \dhighlight{smooth} manifold, we take as our atlas the set \(\{(TU,d\phi)\}_{(U,\phi)}\),
+where \((U,\phi)\) runs over the smooth charts of \(M\). 
+
+\begin{lemma}\label{lem:3.11}
+    this is a smooth atlas. 
+\end{lemma}
+
+\begin{proof}
+    Fix charts \((U,\phi),(V,\psi)\). Then the transition functions take the form 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 3.11}
+    \end{figure}
+    Check if both components are smooth:
+    \begin{itemize}
+        \item The first component \(x\mapsto \psi\circ\phi^{-1}(x)\) is smooth, since \(M\) is a smooth manifold an \((U,\phi),(V,\psi)\) are smooth  \marginnote{Since we can write the second component as a concatination of maps, it is smooth}
+        \item For the second component can be fractured as follows: \[(x,v)\mapsto (d(\underbrace{\psi\circ\phi^{-1}_x}_{\in\text{Man}(n\times n)\equiv\R^{2n}},v))\mapsto d(\psi\circ\phi^{-1})_xv\] 
+        \dhighlight{Exercise:} the map Mat\((m\times n)\times \text{Mat}(n\times p)\to \text{Mat}(m\times p)\) by \(A,B\mapsto AB\) is smooth. \qedhere
+    \end{itemize}
+\end{proof}
+
+\begin{remark}
+    We will see later %TODO
+    that \((\phi:\TM\to M)\) forms a vector bundle. It can be shown that 
+    given \(F:M\to N\) the map \(dF:\TM\to\text{TN}, (p,v)\mapsto (F(p),dF_p(v))\) is smooth.\marginnote{This is the exact same computation as in the proof of lemma \ref{lem:3.11}}.
+
+    In fact, we have 
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 3.12}
+    \end{figure}
+    commutes. This can be restated as follows: There is a functor \(\maninf\to\text{Smooth vector bundles}\)
+    by \[M\mapsto (\pi:\TM\to M)\]
+    \[F:M\to N\mapsto \text{ sketch above}\]
+\end{remark}
+
 
 
 
