@@ -29,11 +29,14 @@
 \usepackage{xstring}
 \usepackage{accents}
 \usepackage{footnotehyper}
+\usepackage{nameref}
 \usepackage[
 style=numeric,
 backend=bibtex
 ]{biblatex}
-
+\usepackage{refcount}
+\newcommand{\pagedifference}[2]{
+  \number\numexpr\getpagerefnumber{#2}-\getpagerefnumber{#1}\relax}
 
 \definecolor{mygray}{RGB}{239,240,241}
 \definecolor{mycolor}{RGB}{1,50,32}
@@ -192,7 +195,9 @@ backend=bibtex
 
 \def\lecturelist{}
 \def\tutlist{}
-\newcommand{\beginlecture}[2]{\hypertarget{lec#1}{}\listxadd{\lecturelist}{lec#1}\marginnote{Start of lecture #1 (#2)}}
+
+\newcommand{\markeol}[1]{\label{lec#1end}}
+\newcommand{\beginlecture}[2]{\hypertarget{lec#1}{}\label{lec#1}\listxadd{\lecturelist}{lec#1}\marginnote{Start of lecture #1 (#2)}}
 \newcommand{\begintutorial}[2]{\hypertarget{tut#1}{}\listxadd{\tutlist}{tut#1}\marginnote{Start of tutorial #1 (#2)}}
 \newcommand{\dhighlight}[1]{{\color{mycolor}{\underline{{\textbf{#1}}}}}}
 \newcommand{\highlight}[1]{{\color{mycolor}{\textbf{#1}}}}

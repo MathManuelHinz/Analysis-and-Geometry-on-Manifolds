@@ -73,10 +73,10 @@
 \input{chapters/chapter03}
 \input{chapters/chapter04}
 \input{chapters/chapter05}
-\chapter*{List of Lectures}
-\addcontentsline{toc}{chapter}{List of Lectures}
+\chapter*{Journal}
+\addcontentsline{toc}{chapter}{Journal}
 \begin{itemize}
-    \renewcommand*{\do}[1]{\item \hyperlink{#1}{Lecture \StrBehind{#1}{c}:} \input{journal/#1}}
+    \renewcommand*{\do}[1]{\item \hyperlink{#1}{Lecture \StrBehind{#1}{c}:} Covering: \input{journal/#1}.\newline Starting in \Nameref{#1} and ending in \Nameref{#1end}. Spanning\pagedifference{#1}{#1end} pages}
     \dolistloop{\lecturelist}
 \end{itemize}
 \addcontentsline{toc}{chapter}{Bibliography}
