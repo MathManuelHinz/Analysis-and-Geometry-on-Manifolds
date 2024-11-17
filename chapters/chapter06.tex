@@ -154,22 +154,37 @@ Let \(M\) be a smooth manifold.
 \subsection{Transversality of maps}
 
 \begin{definition*} % TODO: FIX
-    Let \begin{figure}[H]
+    Let \begin{figure}[H]\label{fig:6.11}
         \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_11.png}
+        \begin{tikzcd}
+            & Y \arrow[d,hook',"g"]\\
+            X\arrow[r,hook,"f"] & Z
+        \end{tikzcd}
         \caption{Sketch 6.11}
     \end{figure}
     be a diagram in Top (the category of topological spaces). We let \(X\substack{\times\\z} Y \coloneqq \{(x,y)\mid f(x)=g(y)\}\subset X\times Y\),
     endowed woth the subspace topology. We call \(X\substack{\times\\z} Y\) the \dhighlight{fiber product (of the diagram)}.
 \end{definition*}
 
-\begin{remark}[(for enthusiasts only)]
+\begin{remark}[for enthusiasts only]
 It can be shown that given any topological space \(W\in \text{Top}\) and maps 
-\begin{figure}[H]
+\begin{center}
+    \begin{tikzcd}
+        W \arrow[d]\arrow[r] & Y\arrow[d]\\ 
+        X \arrow[r,]& Z
+    \end{tikzcd}
+\end{center}
+\begin{figure}[H]\label{fig:6.12}
     \centering
-    \includegraphics[width=.7\textwidth]{sketch_6_12.png}
+    
+    \begin{tikzcd}
+        W\arrow[rdd,bend right]\arrow[rrd,bend left]\arrow[dr,dashed,sloped,"\exists!"]&&\\
+        &X\substack{\times\\Z}Y\arrow[d]\arrow[r] & Y\arrow[d]\\ 
+        &X \arrow[r]& Z
+    \end{tikzcd}
     \caption{Sketch 6.12}
 \end{figure}
+
 there exists a unique map \(W\to X\substack{\times\\ z} Y\) commutes.(Universal property)
 \end{remark}
 
@@ -182,12 +197,15 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
 \end{example} 
 
 \begin{definition*}
-    Let \begin{figure}[H]
+    Let \begin{figure}[H]\label{fig:6.13}
         \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_13.png}
+        \begin{tikzcd}
+            & Y \arrow[d,hook',"g"]\\
+            X\arrow[r,hook,"f"] & Z
+        \end{tikzcd}
         \caption{Sketch 6.13}
     \end{figure}
-    be a diagram in \(\maninf\). We say that \(f,g\) are transverse at \(z=f(x)=g(y)\) if 
+    be a diagram in \(\maninf\). We say that \(f,g\) are \dhighlight{transverse} at \(z=f(x)=g(y)\) if 
     \[\text{im }df_x+\text{im }dg_y=T_zZ.\]
     We say that \(f,g\) are \dhighlight{transverse} and say \(f\pitchfork g\) if this holds 
     for all such \(z\).
@@ -195,9 +213,12 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
 
 \begin{remark}
     Transversality for maps generalizes transversality for submanifolds. Take the diagram 
-    \begin{figure}[H]
+    \begin{figure}[H]\label{fig:6.14}
         \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_14.png}
+        \begin{tikzcd}
+            & Y \arrow[d,hook']\\
+            X\arrow[r,hook] & Z
+        \end{tikzcd}
         \caption{Sketch 6.14}
     \end{figure}
 \end{remark}
@@ -205,10 +226,14 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
 \begin{proposition}\label{prop:6.2}
     If \(f\pitchfork g\), then \(X\substack{\times\\z} Y \stackrel{i}{\to} X\times Y\) is a smooth embedding.
 \end{proposition}
-
-\begin{figure}[H]
+\marginnote{The diagonal arrows are the obvious projections}
+\begin{figure}[H]\label{fig:6.15}
     \centering
-    \includegraphics[width=.7\textwidth]{sketch_6_15.png}
+    \begin{tikzcd}
+        &Y&\\
+        X \substack{\times\\Z}Y\arrow[rr,hook]\arrow[ur] &&X\times Y\arrow[lu] \\
+        &\arrow[lu]X\arrow[ru]&
+    \end{tikzcd}
     \caption{Sketch 6.15}
 \end{figure}
 
@@ -221,16 +246,24 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     \end{itemize}
 
     Consider 
-    \begin{figure}[H]
+    \begin{figure}[H]\label{fig:6.16}
         \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_16.png}
+        \begin{tikzcd}
+            \Delta\coloneqq (X,Y,Z,Z)\arrow[d,bend right] &\\
+            X\times Y\times Z\times Z\arrow[r,"\pi"] & X\times Y \\
+            W=\text{graph}(f,g)\arrow[u,bend left]&
+         \end{tikzcd} 
         \caption{Sketch 6.16}
-    \end{figure}
+    \end{figure}        
+    where \[\text{graph}(f,g)=\coloneqq \{(x,y,x_2,z_1,z_2)\mid z_1=f(x),z_2=g(y)\}.\]
     Then \[W\cap \Delta=\{(x,y,z_1,z_2)\mid z_1=z_2=f(x)=g(y)\}=X\substack{\times\\z}Y.\]
-    We have: 
-    \begin{figure}[H]
+    We have:
+    \begin{figure}[H]\label{fig:6.17}
         \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_17.png}
+        \begin{tikzcd}
+            W\cap \Delta \arrow[rr, hook,"j"] \arrow[d,sloped,"\sim"]\arrow[d,swap,"\alpha"]\arrow[rd,hook,"i"] & & X\times X\times Z\times Z \arrow[ld,"\pi"]\\
+            X\substack{\times\\Z}\arrow[r,hook] & X\times Y
+        \end{tikzcd}  
         \caption{Sketch 6.17}
     \end{figure} 
     \(\alpha\) is clearly bijective and continuous. It is elementary that \(\alpha\) is a closed map.
@@ -244,8 +277,9 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     \[T_p\Delta=\{v',w',u,u\},\]
     where \(v,v'\in T_xX,w,w'\in T_yY,u\in T_zZ.\)
     We need to check: \(T_p W+T_p\Delta=T_p(X\times Y\times Z\times Z)\). We must show that for an arbitrary \((a,b,c,d)\in T_p(X\times Y\times Z\times Z)=T_XX\oplus T_yY\oplus T_zZ \oplus T_zZ,\)
-    
+
     \markeol{11}
+
 \end{proof}
 
 

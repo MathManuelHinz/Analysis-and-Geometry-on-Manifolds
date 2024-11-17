@@ -3,7 +3,7 @@
 	"Figure": {
 	 	"prefix": "sketch",
 	 	"body": [
-	 		"\\begin{figure}[H]\n    \\centering\n    \\includegraphics[width=.7\\textwidth]{example-image}\n    \\caption{Sketch 2.01}\n\\end{figure}"
+	 		"\\begin{figure}[H]\\label{fig:$1}\n    \\centering\n    \\includegraphics[width=.7\\textwidth]{example-image}\n    \\caption{Sketch $2}\n\\end{figure}$0"
 	 	],
 	 	"description": "Insert figure of a sketch"
 	}
