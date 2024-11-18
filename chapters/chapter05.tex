@@ -118,9 +118,9 @@
     Up to shrinking \(\psi\) (restricting the image of \(\varphi\)), we find that 
     \[\psi(V\cap S)=\{(x_1,\dots,x_k,x_{k+1},\dots,x_n)\mid x_{k+1}=\dots=x_{n}=0\}\]
     \dhighlight{Warning:} What can go wrong here? Consider 
-    \begin{figure}[H]
+    \begin{figure}[H]\label{fig:5.04}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_5_04.png}
         \caption{Sketch 5.04}
     \end{figure}
     Show that there is no more stuff in the set! % Will be fixed later
@@ -142,25 +142,29 @@ A priori, \(S\subset N\) could admit multiple smooth structures making it a subm
 \begin{lemma}\label{lem:5.4}
     Let \(S\subset N\) be a submanifold. If \(F:M\to N\) is a smooth map which factors through 
     \(S\hookrightarrow N\) as a continuous map, then \(F\) is smooth as a map \(M\to S\). 
-    \begin{figure}[H]
+    \begin{figure}[H]\label{fig:5.05}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_5_05.png}
         \caption{Sketch 5.05}
     \end{figure}
 \end{lemma}
 
 \begin{proof} % TODO: Fix notation
     By theorem \ref{thm:5.3}, there exists \(U\subset S\hookrightarrow N\supset V\)
-    \begin{figure}[H]\marginnote{More by the proof of the theorem ...}
+    \begin{figure}[H]\label{fig:5.06}\marginnote{More by the proof of the theorem ...}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_5_06.png}
         \caption{Sketch 5.06}
     \end{figure}
 Let us call \(\stackrel{\vee}{F}:M\to S,\stackrel{\vee}{F}(x)=F(x)\). Since \(\stackrel{\vee}{F}\) 
-is continuous, \(\stackrel{\vee}{F^{-1}}(U)\subset M\) open. So, we can write, for \((W,u)\), \(W\subset \stackrel{\vee}{F^{-1}}(U)\)
-\begin{figure}[H]
+is continuous, \(\stackrel{\vee}{F^{-1}}(U)\subset M\) open. So, we can write, for \((W,U)\), \(W\subset \stackrel{\vee}{F^{-1}}(U)\)
+\begin{figure}[H]\label{fig:5.07}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \begin{tikzcd}
+        F^{-1}(U)\arrow[r,"F^\vee"]\arrow[d,sloped,"\supset"] & S\arrow[d,sloped,"\supset"]\\
+        W\arrow[r] & U \\ 
+        (x_1,\dots,x_m)\arrow[r]& (F^{\vee 1}(x_1,\dots,x_m),\dots,F^{\vee k}(x_1,\dots,x_m))
+    \end{tikzcd}
     \caption{Sketch 5.07}
 \end{figure}
 were, a priori, \(\stackrel{\vee}{F^{i}}\) are continuous.
@@ -220,9 +224,9 @@ This is a very philosophically pleasing statement, since we recover our intuitio
 
     \dhighlight{\(F\) is an immersion:} Choose \(p\in M\). Then p \(p\in B_{i_0}\), for some 
     \(i_0\). Hence \(\rho_{i_0}\equiv 1\) for some neighborhood of \(p\).
-    \begin{figure}[H]
+    \begin{figure}[H]\label{fig:5.08}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_5_08.png}
         \caption{Sketch 5.08}
     \end{figure}
     Hence \(d(\rho_{i_0}\varphi_{i_0})=\underbrace{d\rho_{i_0}}_{\text{ invertible }m\times m}\) near \(p\implies dF\) is injective near \(p\), but \(p\) was arbitrary.

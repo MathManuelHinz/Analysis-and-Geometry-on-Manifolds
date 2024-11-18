@@ -122,9 +122,14 @@ Let \(M\) be a smooth manifold.
     surjective (by the rank theorem). Note that \(H^{-1}(0)=f^{-1}(0)\cap g^{-1}(0)=K\cap L\).
 
     To see surjectivity of \(dH_0\), we consider the exact sequences: 
-    \begin{figure}[H]
+    \begin{figure}[H]\label{fig:6.09}
         \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_09.png}
+        \begin{tikzcd}
+            \arrow[ddd,swap,sloped,"="]\arrow[ddd,sloped,"transversality"]T_0L + T_0K \arrow[r] & T_0L/{(T_0L\cap T_0 K)} \oplus T_0K/{(T_0L\cap T_0 K)}  \arrow[ddd,"(df_0{,}dg_0)"]\\
+            &\\
+            &\\
+            \R^m \equiv T_0U \arrow[r,"dH_0=(df_0{,}dg_0)"] & R^{n-k}\oplus \R^{m-l}
+        \end{tikzcd}
         \caption{Sketch 6.09}
     \end{figure}
     The horizontal map \(T_0 L + T_0 K\to T_L/(T_0L\cap T_0K)\oplus T_K/(T_0L\cap T_0K)\) sends \(v+w\)
@@ -133,20 +138,26 @@ Let \(M\) be a smooth manifold.
 
     Clearly the R.H vertical arrow is injective: the kernel of \(df_0=T_0K\), so \((df_0)\restrict{T_0L/(T_0L\cap T_0K)}\) and similarly for \(dg_0\).
     To prove the R.H. vertical arrow is an isomorphism, do a dimension count:\marginnote{Exact sequence} 
-    %TODO: FIX arrows
-    \[0\to T_0K\cap T_0L\stackrel{v\mapsto (v,v)}{\to} T_0K + T_0L\stackrel{(u,w)\mapsto u-w}{\to} T_0U\equiv \R^n\to 0\]
+    \begin{center}
+        \begin{tikzcd}
+            0 \arrow[r]&  T_0K\cap T_0L \arrow[rr,"v \mapsto (v{,}v)"] && T_0K + T_0L\arrow[rr,"(u{,}w)\mapsto u-w"]&& T_0U\equiv \R^n\arrow[r]& 0
+        \end{tikzcd}
+    \end{center}
     \(\implies \dim(T_0K\cap T_0L)+n=k+l\implies \dim(T_0L/_{(T_0K\cap T_0L)})=l-(k+l-n)=n-k\) and \(\dim(T_0K/_{(T_0K\cap T_0L)})=k-(k+l-n)=n-l\).
     We conclude that the R.H. vertical arrow is an isomorphism. 
 \end{proof}
 
 \begin{remark}
     We have 
-    \begin{figure}[H]
+    \begin{figure}[H]\label{fig:6.10}
         \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_10.png}
+        \begin{tikzcd}
+            \arrow[d,sloped,"\sim"] T_0L\cap T_0 K\arrow[r,hook] &\arrow[d,sloped,"\sim"] T_0L+ T_0K\\
+            \ker(dH_0)\arrow[r,hook] & T_0U\equiv \R^3
+        \end{tikzcd}
         \caption{Sketch 6.10}
     \end{figure}
-    where the left vertical arrow is an isomorphism, due to the 5'lemma or diagram chasing.
+    where the left vertical arrow is an isomorphism, due to the five lemma or diagram chasing.
 
     Hence \(\ker (dH_0)=T_0L\cap T_0K=T_0(L\cap K)\).
 \end{remark}
@@ -157,13 +168,13 @@ Let \(M\) be a smooth manifold.
     Let \begin{figure}[H]\label{fig:6.11}
         \centering
         \begin{tikzcd}
-            & Y \arrow[d,hook',"g"]\\
-            X\arrow[r,hook,"f"] & Z
+            & Y \arrow[d,"g"]\\
+            X\arrow[r,"f"] & Z
         \end{tikzcd}
         \caption{Sketch 6.11}
     \end{figure}
     be a diagram in Top (the category of topological spaces). We let \(X\substack{\times\\z} Y \coloneqq \{(x,y)\mid f(x)=g(y)\}\subset X\times Y\),
-    endowed woth the subspace topology. We call \(X\substack{\times\\z} Y\) the \dhighlight{fiber product (of the diagram)}.
+    endowed with the subspace topology. We call \(X\substack{\times\\z} Y\) the \dhighlight{fiber product (of the diagram)}.
 \end{definition*}
 
 \begin{remark}[for enthusiasts only]
