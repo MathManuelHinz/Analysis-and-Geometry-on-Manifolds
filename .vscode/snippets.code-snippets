@@ -10,7 +10,7 @@
 	"Tikz":{
 		"prefix": "tikzcd",
 	 	"body": [
-	 		"\\begin{tikzcd}$1\\end{tikzcd}$0"
+	 		"\\begin{tikzcd}\n$1\n\\end{tikzcd}$0"
 	 	],
 	 	"description": "Insert tikzcd env"
 	}

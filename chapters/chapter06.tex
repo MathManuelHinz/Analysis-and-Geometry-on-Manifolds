@@ -273,7 +273,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
         \centering
         \begin{tikzcd}
             W\cap \Delta \arrow[rr, hook,"j"] \arrow[d,sloped,"\sim"]\arrow[d,swap,"\alpha"]\arrow[rd,hook,"i"] & & X\times X\times Z\times Z \arrow[ld,"\pi"]\\
-            X\substack{\times\\Z}\arrow[r,hook] & X\times Y
+            X\substack{\times\\Z}Y\arrow[r,hook] & X\times Y
         \end{tikzcd}  
         \caption{Sketch 6.17}
     \end{figure} 
@@ -281,16 +281,184 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     That means we have to check the limit points. \(W\cap \Delta\) is closed, i.e. contains the same limit points\dots   
     Therefore \(\alpha\) is a homeomorphism.
 
-    By lemma \ref{lem:6.1}, if we can show that \(W\pitchfork \Delta\), then \(W\cap \Delta\stackrel{j}{X\times Y\times Z\times Z}\) is smooth embedding. 
+    By lemma \ref{lem:6.1}, if we can show that \(W\pitchfork \Delta\), then \(W\cap \Delta\stackrel{j}{\hookrightarrow}X\times Y\times Z\times Z\) is smooth embedding. 
     Hence \(i\coloneqq \pi\circ j\) smooth. Let us now check that \(W\pitchfork \Delta\) at some arbitrary point \(p=(x,y,z,z)\in W\cap \Delta\subset X\times Y\times Z\times Z\).
     Note that \(z=f(x)=g(y)\). We have \[T_pW=\{(v,w,df_x(v),dg_y(w))\}\]
     and 
     \[T_p\Delta=\{v',w',u,u\},\]
     where \(v,v'\in T_xX,w,w'\in T_yY,u\in T_zZ.\)
-    We need to check: \(T_p W+T_p\Delta=T_p(X\times Y\times Z\times Z)\). We must show that for an arbitrary \((a,b,c,d)\in T_p(X\times Y\times Z\times Z)=T_XX\oplus T_yY\oplus T_zZ \oplus T_zZ,\)
+    We need to check: \(T_p W+T_p\Delta=T_p(X\times Y\times Z\times Z)\). 
+    We must show that for an arbitrary \((a,b,c,d)\in T_p(X\times Y\times Z\times Z)=T_xX\oplus T_yY\oplus T_zZ \oplus T_zZ.\)
 
-    \markeol{11}
+    \markeol{11}\beginlecture{12}{19.11.2024}
+
+    We must solve: 
+    \begin{align*}
+        a&=v+v'\\
+        b&=w+w'\\
+        c&=u+df_x(v)\\
+        d&=u+dg_y(w)
+    \end{align*}
+    for some \(\underbrace{(v,w,df_x(v),dg_y(w))}_{\in T_pW}, (v',w',u,u)\in T_p\Delta\).
+    The above is equivalent to \marginnote{we solve this, since we want to show \(f\pitchfork g\iff \forall z\in X\substack{\times\\Z}Y:\text{im} df+\text{im}dg=T_zZ\)}
+    \begin{align*}
+        c-d  & = df_x(v)-dg_y(w)\in T_zZ & \text{By assumption there exists \(v,w\) s.t. equation holds}\\
+        c+d &=2u+df_x(v)+dg_y(w) & \text{can solve by picking suitable } u \\
+        a-v&=v'&\\
+        b-w&=w' & \text{choose } v',w'\text{ s.t. this holds}\\ 
+    \end{align*}   % TOFIX (photo)
+    Follows from Lemma \ref{lem:6.1} that
+    \begin{center}
+        \begin{tikzcd}
+            \Delta\cap W\arrow[r,hook]\arrow[rr,bend right,"i"] & X\times Y\times Z\times Z \arrow[r,"\pi"] & X\times Y
+        \end{tikzcd}
+    \end{center}
+    is a smooth submanifold. Finally, \(d_i\) is injective. This is clear, because \begin{tikzcd}
+    T_pW\arrow[r] & T_{(x,y)} X\times Y
+    \end{tikzcd} is injective. Indeed, if \((v,w,df_x(v),dg_y(w))\mapsto 0\), then \((v,w)=(0,0)\), but then 
+    \((v,w,df_x(v),dg_y(w))=(0,0,0,0)\).
+\end{proof}
+
+\section{Sarel's theorem} % tofix
+
+\subsection{Measure theory on manifolds}
+
+\begin{definition*}
+    A subset $S\subset \R^n$ has \dhighlight{measure zero} if, for any \(\epsilon>0\), there exists a family 
+    \(\{C_i\}_{i=1}^\infty\) of rectangles:
+    \[\R^n\supset C_i = (a_1^i-\epsilon_1^i,a_1^i+\epsilon_1^i)\times\dots\times (a_n^i-\epsilon_1^i,a_n^i+\epsilon_1^i),\]
+    where \((a_1^i,\dots,a_n^i)\in\R^n\) and \((\epsilon_1^i,\dots,\epsilon_n^i)\in\R_{>0}^n\), s.t. 
+    \[S\subset \bigcup_{i=1}^\infty C_i\land \sum_{i=1^\infty} \text{vol}(C_i)<\epsilon.\] 
+\end{definition*}
+
+\begin{remark}
+    We would get an equivalent definition, if we replaced rectangles with balls, cubes, paralellograms,\dots.
+\end{remark}
+
+\begin{example}
+    Suppose \(S\subset\R^1\) and \(|S|<\infty\), clearly S now has measure zero: \(a_i\in S\implies (a_i-\epsilon,a_i+\epsilon)\) has finite volume \(2n\epsilon\).
+    \begin{itemize}
+        \item \(S\subset\R\), \(S\) countable. Then \(S\) has measure zero: Take \((a_i-\frac{\epsilon}{2^i},a_i+\frac{\epsilon}{2^i})\)
+    \end{itemize}
+\end{example}
+
+\begin{lemma}\label{lem:6.3}
+    \begin{enumerate}
+        \item[(i)] If \(A\subset B\subset\R^n\) and \(B\) has measure zero, then \(A\) has measure zero. 
+        \item[(ii)] if \(A\subset\R^n\) is a countable union of measure zero subsets, then \(A\) also has zero measure.   
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Emitted.
+\end{proof}
+
+\begin{lemma}\label{lem:6.4}
+    Let \(A\subset \R^n\) be compact. Suppose that for all \(c\in\R:A\cap\{c\}\times \R^{n-1}\)
+    has \((n-1)\)-dimensional measure zero. Then \(A\) has \(n\)-dimensional measure zero. 
+    \begin{figure}[H]\label{fig:6.18}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.18}
+    \end{figure}
+    \begin{figure}[H]\label{fig:6.19}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.19}
+    \end{figure}
+\end{lemma}
+
+\begin{proof}
+    Choose \(a<b,a,b\in \R\) so that \(A\subset (a,b)\times \R^{n-1}.\) Let \(A_c\coloneqq\{x\in\R^{n-1}:(c,x)\in A\}.\)
+    Fix \(\epsilon>0.\) By assumption, we can cover \(A_c\) by a union of rectangles \(U_c\coloneqq \bigcup_{i=1}^\infty C_c^i\)
+    such that \(\sum_{i=1}^\infty\text{vol} (C_i)<\epsilon\).
+
+    By compactness there exists an open interval \(J_c\) such that \(A\cap J_c\times \R^{k-1}\subset J_c\times U_c.\)
+    \begin{figure}[H]\label{fig:6.20}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.20}
+    \end{figure}
+    Otherwise, there exists a sequence \((c_i,x_i),c_i\to c\land x_i\notin U_c\land (c_i,x_i)\in A\). By compactness one can extract a 
+    convergent subsequence \(\to (c,x)\in A\)\marginnote{Since \(A\) compact}, \(x\in U_c^C\). This is impossible, since 
+    \(A\subset U_c\). 
+
+    By compactness of \([a,b]\), there is a finite sequence \(a=c_1<c_2<\dots<c_l=b\) such that 
+    \[\bigcup_{i=1}^l J_{c_i}\text{ covers } [a,b].\]
+    We can freely assume up to deleting certain \(J_{c_i}\) that \(\sum \text{vol}(J_{c_i})<2|b-a|\). 
+    \marginnote{He writes \(|J_{c_i}|\) \dots}
+    Finally: \(A\subset \bigcup_{i=1}^l J_{c_i}\times U_{c_i}\). But 
+    \[\text{vol}(J_{c_i}\times U_{c_i})\leq \sum |J_{c_i}|\times |U_{c_i}|\leq \epsilon\sum |J_{c_i}|=2\epsilon|b-a|\]
+\end{proof}
+
+\begin{corollary}\label{cor:6.5}
+    Let \(f:\underbrace{A}_{\subset \R^n}\to\R^{1}\), where \(A\) is a countable union of compact subsets (e.g. A could be open or closed) and \(f\) continuous.
+    Then the graph of \(f\): \[\text{graph}(f)=\{(x,y)\mid y=f(x)\}\]
+    has measure zero as a subset of \(\R^{n+1}\). \marginnote{\(\R^n\times\{c\}\subset\R^{n+1}\) is a measure zero set}
+\end{corollary}
+
+\begin{proof}
+    Assume \(A\) compact. Argue by induction. If \(n=0\), trivial. Assume that the result holds for \(\leq n+1\).
+    Observe that \(\forall c\in\R\), \(\text{graph}(f)\cap\{c\}\times \R^{(n-1)+1}=\text{graph}\left(f\restrict{\{c\}\times \R^{n-1}}\right)\), which by induction has measure zero. 
+    Hence follows from Lemma \ref{lem:6.4}. For general \(A\), write \(A=\bigcup_{i=1}^\infty K_i\). Then \marginnote{Holds by Lemma \ref{lem:6.3}}
+    \[\text{graph}(f)=\bigcup_{i=1}^\infty\underbrace{\text{graph}\left(f\restrict{\{K_i\}}\right)}_{\text{measure zero}}\]
+\end{proof}
+
+\begin{lemma}\label{lem:6.6}
+    Let \(A\subset\R^n\), let \(F:A\to\R^n\) be smooth. If \(A\) has measure zero, so does \(F(A)\).
+\end{lemma}
+
+\begin{remark}
+    Smoothness is important. The lemma would be false if we only assume \(F\) to be continuous. Example: 
+    \(F\) the cantor function. Smoothness is way to strong. Absolutely continuous functions are the correct class.
+\end{remark}
+
+\begin{proof}[Proof of lemma \ref{lem:6.6}]
+    By definition, for any \(p\in A\), \(F\) extends to a smooth map on a neighborhood of \(p\). Up 
+    to shrinking this neighborhood \(U_p\) that \(F\) extends to \(\overline{U_p}\). We can also assume that 
+    \(U_p\) is a ball. Note that \(A\subset \bigcup_{p\in A} U_p\). By lemma \ref{lem:1.5}, we can extract 
+    a countable subcover. Hence it is enough to prove that \(F(A)\cap U_p\) has measure zero for 
+    all \(p\in A\). 
+
+    By Taylor's theorem\marginnote{Here we use smoothness}, \(F\) is uniformly continuous on \(\overline{U_p}\),
+    and we have 
+    \begin{equation}\label{eq:proof_lem6.6}
+        |F(x)-F(y)|< Q|x-y|  
+    \end{equation}
+    for all \(x,y\in\overline{U_p}\). Fix \(\delta>0\). Since \(A\cap \overline{U_p}\) has measure zero, 
+    can cover \(A\cup \overline{U_p}\) by a countable union of balls \(C_i\), such that  
+    \(\sum_{i}\text{vol}(C_i)<\delta.\) By (\ref{eq:proof_lem6.6}), \[\text{diam}(F(\overline{U_p}\cap C_i))<Q'\text{diam}(C_i)\],
+    where \(Q'\leq 100Q\). \(\implies F(A\cap \overline{U_p})\) is contained in a countable union of balls \(D_i\)
+    of diameter \(\leq Q'\text{diam}(C_i)\). Hence 
+    \[\sum_{i=1}^\infty\text{vol}(D_i)<Q'\sum\text{vol}(C_i)<100^n Q'\delta.\qedhere\]
 
 \end{proof}
 
+\begin{definition*}
+    Let \(M\) be a manifold. A subset \(S\subset M\) has measure zero, if, for all charts \((U,\phi)\),
+    \(\varphi(S\cap U)\) has measure zero in \(\R^n\).
+    \begin{figure}[H]\label{fig:6.21}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.21}
+    \end{figure}
+\end{definition*}
 
+\begin{lemma}\label{lem:6.7}
+    If \(\cA\subset\cA'\) is an inclusion of atlases. Then \(S\) has measure zero w.r.t. \(\cA\iff\) S has measure zero w.r.t. \(\cA'\).
+\end{lemma}
+
+\begin{proof}
+    Assume that \(S\) has measure zero w.r.t. \(\cA\), i.e. \(\phi_\alpha(S\cap U_\alpha)\) has measure zero for all charts 
+    \((U_\alpha,\phi_\alpha)\). Assume \((V,\psi)\) is a chart for \(\cA'\). Then 
+    \begin{align*}
+        \psi(S\cap V)&=\psi\left(\bigcup_{\alpha\in\cA} (U_\alpha\cap S)\cap V\right)\\
+                     &=\psi\left(\bigcup_{\alpha\in\cA} (U_\alpha\cap S\cap V)\right)\\
+                     &=\psi\left(\bigcup_{\alpha\in\cA} \phi_\alpha^{-1}\circ \phi_\alpha (iU_\alpha\cap S\cap V)\right)\\
+                     &=\bigcup_{\alpha\in\cA} \underbrace{\psi\circ\phi_\alpha^{-1}\left( \phi_\alpha (iU_\alpha\cap S\cap V)\right)}_{\text{measure by smoothness}}
+    \end{align*}
+    because the \(U_\alpha\) form a cover of \(M\), up to replacing \(\cA\) by a countable cover.
+\end{proof}
+
+
+\markeol{12}
