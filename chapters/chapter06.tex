@@ -448,7 +448,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     If \(\cA\subset\cA'\) is an inclusion of atlases. Then \(S\) has measure zero w.r.t. \(\cA\iff\) S has measure zero w.r.t. \(\cA'\).
 \end{lemma}
 
-\begin{proof}
+\begin{proof}%TODO: FIX + ggf. sketch 6.22
     Assume that \(S\) has measure zero w.r.t. \(\cA\), i.e. \(\phi_\alpha(S\cap U_\alpha)\) has measure zero for all charts 
     \((U_\alpha,\phi_\alpha)\). Assume \((V,\psi)\) is a chart for \(\cA'\). Then 
     \begin{align*}
@@ -459,6 +459,178 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     \end{align*}
     because the \(U_\alpha\) form a cover of \(M\), up to replacing \(\cA\) by a countable cover.
 \end{proof}
-
-
 \markeol{12}
+
+\beginlecture{13}{22.11.2024}
+
+\begin{lemma}\label{6.8}\marginnote{Compare lemma \ref{lem:6.6}}
+    Let \(M,N\) be smooth manifolds and \(f:M\to N\) a smooth map. If \(A\subset M\)
+    has measure zero, then \(F(A)\subset N\) also has measure zero.
+\end{lemma}
+
+\begin{proof}
+    Fix \(\{(U_\alpha,\varphi_\alpha)\}\) a countable atlas for \(M\). We need to show 
+    that given any chart \((V,\psi)\) on \(N\), \(\psi(V\cap F(A))\) has measure zero.
+    We may as well assume that \(F(A)\subset V\) (otherwise replace \(A\) with \(F^{-1}(A)\cap V\)).
+    Observe that \(\psi(F(A))\) is the countable union of these sets \(\psi(F(\phi_i^{-1}(\phi_i(A\cap U_i))))\):
+    \[\psi(F(A))=\bigcup_{i}\psi(F(\phi_i^{-1}(\phi_i(A\cap U_i)))).\]
+    But \(\phi_i(A\cap U)\) has measure zero and \(\psi\circ F\circ \phi_i^{-1}\) is a smooth function, which is applied 
+    to a subset of measure zero of \(\R^n\). Therefore the set has measure zero by lemma \ref{lem:6.6} along with 
+    the fact that countable unions of measure zeros subsets have measure zero (lemma \ref{lem:6.3}).
+\end{proof}
+\subsection{Sarel's theorem}
+
+\begin{definition*}\marginnote{This coincides with the analyis 1 definition}
+    Let \(F:M\to N\) be smooth. Given a point \(x\in M\), we say that \(x\) is a \dhighlight{critical point} 
+    of \(F\), if the differential  \(dF_x:T_xM\to T_{F(x)}N\) fails to be surjective. Otherwise 
+    we say that \(x\) is a \dhighlight{regular point}.
+    
+    A point \(y\in N\) is a \dhighlight{critical value} if \(F^{-1}(y)\) contains a 
+    critical point. Otherwise we say \(y\) is a \dhighlight{regular value}. 
+\end{definition*}
+
+\begin{remark}
+    If \(F^{-1}(y)=\emptyset\implies y\) is a regular value, but not the image of a regular point!
+\end{remark}
+
+\begin{theorem}[Sarel]\label{thm:6.9:sarel}\marginnote{Very important theorem}
+    Let \(M,N\) be smooth manifolds. Let \(F:M\to N\) be a smooth map. Then 
+    the set of critical values of \(F\subset N\) has measure zero. 
+\end{theorem}
+
+\begin{example}
+    \(M\to\R, M\ni x\mapsto 0\in\R\). Here the set of \dhighlight{critical points} has full measure (since it is \(M\)),
+    But the set of \dhighlight{critical values} is \(\{0\}\subset\R\).
+\end{example}
+
+\begin{example}
+    \begin{figure}[H]\label{fig:6.22} % 6 critical points!
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.22}
+    \end{figure}
+    Morse theory: study  the topology of manifolds by studying functions on them.
+\end{example}
+
+\begin{corollary}\label{cor:6.10}
+    Let \(F:M^m\to N^n\) be a smooth map. If \(m<)\), then 
+    \(\text{im}(F)\subset N\) has measure zero. 
+\end{corollary}
+
+\begin{proof}
+    Clear for dimensional reasons.
+\end{proof}
+
+\begin{corollary}\label{cor:6.11}
+    Let \(M^m\subset \R^N\) be a submanifold. Write \(\R^{N-1}=\{(x_1,\dots,x_{N-1},0)\}\subset\R^N\).
+    Given \(v\in\R^{N}-\R^{N-1}\), we set \(\pi_v:\R^N\to\R^{N-1}\) to be the projection with kernel \(\R\cdot v\).
+    \begin{figure}[H]\label{fig:6.23}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.23}
+    \end{figure}
+    Assume that \(N>2m+1\). Then the set of \(v\in\R^{N}\setminus\R^{N-1}\) such that \(\pi_{v\mid_M}:M\to\R^{N-1}\)
+    is an injective immersion is non-empty. It is, in fact, dense\footnote{In \(\R\bP^{N-1}, \R^{N}\)}.
+
+\end{corollary}
+
+\begin{example}
+    Take \(v=(0,0,1)\). Then \(\pi_{(0,0,1)}(M=S^1)=[-1,1]\), and not injective.
+\end{example}
+
+\begin{example}
+    \(v=(1,1,1),\pi_v(M=S^1)=S^1\), up to scaling of the axis. %TODO: Detail
+\end{example}
+
+\begin{proof}
+    Firstly, \(\pi_{v\mid_M}\) is injective \(iff\) for all 
+    \(p\in M\), \((p+tv)_{t\in\R}\cap M = \{p\}\). 
+    
+    Secondly,
+    \(\pi_{v\mid_M}\) is an immersion \(\iff\) for all \(p\in M\), \(T_pM\cap \ker d\pi_v=0\)\footnote{i.e. the zero vector space}
+    \(\iff \overbrace{T_pM}^{\subset\R^N}\) does not contain \(v\).
+
+    Let \(\Delta\subset M\times M\) be the diagonal (i.e. \(\Delta=\{(x,x)\mid x\in M\}\subset M\times M\)). Let 
+    \(0_M\subset TM\) be the \dhighlight{zero section}: 
+    \[0_M\coloneqq \{(p,0)\in TM\}\subset TM\]
+    where \[TM=\bigcup_{p\in M} T_p M.\]
+    \begin{figure}[H]\label{fig:6.24}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.24}
+    \end{figure}
+    Define \begin{align*} % TODO: fix
+        \alpha:& M\times M \setminus \delta \to & \R\bP^{N-1}\\
+        &(p,q)\mapsto& [p-q]\\
+        \beta:& TM\setminus O_M\to& \R\bP^{N-1}\\
+        &(p,w)\mapsto &[w]
+    \end{align*}
+    It is easy to check that \(\alpha,\beta\) are smooth. Check \(\alpha\)
+    \begin{align*}
+        (p,q)\mapsto \underbrace{p-q}_{\in\R^{N}-\{0\}}\mapsto \underbrace{[p-q]}_{\in\R^N\setminus \{0\}/\R^\times}\equiv \R\bP^{N-1}.
+    \end{align*}
+    \marginnote{To see that quotient maps are smooth is a good exercise for the exam}
+    Note that \(N-1>2m\), and dimension of \(M\times M\setminus\Delta\) and \(TM-O_M\) is \(2m\).
+    It follows by corollary \ref{cor:6.10} that \(\text{im}(\alpha)\cup\text{im}(\beta)\subset \R \bP^{N-1}\) has measure zero.
+    Finally the conclusion follows from sheet 08.
+\end{proof}
+
+\begin{corollary}[Strong Whitney embedding]\label{cor:6.12:strong_whitney}
+    Suppose that \(M^m\) (compact) manifold. Then \(M\) admits an embedding into \(\R^{2m+1}\).
+\end{corollary}
+
+\begin{remark}
+    Compactness is not a necessary assumption. But our prof. assumes compactness. If we use this, we don't have to use compactness.
+\end{remark}
+
+\begin{proof}
+    By theorem \ref{thm:5.6:whithney}, \(M\) admits an embedding into \(\R^N\), \(N\gg1\). If \(N>2m+1\),
+    then by corollary \ref{cor:6.11} there exists \(v\in\R^N\setminus\R^{N-1}\), such that \(\pi_{v\mid_M}:M\to\R^{N-1}\)
+    is an injective immersion. By repeatedly applying corollary \ref{cor:6.11}, we get an 
+    injective immersion from \(M\stackrel{i}{\hookrightarrow} \R^{2m+1}\). As in the proof of theorem \ref{thm:5.6:whithney},
+    \(i\) must be an embedding, because \(M\) is compact.
+\end{proof}
+
+\begin{corollary}\label{cor:6.13} Let \(I,X,Y,Z\) be manifolds. Let \(f:X\times I\to Z,g:Y\to Z\)
+    be smooth maps. Suppose that \(f\pitchfork g\). Then for almost all \(s\in I\)\marginnote{i.e. away from a set of measure zero}
+    \[f_s(\cdot)=f(\cdot,s)\pitchfork g.\] 
+\end{corollary}
+
+\begin{remark}
+    Let \(f_0:X\to \R^n,g:Y\to\R^n\) be any maps. Consider \[f:X\times \R^n\to\R,(x,s)\mapsto f_0(x)+s\].
+    Then \(f\) is clearly a submersion. Hence \(f\pitchfork\psi\implies f_s\pitchfork g\) for almost all \(s\).
+\end{remark}
+
+\begin{proof}
+    By assumption and proposition \ref{prop:6.2}: 
+    \begin{center}
+        \begin{tikzcd}
+            W=(X\times I)\substack{\times\\Z}Y\arrow[dr,"\pi"] \arrow[rr,hook,"smooth embedding"] && \arrow[dl](X\times I)\times Y\\
+            & I &
+        \end{tikzcd}      
+    \end{center}
+    We will show that if \(s\in I\) is a regular value of \(\pi\), then \(f_S\pitchfork g\). This implies the corollary
+    by Sarel's theorem \ref{thm:6.9:sarel}.
+    
+    So suppose that \(s\in I \) is a regular value. Then either 
+    \begin{enumerate}
+        \item[(i)] \(s\notin\text{im}(\pi)\). In this cae \(\text{im}(f_s)\cap g=\emptyset\)
+        \item[(ii)] \(s\in\text{im}(\pi)\). In this case \(d_\pi\)  is surjective on \(\pi^{-1}\). 
+    \end{enumerate}
+    Let's assume case (ii). Suppose that \(z=f_s(x)=g(y)\). Since  \(f\pitchfork g\), we have 
+    \[\text{im}df_x+\text{im}dg_y=T_zZ.\]
+    FOr any \(a\in T_zZ\), there exists a pair \(b=(w,e)\subset T_{x,s}(X\times I)=T_xX\oplus T_sI\),
+    such that \(df_{(x,s)}(w,e)-a\in \text{im}dg_y.\) 
+
+    Since \(d\pi\) is surjective, there exist an element \((w',e,c')\in T_{(x,s,y)}W=T_{(x,s,y)}(X\times I)\substack{\times\\Z}Y\).
+    But now \[(df_s)_x(w-w')-a=df_{(x,s)}((w,e)-(w',e))-a=\underbrace{df(\overbrace{b}^{=(w,e)})-a}_{\in \text{im}dg_y}-\underbrace{\overbrace{df(w',e)}^{dg_y(c')}}_{\in \text{im}dg_y}\]
+    \begin{figure}[H]\label{fig:6.25}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.25}
+    \end{figure}
+    \(\implies (df_s)_x(w-w')-a\in \tetx{im}dg_y\).
+
+\end{proof}
+
+\markeol{13}
