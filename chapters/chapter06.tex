@@ -42,20 +42,6 @@ Both of the above observations will still be true.  % sketches ...
     \item Bring a phone / computer
 \end{itemize}
 
-
-Please add to your notes: %TODO: FIX
-\begin{proof}[Proof of theorem \ref{thm:5.3}]
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=.7\textwidth]{sketch_6_04.png}
-        \caption{Sketch 6.04}
-    \end{figure}
-    
-    Since \(S\hookrightarrow N\) is an embedding, \(i(U)\) is open in the 
-    subspace topology, so there exists \(W\subset N\) such that \(i(U)=S\cap W\).
-
-\end{proof}
-
 \subsection{Transversality for submanifolds}
 
 Let \(M\) be a smooth manifold. 
@@ -134,7 +120,7 @@ Let \(M\) be a smooth manifold.
     \end{figure}
     The horizontal map \(T_0 L + T_0 K\to T_L/(T_0L\cap T_0K)\oplus T_K/(T_0L\cap T_0K)\) sends \(v+w\)
     to \((v,w)\). This is well defined, because if \(v+w=v'+w'\implies v-v'=w-w'\in T_0L\cap T_0K\). (Equivalently, this map is 
-    just quotient by \(T_0L\cap T_0K\)) % TODO: FIX .?
+    just quotient by \(T_0L\cap T_0K\))
 
     Clearly the R.H vertical arrow is injective: the kernel of \(df_0=T_0K\), so \((df_0)\restrict{T_0L/(T_0L\cap T_0K)}\) and similarly for \(dg_0\).
     To prove the R.H. vertical arrow is an isomorphism, do a dimension count:\marginnote{Exact sequence} 
@@ -173,8 +159,8 @@ Let \(M\) be a smooth manifold.
         \end{tikzcd}
         \caption{Sketch 6.11}
     \end{figure}
-    be a diagram in Top (the category of topological spaces). We let \(X\substack{\times\\z} Y \coloneqq \{(x,y)\mid f(x)=g(y)\}\subset X\times Y\),
-    endowed with the subspace topology. We call \(X\substack{\times\\z} Y\) the \dhighlight{fiber product (of the diagram)}.
+    be a diagram in Top (the category of topological spaces). We let \(X\times_Z Y \coloneqq \{(x,y)\mid f(x)=g(y)\}\subset X\times Y\),
+    endowed with the subspace topology. We call \(X\times_Z Y\) the \dhighlight{fiber product (of the diagram)}.
 \end{definition*}
 
 \begin{remark}[for enthusiasts only]
@@ -190,7 +176,7 @@ It can be shown that given any topological space \(W\in \text{Top}\) and maps
     
     \begin{tikzcd}
         W\arrow[rdd,bend right]\arrow[rrd,bend left]\arrow[dr,dashed,sloped,"\exists!"]&&\\
-        &X\substack{\times\\Z}Y\arrow[d]\arrow[r] & Y\arrow[d]\\ 
+        &X\times_ZY\arrow[d]\arrow[r] & Y\arrow[d]\\ 
         &X \arrow[r]& Z
     \end{tikzcd}
     \caption{Sketch 6.12}
@@ -235,14 +221,14 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
 \end{remark}
 
 \begin{proposition}\label{prop:6.2}
-    If \(f\pitchfork g\), then \(X\substack{\times\\z} Y \stackrel{i}{\to} X\times Y\) is a smooth embedding.
+    If \(f\pitchfork g\), then \(X\times_Z Y \stackrel{i}{\to} X\times Y\) is a smooth embedding.
 \end{proposition}
 \marginnote{The diagonal arrows are the obvious projections}
 \begin{figure}[H]\label{fig:6.15}
     \centering
     \begin{tikzcd}
         &Y&\\
-        X \substack{\times\\Z}Y\arrow[rr,hook]\arrow[ur] &&X\times Y\arrow[lu] \\
+        X \times_ZY\arrow[rr,hook]\arrow[ur] &&X\times Y\arrow[lu] \\
         &\arrow[lu]X\arrow[ru]&
     \end{tikzcd}
     \caption{Sketch 6.15}
@@ -251,7 +237,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
 \begin{proof}
     Some observations:
     \begin{itemize}
-        \item exercise sheet 07: \(X\substack{\times\\z}X\times Y\) is proper.
+        \item exercise sheet 07: \(X\times_ZX\times Y\) is proper.
         \item similarly to the proof of theorem \ref{thm:5.6:whithney}, it is enough to prove that 
               \(i\) is an injective immersion. By definition \(i\) is injective. Therefore we need to check that \(i\) is smooth and the differential is injective.
     \end{itemize}
@@ -267,13 +253,13 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
         \caption{Sketch 6.16}
     \end{figure}        
     where \[\text{graph}(f,g)=\coloneqq \{(x,y,x_2,z_1,z_2)\mid z_1=f(x),z_2=g(y)\}.\]
-    Then \[W\cap \Delta=\{(x,y,z_1,z_2)\mid z_1=z_2=f(x)=g(y)\}=X\substack{\times\\z}Y.\]
+    Then \[W\cap \Delta=\{(x,y,z_1,z_2)\mid z_1=z_2=f(x)=g(y)\}=X\times_ZY.\]
     We have:
     \begin{figure}[H]\label{fig:6.17}
         \centering
         \begin{tikzcd}
             W\cap \Delta \arrow[rr, hook,"j"] \arrow[d,sloped,"\sim"]\arrow[d,swap,"\alpha"]\arrow[rd,hook,"i"] & & X\times X\times Z\times Z \arrow[ld,"\pi"]\\
-            X\substack{\times\\Z}Y\arrow[r,hook] & X\times Y
+            X\times_ZY\arrow[r,hook] & X\times Y
         \end{tikzcd}  
         \caption{Sketch 6.17}
     \end{figure} 
@@ -300,7 +286,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
         d&=u+dg_y(w)
     \end{align*}
     for some \(\underbrace{(v,w,df_x(v),dg_y(w))}_{\in T_pW}, (v',w',u,u)\in T_p\Delta\).
-    The above is equivalent to \marginnote{we solve this, since we want to show \(f\pitchfork g\iff \forall z\in X\substack{\times\\Z}Y:\text{im} df+\text{im}dg=T_zZ\)}
+    The above is equivalent to \marginnote{we solve this, since we want to show \(f\pitchfork g\iff \forall z\in X\times_ZY:\text{im} df+\text{im}dg=T_zZ\)}
     \begin{align*}
         c-d  & = df_x(v)-dg_y(w)\in T_zZ & \text{By assumption there exists \(v,w\) s.t. equation holds}\\
         c+d &=2u+df_x(v)+dg_y(w) & \text{can solve by picking suitable } u \\
@@ -319,16 +305,16 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     \((v,w,df_x(v),dg_y(w))=(0,0,0,0)\).
 \end{proof}
 
-\section{Sarel's theorem} % tofix
+\section{Sard's theorem}
 
 \subsection{Measure theory on manifolds}
 
 \begin{definition*}
     A subset $S\subset \R^n$ has \dhighlight{measure zero} if, for any \(\epsilon>0\), there exists a family 
     \(\{C_i\}_{i=1}^\infty\) of rectangles:
-    \[\R^n\supset C_i = (a_1^i-\epsilon_1^i,a_1^i+\epsilon_1^i)\times\dots\times (a_n^i-\epsilon_1^i,a_n^i+\epsilon_1^i),\]
+    \[\R^n\supset C_i = (a_1^i-\epsilon_1^i,a_1^i+\epsilon_1^i)\times\dots\times (a_n^i-\epsilon_n^i,a_n^i+\epsilon_n^i),\]
     where \((a_1^i,\dots,a_n^i)\in\R^n\) and \((\epsilon_1^i,\dots,\epsilon_n^i)\in\R_{>0}^n\), s.t. 
-    \[S\subset \bigcup_{i=1}^\infty C_i\land \sum_{i=1^\infty} \text{vol}(C_i)<\epsilon.\] 
+    \[S\subset \bigcup_{i=1}^\infty C_i\land \sum_{i=1}^\infty \text{vol}(C_i)<\epsilon.\] 
 \end{definition*}
 
 \begin{remark}
@@ -356,17 +342,18 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
 \begin{lemma}\label{lem:6.4}
     Let \(A\subset \R^n\) be compact. Suppose that for all \(c\in\R:A\cap\{c\}\times \R^{n-1}\)
     has \((n-1)\)-dimensional measure zero. Then \(A\) has \(n\)-dimensional measure zero. 
-    \begin{figure}[H]\label{fig:6.18}
-        \centering
-        \includegraphics[width=.7\textwidth]{example-image}
-        \caption{Sketch 6.18}
-    \end{figure}
-    \begin{figure}[H]\label{fig:6.19}
-        \centering
-        \includegraphics[width=.7\textwidth]{example-image}
-        \caption{Sketch 6.19}
-    \end{figure}
 \end{lemma}
+
+\begin{figure}[H]\label{fig:6.18}\marginnote{This is misleading \dots}
+    \centering
+    \includegraphics[width=.7\textwidth]{sketch_6_18.png}
+    \caption{Sketch 6.18}
+\end{figure}
+\begin{figure}[H]\label{fig:6.19}
+    \centering
+    \includegraphics[width=.7\textwidth]{sketch_6_19.png}
+    \caption{Sketch 6.19}
+\end{figure}
 
 \begin{proof}
     Choose \(a<b,a,b\in \R\) so that \(A\subset (a,b)\times \R^{n-1}.\) Let \(A_c\coloneqq\{x\in\R^{n-1}:(c,x)\in A\}.\)
@@ -376,7 +363,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     By compactness there exists an open interval \(J_c\) such that \(A\cap J_c\times \R^{k-1}\subset J_c\times U_c.\)
     \begin{figure}[H]\label{fig:6.20}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_6_20.png}
         \caption{Sketch 6.20}
     \end{figure}
     Otherwise, there exists a sequence \((c_i,x_i),c_i\to c\land x_i\notin U_c\land (c_i,x_i)\in A\). By compactness one can extract a 
@@ -439,7 +426,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     \(\varphi(S\cap U)\) has measure zero in \(\R^n\).
     \begin{figure}[H]\label{fig:6.21}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_6_21.png}
         \caption{Sketch 6.21}
     \end{figure}
 \end{definition*}
@@ -448,14 +435,14 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     If \(\cA\subset\cA'\) is an inclusion of atlases. Then \(S\) has measure zero w.r.t. \(\cA\iff\) S has measure zero w.r.t. \(\cA'\).
 \end{lemma}
 
-\begin{proof}%TODO: FIX + ggf. sketch 6.22
+\begin{proof}%maybe add sketch 6.22
     Assume that \(S\) has measure zero w.r.t. \(\cA\), i.e. \(\phi_\alpha(S\cap U_\alpha)\) has measure zero for all charts 
     \((U_\alpha,\phi_\alpha)\). Assume \((V,\psi)\) is a chart for \(\cA'\). Then 
     \begin{align*}
         \psi(S\cap V)&=\psi\left(\bigcup_{\alpha\in\cA} (U_\alpha\cap S)\cap V\right)\\
                      &=\psi\left(\bigcup_{\alpha\in\cA} (U_\alpha\cap S\cap V)\right)\\
-                     &=\psi\left(\bigcup_{\alpha\in\cA} \phi_\alpha^{-1}\circ \phi_\alpha (iU_\alpha\cap S\cap V)\right)\\
-                     &=\bigcup_{\alpha\in\cA} \underbrace{\psi\circ\phi_\alpha^{-1}\left( \phi_\alpha (iU_\alpha\cap S\cap V)\right)}_{\text{measure by smoothness}}
+                     &=\psi\left(\bigcup_{\alpha\in\cA} \phi_\alpha^{-1}\circ \phi_\alpha (U_\alpha\cap S\cap V)\right)\\
+                     &=\bigcup_{\alpha\in\cA} \underbrace{\psi\circ\phi_\alpha^{-1}\left( \phi_\alpha (U_\alpha\cap S\cap V)\right)}_{\text{measure by smoothness}}
     \end{align*}
     because the \(U_\alpha\) form a cover of \(M\), up to replacing \(\cA\) by a countable cover.
 \end{proof}
@@ -478,7 +465,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     to a subset of measure zero of \(\R^n\). Therefore the set has measure zero by lemma \ref{lem:6.6} along with 
     the fact that countable unions of measure zeros subsets have measure zero (lemma \ref{lem:6.3}).
 \end{proof}
-\subsection{Sarel's theorem}
+\subsection{Sard's theorem}
 
 \begin{definition*}\marginnote{This coincides with the analyis 1 definition}
     Let \(F:M\to N\) be smooth. Given a point \(x\in M\), we say that \(x\) is a \dhighlight{critical point} 
@@ -493,7 +480,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     If \(F^{-1}(y)=\emptyset\implies y\) is a regular value, but not the image of a regular point!
 \end{remark}
 
-\begin{theorem}[Sarel]\label{thm:6.9:sarel}\marginnote{Very important theorem}
+\begin{theorem}[Sard]\label{thm:6.9:Sard}\marginnote{Very important theorem}
     Let \(M,N\) be smooth manifolds. Let \(F:M\to N\) be a smooth map. Then 
     the set of critical values of \(F\subset N\) has measure zero. 
 \end{theorem}
@@ -506,14 +493,14 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
 \begin{example}
     \begin{figure}[H]\label{fig:6.22} % 6 critical points!
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_6_22.png}
         \caption{Sketch 6.22}
     \end{figure}
     Morse theory: study  the topology of manifolds by studying functions on them.
 \end{example}
 
 \begin{corollary}\label{cor:6.10}
-    Let \(F:M^m\to N^n\) be a smooth map. If \(m<)\), then 
+    Let \(F:M^m\to N^n\) be a smooth map. If \(m<n\), then 
     \(\text{im}(F)\subset N\) has measure zero. 
 \end{corollary}
 
@@ -526,7 +513,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     Given \(v\in\R^{N}-\R^{N-1}\), we set \(\pi_v:\R^N\to\R^{N-1}\) to be the projection with kernel \(\R\cdot v\).
     \begin{figure}[H]\label{fig:6.23}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_6_23.png}
         \caption{Sketch 6.23}
     \end{figure}
     Assume that \(N>2m+1\). Then the set of \(v\in\R^{N}\setminus\R^{N-1}\) such that \(\pi_{v\mid_M}:M\to\R^{N-1}\)
@@ -556,14 +543,14 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     where \[TM=\bigcup_{p\in M} T_p M.\]
     \begin{figure}[H]\label{fig:6.24}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_6_24.png}
         \caption{Sketch 6.24}
     \end{figure}
     Define \begin{align*} % TODO: fix
-        \alpha:& M\times M \setminus \delta \to & \R\bP^{N-1}\\
-        &(p,q)\mapsto& [p-q]\\
-        \beta:& TM\setminus O_M\to& \R\bP^{N-1}\\
-        &(p,w)\mapsto &[w]
+        \alpha:& M\times M \setminus \Delta \to  \R\bP^{N-1}\\
+        &(p,q)\mapsto [p-q]\\
+        \beta:& TM\setminus O_M\to \R\bP^{N-1}\\
+        &(p,w)\mapsto  [w]
     \end{align*}
     It is easy to check that \(\alpha,\beta\) are smooth. Check \(\alpha\)
     \begin{align*}
@@ -605,12 +592,12 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     By assumption and proposition \ref{prop:6.2}: 
     \begin{center}
         \begin{tikzcd}
-            W=(X\times I)\substack{\times\\Z}Y\arrow[dr,"\pi"] \arrow[rr,hook,"smooth embedding"] && \arrow[dl](X\times I)\times Y\\
+            W=(X\times I)\times_ZY\arrow[dr,"\pi"] \arrow[rr,hook,"smooth embedding"] && \arrow[dl](X\times I)\times Y\\
             & I &
         \end{tikzcd}      
     \end{center}
     We will show that if \(s\in I\) is a regular value of \(\pi\), then \(f_S\pitchfork g\). This implies the corollary
-    by Sarel's theorem \ref{thm:6.9:sarel}.
+    by Sard's theorem \ref{thm:6.9:Sard}.
     
     So suppose that \(s\in I \) is a regular value. Then either 
     \begin{enumerate}
@@ -622,13 +609,14 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     FOr any \(a\in T_zZ\), there exists a pair \(b=(w,e)\subset T_{x,s}(X\times I)=T_xX\oplus T_sI\),
     such that \(df_{(x,s)}(w,e)-a\in \text{im}dg_y.\) 
 
-    Since \(d\pi\) is surjective, there exist an element \((w',e,c')\in T_{(x,s,y)}W=T_{(x,s,y)}(X\times I)\substack{\times\\Z}Y\).
+    Since \(d\pi\) is surjective, there exist an element \((w',e,c')\in T_{(x,s,y)}W=T_{(x,s,y)}(X\times I)\times_ZY\).
     But now \[(df_s)_x(w-w')-a=df_{(x,s)}((w,e)-(w',e))-a=\underbrace{df(\overbrace{b}^{=(w,e)})-a}_{\in \text{im}dg_y}-\underbrace{\overbrace{df(w',e)}^{dg_y(c')}}_{\in \text{im}dg_y}\]
-    \begin{figure}[H]\label{fig:6.25}
-        \centering
-        \includegraphics[width=.7\textwidth]{example-image}
-        \caption{Sketch 6.25}
-    \end{figure}
+    \begin{center}
+        \begin{tikzcd}
+            \arrow[d](X\times I) \times_Z Y\arrow[r] & Y\arrow[d]\\
+            X\times  I \arrow[r] & Z 
+        \end{tikzcd}
+    \end{center}
     \(\implies (df_s)_x(w-w')-a\in \text{im}dg_y\).
 
 \end{proof}
