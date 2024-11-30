@@ -592,7 +592,7 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
     By assumption and proposition \ref{prop:6.2}: 
     \begin{center}
         \begin{tikzcd}
-            W=(X\times I)\times_ZY\arrow[dr,"\pi"] \arrow[rr,hook,"smooth embedding"] && \arrow[dl](X\times I)\times Y\\
+            W=(X\times I)\times_ZY\arrow[dr,"\pi"] \arrow[rr,hook,"\text{smooth embedding}"] && \arrow[dl](X\times I)\times Y\\
             & I &
         \end{tikzcd}      
     \end{center}
@@ -617,8 +617,139 @@ fiber products (nor does \(\man0\subset\text{Top}\)).
             X\times  I \arrow[r] & Z 
         \end{tikzcd}
     \end{center}
-    \(\implies (df_s)_x(w-w')-a\in \text{im}dg_y\).
+    \(\implies (df_s)_x(w-w')-a\in \text {im}dg_y\).
 
 \end{proof}
 
 \markeol{13}
+\beginlecture{14}{26.11.2024}
+
+In this lecture we will try to prove theorem \ref{thm:6.9:Sard} using three intermediate lemmas.
+
+\dhighlight{Notation (auxiliaray):} Consider \(U\subset\R^m\) open, \(F:U\to \R^n\). We let \(C\subset U\)
+be the set of critical points of \(F\). More generally, for \(k\geq 1\) we let 
+\[C\supset C_k\coloneqq \{x\in C\mid \forall 1\leq i\leq k: \text{All ith partial derivatives of }F\text{ vanish at }x\}.\]
+Clearly \(C\supset C_1\subset C_2\subset \dots \). Note also \(C,C_k\) are all closed.\marginnote{Because being zero is a closed condition}
+\begin{figure}[H]\label{fig:6.26}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 6.26}
+\end{figure}
+
+\begin{lemma}\label{lem:6.14}
+    Suppose that \(k>\frac{m}{n}-1\). Then \(F(C_k)\) has measure zero.
+\end{lemma}
+
+\begin{proof}
+    For each \(a\in U\), there exists a closed cube \(a\in E\subset U\). By second countability 
+    we can cover \(C_k\) by countability many such cubes. Hence it is enough to prove, for arbitrary 
+    such \(E\) that \(F(C_k\cap E)\) has measure zero. Now fix \(a\in C_k\) and cube \(E\ni a\). Also 
+    fix \(A>\sup_{y\in E}|\partial_x^{\alpha} F(y)|\) for \(\alpha=(\alpha_1,\dots,\alpha_m)\in \N^m,|\alpha|\leq k+1\).
+
+    Let \(L>0\) be the side length of \(E\). Let \(K\gg 1\) be a natural number.
+    We now subdivide \(E\) by \(K^m\) cubes of side length  \(L/K\). Let \(E_1,\dots,E_{K^m}\) be 
+    an enumeration of these subcubes.
+    \begin{figure}[H]\label{fig:6.27}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.27}
+    \end{figure}
+    Since \(a\in E\) there exists some \(i_0\) such that \(a\in E_{i_0}\).
+    Since \(a\in C_k\), Taylor's theorem finishes the following inequality:
+    \[|F(x)-F(a)|\leq A'|x-a|^{k+1}\] 
+    for all \(x\in E_{i_0}\), where \(A'\) depends only on \(A\).
+
+    \(\implies F(E_{i_0})\) is contained in a ball centered at \(F(a)\) of radius \(A'(L/K)^{k+1}\). 
+    Now \[F(C_k\cap E)=\bigcup_{i\mid C_k\cap E_i\neq \emptyset} F(C_k\cap E_i).\]\marginnote{Restricting to the cubes which intersect \(C_k\) is a very important step, because otherwise we can't Taylor and have no control over the measure!}
+    But each \(F(C_k\cap E_i)\) is contained in a union of balls of volume \(\leq \Lambda\left[A'(L/K)^{k+1}\right]^n\).
+
+    Therefore at most \(K^m\) cubes \(E_i\) which intersect \(C_k\) non-emptily. Hence \(F(C_k\cap E)\)
+    is contained in a union of balls of total volume at most 
+    \[\Lambda A^{' n} K^m\left[(L/K)^{k+1}\right]^n = \lambda A^{' n} L^{(k+1)n}K^{m-(k+1)n}.\]
+    Since \(k> \frac{m}{n}-1\) the exponent of \(K\) is negative and hence increasing \(K\)
+    forces the equation above to go to zero.
+\end{proof}
+
+\begin{lemma}\label{lem:6.15}
+    Assume that Sard's theorem holds for domains of dimension \(<m\). Then \(F(C\setminus C_1)\) has measure zero.
+\end{lemma}
+
+\begin{proof}\marginnote{Bird's eye view: Change coordinates, consider modified functions}
+    Since \(C_1\) is closed in \(U\), we can assume after replacing \(U\) by \(U\setminus C_1\), that \(C_1=\emptyset\).
+    Then we just prove that \(F(C)\), under that assumption, has measure zero. 
+    
+    Fix \(a\in C\). By assumption that \(C_1=\emptyset\). Up to reordering coordinates in the source and in the target, we can assume 
+    that \(\partial_{x_1}F^1(a)\neq 0\).
+    Set \(\begin{cases}
+        u(x)=F^1(x)&\\
+        v^i(x)=x_i  & 2\leq i\leq m
+    \end{cases}\). By the inverse function theorem \((u,v)=(u,v^1,\dots,v^m)\)
+    forms a coordinate system in some neighborhood \(V_a\) of \(a\). Since the transition matrix is
+    \[\begin{bmatrix}
+        \partial_{x_1} F^1 & \star & \star &\star \\
+        0 & & 1 &
+    \end{bmatrix}.\]
+    We can assume that \((u,v)\) extend to \(\overline{V_a}\). With respect to 
+    these new coordinates \((u,v)\), we have \(F(u,v)=(u,F^2(u,v),\dots,F^n(u,v))\).
+    So we have: \(dF(u,v)=\begin{bmatrix}
+        1 & 0 &\dots & 0\\
+        \star & &  \\
+        \vdots && \frac{\partial F^i}{\partial v^j}&\\
+        \star & &&
+    \end{bmatrix}\) where \(2\leq i\leq n, 2\leq j\leq m\). 
+    Therefore \(C\cap \overline{V_a}\) is precisely the set of points such that rank\(\left(\frac{\partial F^i}{\partial v^j}\right)<n-1\). 
+
+    Note that \(F(C\cap \overline{V_a})\) is compact. By lemma \ref{lem:6.4}, if we can show that \(F(C\cap)\cap \{y^1=d\}\)
+    has measure zero, then \(F(C\cap \overline{V_a})\) has measure zero. Since \(C\) is covered by countably many such \(V_a\) (by second countability),
+    we could conclude that \(F(C)\) has measure zero.
+
+    For \(d\in\R\), \(B_d\coloneqq \{v\mid (d,v)\in \overline{V_\alpha}\}\subset \R^{n-1}\). 
+    Set \(F_d(v)\coloneqq (F^2(d,v),\dots,F^n(d,v))\). Since \(F(d,v)=(d,F_d(v))\), we 
+    have that the critical values of \(F\restrict{\overline{V_a}}\) that lie in \(\{y^1=d\}\)
+    are precisely the points \((d,q)\), where \(q\) are critical values of \(F_d\). 
+    By assumption that Sard's theorem \ref{thm:6.9:Sard} holds for dimension \(<m\), since the domain of \(F_d\)
+    has dimension \(m-1<m\), \(\{\text{critical values of } F_d\}=\{y_1=d\}\cap F(C\cap \overline{V_a})\) has 
+    measure zero. \qedhere
+
+\end{proof}
+\begin{lemma}\label{lem:6.16}
+    Assume that Sard's theorem holds for domains of dimension \(<m\). For all \(k\geq 1\),
+    \(F(C_k\setminus\{F(C_{k+1})\})\) has measure zero.         
+\end{lemma}
+
+\begin{proof}
+    As in the proof of the previous lemma \ref{lem:6.15}, we can assume \(C_{k+1}=\emptyset\). We will prove 
+    under that assumption that \(F(C_k)\) has measure zero.
+
+    Let \(a\in C_k\) be arbitrary. Let \(\sigma:U\to \R\) be a k-th partial derivative of \(F\), with the property that 
+    \(\sigma\) has at least one non-vanishing partial at \(a\). I.e. \(\begin{cases}
+        \sigma =\partial_x^\alpha F & |\alpha|=k\\
+        \partial_{x_i}\sigma(a)\neq 0 &\forall i
+    \end{cases}.\) Let \(V_a\) be a neighborhood of \(a\) consisting of regular points of \(\sigma\). Let \(\Sigma\coloneqq \{\sigma^{-1}(0)\}\cap V\). Then \(\Sigma\) is a smooth submanifold in \(V_a\).
+    By definition of \(C_k\), we have \((C_k\cap V_a)\subset \sigma^{-1}(0)\cap V_a\).
+    
+    Moreover \(F(C_k\cap V_a)\) is contained in the set of critical values of \(F\restrict{\Sigma}\) (that's because \(\partial_{x_i}F^j=0\implies dF\restrict{T\Sigma}\equiv 0\)).
+    But \(\text{dim}(\Sigma)=\text{dim}(U)-1=m-1\). Hence \(\{\text{ critical values of } F\restrict{\Sigma}\}\) has measure zero, by assumption.
+\end{proof}
+
+\begin{proof}[Proof of Sard's theorem \ref{thm:6.9:Sard}]
+    We prove it by induction on the dimension of the source. If \(F:M^m\to N^n\), and \(m=0\) the statement is true.
+
+    Let's assume that Sard's theorem has been proven for all manifolds \(F:M^m\to N^n\), where \(m<\tilde{m}\).
+    We need to prove it for maps \(\tilde{F}:\tilde{M}\to\tilde{N}\), where \(\dim(\tilde{M})=\tilde{m}\).
+    \begin{figure}[H]\label{fig:6.28}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 6.28}
+    \end{figure}
+    By covering source and target by charts, we can assume 
+    \begin{itemize}\marginnote{If the intersection is non-empty, we reall need lemma \ref{lem:6.14}} %TODO: Fix spacing of margin
+        \item \(\tilde{M}=U\subset\R^m\)
+        \item \(\tilde{N}\subset\R^n\).
+    \end{itemize}
+
+    Apply lemma \ref{lem:6.14},\ref{lem:6.15},\ref{lem:6.16} to get the claim. \qedhere
+
+\end{proof}
+
+\markeol{14} 

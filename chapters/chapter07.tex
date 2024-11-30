@@ -1,0 +1,229 @@
+\chapter{Vector fields}
+\beginlecture{15}{29.11.2024}
+
+\section{Basics}
+
+Let \(M\) be a smooth manifold. Recall  that we have 
+\[\pi: TM \to M\]
+where \(TM=\coprod_{p\in M} T_p M\). A typical point in \(TM\) is \((p,\underbrace{v}_{\in T_pM})\) and 
+\[\pi((p,v))=p.\]
+
+\begin{definition*}
+    A (smooth) \dhighlight{vector field} \(X\) on \(M\) is a 
+    section of \(\pi:\TM\to M\). In other words 
+    \begin{enumerate}
+        \item \(X:M\to TM\) smooth map 
+        \item \(\pi\circ X=\text{id}\)
+    \end{enumerate} 
+    We let \(\mathcal{X}(M)\) be the set of vector fields on \(M\).
+\end{definition*}
+
+\dhighlight{Concretely:} To every point \(p\in M\), we associate a vector \[X(p)=X_\in T_pM.\]
+Visually
+\begin{figure}[H]\label{fig:7.01}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 7.01}
+\end{figure}
+
+Another picture:
+
+\begin{figure}[H]\label{fig:7.02}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 7.02}
+\end{figure}
+
+\begin{lemma}\label{lem:7.1}
+    \begin{enumerate} Let \(M\) be a smooth manifold.
+        \item[(a)] \(\mathcal{X}(M)\) is a \(\R\) vector space 
+        \item[(b)] \(\mathcal{X}(M)\) is a module over the ring \(C^{\infty}(M)\) of smooth functions on \(M\):\marginnote{\(fX(p)=\underbrace{f(p)}_{\in\R}\underbrace{X(p)}_{\in T_pM}\)}
+        \[(f,X)\mapsto fX\] 
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\begin{remark}\marginnote{We are not gonna study those, but it is useful to know they exist}
+    In this class, we only consider smooth vector fields. If you drop the smoothness condition on the map \(X:M\to TM\),
+    you get a \dhighlight{rough vector field}. 
+\end{remark}
+
+\begin{example}
+    Recall that \(T_p\R^n\equiv \R^n\), hence \(T\R^n\equiv \R^n\times \R^n\).
+    A vector field \(X\in\mathcal{X}(\R^n)\) is just a map  
+    \begin{center}
+        \begin{tikzcd}
+            X:\R^n \arrow[r] & R^n\times \R^n\\
+            p \arrow[r] & (p,v(p))
+        \end{tikzcd}
+    \end{center}
+    Equivalently \(X\) is a map \(\R^n\to\R^n\), since the first coordinate is just fixed to be the 
+    identity. This agrees with the notion from Analysis 2. \marginnote{A map \(\R^n\ni p\mapsto (X^1(p),\dots,X^n(p))\)}
+\end{example}
+
+\begin{remark}
+    \(T_p\R^n\) has a canonical basisi \(\{(\partial_{x_1})_p,\dots,(\partial_{x_n})_p\}\). This identifies 
+    \((\partial_{x_i})_p\equiv (0,\dots,0,\overbrace{1}^{i\text{th component}},0\dots,0)\). We can equivalently 
+    write a vector field on \(\R^n\) as \[p\mapsto (X^1(p),\dots,X^n(p))\]
+    or 
+    \[p\mapsto X^1(p)(\partial_{x_1})_p+\dots+X^1(p)(\partial_{x_n})_p.\]
+\end{remark}
+
+\dhighlight{Notation:} We write \(\partial_{x_i}\in\mathcal{X}(\R^n)\) for the vector field 
+\[p \mapsto (\partial_{x_i})_p\in T_p\R^m\equiv (0,\dots,0,\overbrace{1}^{i\text{th component}},0\dots,0)\]
+In the literature another common notation for the same thing is \(\frac{\partial}{\partial x_i}\).
+
+\begin{example}[Vector field on \(S^3\)]
+    Let \(M=\{(x_0,\dots,x_3)\mid \sum x_i^2=1\}\subset\R^{1+3}\). Let \(X=x_0\partial_{x_1}-x_1\partial_{x_0}+x_2\partial_{x_3}-x_3\partial_{x_2}\in \mathcal{X}(\R^{1+3}).\)
+    Observe that \(X\perp S^3 \iff \underbrace{X\cdot v}_{X_v\cdot v} = 0, v\in S^3.\) Hence \(X \in \mathcal{X}(S^3)\).
+    \begin{figure}[H]\label{fig:03}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.03}
+    \end{figure}
+\end{example}
+
+\begin{example}
+    For any \(M\) smooth, the map \(p\mapsto 0\in T_pM\) is a vector field called the \dhighlight{zero section}.\marginnote{This is the only canonical vector field. ``There is no 1''}
+\end{example}
+
+Let \(F:M \to N\) be a smooth map. Let \(X\in\mathcal{X}(M),Y\in \mathcal{X}(N)\).
+
+\begin{definition*}
+    We say that \(X,Y\) are \(\dhighlight{\(F\)-related}\) if the following diagram commutes 
+    \begin{center}
+        \begin{tikzcd}
+            \arrow[d]TM \arrow[r,"dF"]& TN\arrow[d] \\
+            \arrow[u,bend left,"X"]M \arrow[r,"F"] & N \arrow[u,bend right,swap,"Y"] % TODO: FIX
+        \end{tikzcd}
+    \end{center} 
+\end{definition*}
+
+\dhighlight{Be warned!} Given \(F:M\to N, X\in\mathcal{X}(M)\), there need not exist a \(Y\in \mathcal{X}(N)\) s.t. 
+\(X,Y\) are \(F\)-related. Vector fields do not push forward.\marginnote{They push back!}
+\begin{figure}[H]\label{fig:7.04}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 7.0}
+\end{figure}
+
+\begin{definition*}
+    Let \(F:M\to N\) be a diffeomorphism. Let \(X\in\mathcal{X}(M)\), we define 
+    the \dhighlight{pushforward} of \(X\) \(F_\star X\in \mathcal{X}(N)\)
+    by \[(F_\star X)_p=dF_{F^{-1}(p)}(X_{F^{-1}(p)}),\]
+    i.e.:
+    \begin{center}
+        \begin{tikzcd}
+            \arrow[d]TM \arrow[r,"dF"]& TN\arrow[d] \\
+            \arrow[u,bend left,"X"]M  &\arrow[l,"F^{-1}"] N \arrow[u,,swap,bend right,dotted,"F_\star X"] % TODO: FIX
+        \end{tikzcd}
+    \end{center}
+\end{definition*}
+
+\begin{lemma}\label{7.2}
+    Given \(F:M\to N\), \(G:N\to P\) diffeomorphisms, 
+    \begin{enumerate}
+        \item[(i)] \((G\circ F)_\star=G_\star\circ F_\star: \mathcal{X}(M)\to \mathcal{X}(P)\)
+        \item[(ii)] if \(F=\text{id},M=N\), then \(F_\star=\text{id}:\mathcal{X}(M)\to \mathcal{X}(M)\)  
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Exercise.
+\end{proof}
+
+\section{Vector fields as derivations}
+
+Recall: a tangent vector \(V\in T_pM\), \(p\in M\) can be viewed as a 
+\dhighlight{derivation at \(p\)}, i.e. \[V:C^\infty(M)\to\R,V(fg)=f(p)V(g)+V(f)g(p).\]
+
+\dhighlight{Notation:} Let \(X\in\mathcal{X}(M)\). Given a smooth function on \(f\in C^\infty(M)\), we 
+let \(Xf\) be the map \(M\ni p\mapsto X_p f\in \R\).
+
+\begin{lemma}\label{lem:7.3}
+    \begin{enumerate}
+        \item[(i)] If \(X\in \mathcal{X}(M)\), i.e. \(X\) is a smooth vector field, then \(Xf\) is a smooth function 
+        \item[(ii)] Suppose that \(X:M\to TM\) is an \dhighlight{arbitrary} section (this is also known as a rough vector field). If 
+                    \(Xf\) is smooth for all \(f\in C^\infty(M)\), then \(X\) is a \dhighlight{smooth} vector field.  
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Sheet 09. Hint: Test against coordinate functions. \marginnote{Check in \(\R^n\)}
+\end{proof}
+
+\begin{definition*}
+    An \(\R\) linear map \(X:C^\infty(M)\to C^\infty(M)\) is called a \dhighlight{derivation} if, for all \(f,g\in C^\infty(M)\): 
+    \[X(fg)=f\cdot Xg+Xf\cdot g\]\marginnote{The \(\cdot\) are multiplications of functions}
+\end{definition*}
+
+\begin{lemma}\label{lem:7.4}
+    \begin{enumerate}
+        \item If \(X\in \cX(M)\), then the map \[C^\infty(M)\ni f\mapsto Xf\in C^\infty(M)\]
+              is a derivation.
+        \item every derivation is of this form.
+    \end{enumerate}
+\end{lemma}
+
+Upshot of the lemma: \[\cX(M)\equiv \{\text{derivations } C^\infty(M)\to C^\infty(M)\}\]
+just as we identified before 
+\[T_pM\equiv \{\text{derivations at } p\}.\]
+
+\begin{proof}\marginnote{All of this follows basically by applying point wise definitions}
+    (1) By definition, \(\forall p\in M\), we have 
+    \begin{align*}
+        X(fg)(p)=X_p(fg)&=f(p)X_pg+X_pf g(p)\\
+        &= f(p)Xg(p) + Xf(p)g(p).
+    \end{align*}
+    Suppose that \(\nu:C^\infty\to C^\infty\) is a derivation. Define a (possibly discontinuous) 
+    vector field \(X\) by setting
+    \[X_pf=\underbrace{\nu f}_{\in C^\infty(M)}(p).\]
+    By lemma \ref{lem:7.3} (ii) \(X\) is smooth, because \(\nu f\in C^\infty\).
+\end{proof}
+
+\begin{definition*}
+    Let \(X,Y\in \mathcal{X}(M)\). We let \([X,Y]\in \cX(M)\) defined by the rule 
+    \begin{equation}\label{eq:def_lie-bracket}
+        C^\infty(M)\ni f\mapsto XYf-YXf \in C^\infty(M).
+    \end{equation}
+    We call \([X,Y]\) the \dhighlight{Lie-bracket} of \(X,Y\).
+\end{definition*}
+
+\begin{lemma}\label{lem:7.5}
+    Equation \ref{eq:def_lie-bracket} defines a derivation, hence \([X,Y]\)
+    is a smooth vector field (by Lemma \ref{lem:7.4}). 
+\end{lemma}
+
+\begin{proof}
+    FOr \(f,g\in C^\infty(M)\):
+    \begin{align*}
+        [X,Y](f,g)&=XY(fg)-YX(fg) \\
+        &=X[f\cdot Yg+ Yf \cdot g]- Y [f\cdot Xg + Xf\cdot g]\\
+        &=Xf\cdot Yg+f\cdot XYg+ XY f\cdot g + Xf\cdot Xg\\
+        & -Yf\cdot X g- f\cdot YXg-YXf \cdot g- Xf\cdot Yg\\
+        &= f(XY-YX)(g)-g(XY-YX)f \\
+        &= f[X,Y]g+g[X,Y]f\qedhere 
+    \end{align*}
+\end{proof}
+
+\begin{remark}[Properties of Liebracket]
+    The Liebracket \([\cdot,\cdot]:\cX(M)\times \cX(M)\to \cX(M)\) satisfies:
+    \begin{enumerate}
+        \item[(i)] bilinearity: \begin{align*}
+            [aX+bY,Z] &= a[X,Z]+b(Y,Z)\\
+            [X,aY+bZ]&=  a[X,Y]+b(X,Z)
+        \end{align*} 
+        \item[(ii)] anti-symmetry \[[X,Y]=-[Y,X]\]
+        \item[(iii)] Jacobi identity: \[[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]\] 
+    \end{enumerate}
+    Thus \((\cX(M),[\cdot,\cdot])\) is a Lie-algebra (an \(\infty\)-dimensional one).
+\end{remark}
+
+\dhighlight{Warning:}
+
+\[C^\infty(M)\ni f\mapsto XY f\in C^\infty(M)\] 
+does not define a vector field in general!
+\markeol{15}
