@@ -22,7 +22,7 @@ where \(TM=\coprod_{p\in M} T_p M\). A typical point in \(TM\) is \((p,\underbra
 Visually
 \begin{figure}[H]\label{fig:7.01}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{sketch_7_01.png}
     \caption{Sketch 7.01}
 \end{figure}
 
@@ -30,7 +30,7 @@ Another picture:
 
 \begin{figure}[H]\label{fig:7.02}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{sketch_7_02.png}
     \caption{Sketch 7.02}
 \end{figure}
 
@@ -65,7 +65,7 @@ Another picture:
 \end{example}
 
 \begin{remark}
-    \(T_p\R^n\) has a canonical basisi \(\{(\partial_{x_1})_p,\dots,(\partial_{x_n})_p\}\). This identifies 
+    \(T_p\R^n\) has a canonical basis \(\{(\partial_{x_1})_p,\dots,(\partial_{x_n})_p\}\). This identifies 
     \((\partial_{x_i})_p\equiv (0,\dots,0,\overbrace{1}^{i\text{th component}},0\dots,0)\). We can equivalently 
     write a vector field on \(\R^n\) as \[p\mapsto (X^1(p),\dots,X^n(p))\]
     or 
@@ -79,11 +79,13 @@ In the literature another common notation for the same thing is \(\frac{\partial
 \begin{example}[Vector field on \(S^3\)]
     Let \(M=\{(x_0,\dots,x_3)\mid \sum x_i^2=1\}\subset\R^{1+3}\). Let \(X=x_0\partial_{x_1}-x_1\partial_{x_0}+x_2\partial_{x_3}-x_3\partial_{x_2}\in \mathcal{X}(\R^{1+3}).\)
     Observe that \(X\perp S^3 \iff \underbrace{X\cdot v}_{X_v\cdot v} = 0, v\in S^3.\) Hence \(X \in \mathcal{X}(S^3)\).
-    \begin{figure}[H]\label{fig:03}
-        \centering
-        \includegraphics[width=.7\textwidth]{example-image}
-        \caption{Sketch 7.03}
-    \end{figure}
+    \begin{center}
+        \begin{tikzcd}
+            \arrow[d] TS^3 \arrow[r,hook] & \arrow[d,"\pi",swap] T\R^{1+3}\\
+            \arrow[u,dotted,bend left,"X\restrict{S^3}"]S^3 \arrow[r,hook] & \R^{1+3}\arrow[u,bend right]
+        \end{tikzcd}
+    \end{center}
+    where the map \(X\restrict{S^3}\) is implied by composition.
 \end{example}
 
 \begin{example}
@@ -106,8 +108,8 @@ Let \(F:M \to N\) be a smooth map. Let \(X\in\mathcal{X}(M),Y\in \mathcal{X}(N)\
 \(X,Y\) are \(F\)-related. Vector fields do not push forward.\marginnote{They push back!}
 \begin{figure}[H]\label{fig:7.04}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
-    \caption{Sketch 7.0}
+    \includegraphics[width=.7\textwidth]{sketch_7_04.png}
+    \caption{Sketch 7.04}
 \end{figure}
 
 \begin{definition*}
@@ -189,7 +191,7 @@ just as we identified before
     \begin{equation}\label{eq:def_lie-bracket}
         C^\infty(M)\ni f\mapsto XYf-YXf \in C^\infty(M).
     \end{equation}
-    We call \([X,Y]\) the \dhighlight{Lie-bracket} of \(X,Y\).
+    We call \([X,Y]\) the \dhighlight{Lie bracket} of \(X,Y\).
 \end{definition*}
 
 \begin{lemma}\label{lem:7.5}
@@ -209,8 +211,8 @@ just as we identified before
     \end{align*}
 \end{proof}
 
-\begin{remark}[Properties of Liebracket]
-    The Liebracket \([\cdot,\cdot]:\cX(M)\times \cX(M)\to \cX(M)\) satisfies:
+\begin{remark}[Properties of Lie bracket]
+    The Lie bracket \([\cdot,\cdot]:\cX(M)\times \cX(M)\to \cX(M)\) satisfies:
     \begin{enumerate}
         \item[(i)] bilinearity: \begin{align*}
             [aX+bY,Z] &= a[X,Z]+b(Y,Z)\\
@@ -219,7 +221,7 @@ just as we identified before
         \item[(ii)] anti-symmetry \[[X,Y]=-[Y,X]\]
         \item[(iii)] Jacobi identity: \[[X,[Y,Z]]+[Y,[Z,X]]+[Z,[X,Y]]\] 
     \end{enumerate}
-    Thus \((\cX(M),[\cdot,\cdot])\) is a Lie-algebra (an \(\infty\)-dimensional one).
+    Thus \((\cX(M),[\cdot,\cdot])\) is a Lie algebra (an \(\infty\)-dimensional one).
 \end{remark}
 
 \dhighlight{Warning:}
