@@ -200,7 +200,7 @@ just as we identified before
 \end{lemma}
 
 \begin{proof}
-    FOr \(f,g\in C^\infty(M)\):
+    For \(f,g\in C^\infty(M)\):
     \begin{align*}
         [X,Y](f,g)&=XY(fg)-YX(fg) \\
         &=X[f\cdot Yg+ Yf \cdot g]- Y [f\cdot Xg + Xf\cdot g]\\
@@ -229,3 +229,223 @@ just as we identified before
 \[C^\infty(M)\ni f\mapsto XY f\in C^\infty(M)\] 
 does not define a vector field in general!
 \markeol{15}
+
+\beginlecture{16}{03.12.2024}
+
+\begin{lemma}[Naturality of Lie brackets]\label{lem:7.6}
+    Given \(F:M\to N\) smooth, \(X_1,X_2\in\cX(M),Y_1,Y_2\in\cX(N)\). Assume 
+    \((X_i,Y_i)\) are \(F\) related for \(i=1,2\). Then \([X_1,X_2],[Y_1,Y_2]\) are 
+    \(F\)-related.
+\end{lemma}
+
+\begin{proof}
+     For \(f\in C^\infty(N)\)
+    \begin{align*}
+        X_1X_2(f\circ F) &= X_1((Y_1f)\circ F)=(Y_1Y_2f)\circ F
+    \end{align*}
+    SImilarly swapping the order of \(X_1,X_2\). Hence 
+    \begin{align*}
+        [X_1,X_2](f\circ F)&=(X_1X_2-X_2X_1)(f\circ F)\\
+        &=(Y_1Y_2-Y_2Y_1)(f)\circ F\\
+        &=[Y_1,Y_2](f)\circ F\qedhere
+    \end{align*}
+\end{proof}
+
+\section{Coordinate vector fields}
+
+Let \(M\) be a smooth manifold. Let \((U,\varphi)\) be a smooth chart. 
+
+Recall that we abuse notation by writing \(x_i\equiv x_i\circ \varphi\), where \(\underbrace{x_i}_{x^i}(x)=x_i=\pi_i(x)\).\marginnote{w.r.t the chart}
+\begin{figure}[H]\label{fig:7.05}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 7.05}
+\end{figure}
+
+If \(p\in U\), we also have been writing \((\partial_{x_i})_p=d\varphi_{\varphi(p)}^{-1}((\partial_{x_i})_{\varphi(p)})\).
+\marginnote{Section of the tangent bundle, a vector field \dots}
+
+\begin{lemma}\label{lem:7.7}
+    The map \(U\ni p\mapsto (\partial_{x_i})_p\in T_p M\) is a smooth vector field on \(U\), i.e. an element 
+    of \(\cX(U)\).
+\end{lemma}
+
+\begin{proof}
+    Recall from last week \ref{lec15} % TODO: FIX 
+    \marginnote{We often ommit the identity, i.e. the first \(n\) entries of the following} 
+    \(M=\R^n\)m then the map \[(x_1,\dots,x_n)\mapsto (x_1,\dots,x_n,0,\dots,0,1,0\dots,0)\]
+    Then section 7.1 % TODO 
+    ,we have this is true, when \(M\) is an open subset of \(\R^n\).
+
+    In general, \(d\varphi_{\varphi(p)}^{-1}((\partial_{x_i})_{\varphi(p)})=(\varphi)^{-1}_\star \partial_{x_i}\), where the pushfoward is 
+    \[\varphi_\star^{-1}:\cX(\varphi(u))\to\cX(U).\]
+    The lemma follows from the fact the fact that pushforwards of diffeomorphism send smooth vector fields to 
+    smooth vector fields.
+\end{proof}
+
+\dhighlight{Notation:} The vector field \(U\ni p\mapsto (\partial_{x_i})_p\) shall be denoted by \(\partial_{x_i}\).
+Other sources / authors write \(\frac{\partial}{\partial x_i}\).
+\marginnote{It is important to understand the difference between vector fields and tangent vectors, like the difference between functions and elements of the target of those functions}
+
+\begin{definition*}
+    Let \(M\) be smooth of dimension \(m\).
+    \begin{enumerate}
+        \item[(i)] Given a point \(p\in M\), an m-tuple of vector fields \((X^1,\dots,X^m)\in \cX(M)^m\) is called a \dhighlight{local frame at \(p\)}, if \((X_p^1,\dots,X_p^m)\in T_p M^m\)\marginnote{Does this commute?
+        %TODO
+        }
+        \item[(ii)] We say that \((X^1,\dots,X^m)\in \cX(M)^m\) is a \dhighlight{global frame} if \((X_p^1,\dots,X_p^m)\) spans \(T_pM\) for all \(p\in M\). 
+    \end{enumerate}
+\end{definition*}
+
+\begin{remark}
+    We take \(X^i\in \cX(M)\) and not \(\cX(U)\) for local frames, since (similar to functions), we can always extend them!
+\end{remark}
+
+\begin{lemma}\label{lem:7.8}\marginnote{This uses the fact that being full rank is an open condition}
+    If \((X^1,\dots,X^m)\) is a local frame at \(p\in M\), then there exists \(p\in U\subset M\) s.t. 
+    \((X^1\restrict{U},\dots,X^m\restrict{U})\in \cX(U)^m\) is a global frame on \(U\).
+\end{lemma}
+\begin{proof}
+    Exercise using lemma \ref{lem:4.1}.
+\end{proof}
+
+\dhighlight{Key example:} If \((U,\varphi)\) is a chart on \(M\), then \((\partial_{x_1},\dots,\partial_{x_m})\in \cX(M)^m\) form 
+a global frame on \(U\).
+
+\begin{remark}[Warning]
+    It is not the case that all frames are of this form, i.e. there exists frames \((X^1\dots,X^m)\in \cX(M)^m\) local frames at some 
+    \(p\in M\), such that \((X^1\restrict{U},\dots,X^m\restrict{U})\) is not a coordinate vector field for any chart \((V,\psi),V\subset U\).
+    E.g. \([\partial_{x_i},\partial_{x_j}]\equiv 0.\)\marginnote{It turns our the condition \([\partial_{x_i},\partial_{x_j}]\equiv 0\) is necessary and sufficient}
+
+\end{remark}
+
+\section{Integral curves}
+
+Let \(\gamma:(a,b)\to M\) be a smooth map (a curve). We write 
+\(\dot{\gamma}(t)=d\gamma_t(\partial_t)\in T_{\gamma(t)}M\)
+\begin{center}
+    \begin{tikzcd}
+        \arrow[d]T\R \arrow[r,"d\gamma"]& TM\arrow[d]\\
+        \arrow[u,bend left,"\partial_t"]\R \arrow[ur,dotted,"\dot{\gamma}(t)"]\arrow[r,"\gamma"] &M
+    \end{tikzcd}
+\end{center}
+
+In coordinates, \(gamma(t)=(\gamma^1(t),\dots,\gamma^n(t))\in \R^n\implies \dot{\gamma}(t)=(\dot{\gamma}^1(t),\dots,\dot{\gamma}^n(t))=\gamma^1(t)\partial_{x_1}+\dots+\gamma^n(t)\partial_{x_n}\),
+where \(\dot{\gamma}^i(t)=\frac{d}{dt}\gamma^i(t)\).
+
+\begin{definition*}
+    Let \(M\) be a manifold and let \(V\in \cX(M)\). An \dhighlight{integral courve} for \(V\) is a curve 
+    \(\gamma:(a,b)\to M\) such that 
+    \[\dot{\gamma}(t)=V_{\gamma(t)}.\]   
+    We typically assume \(0\in (a,b)\), we say that the \dhighlight{starting point} \(\gamma\), is the point \(\gamma(0)\in M\).
+\end{definition*}
+
+\begin{example}
+    \(M=\R^2,V=\partial_x=(1,0)\).
+    \begin{figure}[H]\label{fig:7.06}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.06}
+    \end{figure}
+    The integral curves are precisely the curves 
+    \[(t\mapsto p+t(1,0))\]
+    where \(p\in \R^2\) is the starting point.
+\end{example}
+
+\begin{example}
+    \(M=\R^2,V=x\partial_y-y\partial_x\equiv (-y,x)\)-
+    \begin{figure}[H]\label{fig:7.07}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.07}
+    \end{figure}
+
+    Suppose that \(\gamma:\R\to \R^2\) is an integral curve
+    \[t\mapsto (\gamma^1(t),\gamma^2(t))\]
+    Then we need \begin{align*}
+        \dot{\gamma}(t)&=-\gamma^2(t)\\
+        \dot{\gamma}^2(t) = \gamma^1
+    \end{align*}
+    which is an ODE, with the following unique solution: 
+    
+    \begin{align*}
+        \gamma^1(t)=a\cos t-b sin (t), 
+        \gamma^2(t)=a \sin t + b\cos(t).
+    \end{align*}
+    Hence \[\gamma(t)=(a\cos t-b sin (t),a \sin t + b\cos(t))\text{, }a,b\in \R\]
+    integral curve with starting point \((a,b)\).
+\end{example}
+%todo maybe python code and output?
+\begin{proposition}\label{prop:7.9}
+    Let \(M\) be a smooth manifold. Let \(V\in \cX(M)\).
+    \begin{enumerate}
+        \item[(a)] \dhighlight{Existence:} Given any point \(p\in M,\) there exists an open interval \(0\in J\subset \R\) and 
+                   an integral curve \(\gamma:J\to M\) starting at \(p\)
+        \item[(b)] \dhighlight{Uniqueness:} If \(\sigma,\gamma:J\to M\) starting at the same point \(p=\sigma(0)=\gamma(0)\), then \(\sigma=\gamma\)
+    \end{enumerate}
+    \begin{figure}[H]\label{fig:7.08}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.08}
+    \end{figure}
+\end{proposition}
+
+\begin{remark}\marginnote{This probably needs Zorn's lemma.}
+    It follows from the proposition that,\(\forall p\in M\) there is a largest interval \(0\in J\subset\R\) admitting an integral curve \(\gamma:J\to M\).
+    We call \(\gamma : J\to M\) the \dhighlight{maximal integral curve}.
+\end{remark}
+
+\begin{proof}[Proof of proposition \ref{prop:7.9}]
+    (a): This is a local statement, hence we can assume open \(M\subset\R^n\). Then we must solve 
+    \[\dot{\gamma}(t)=V_{\gamma(t)},\]
+    \(\gamma(t)=(\gamma^1(t),\dots,\gamma^n(t))\).
+    \begin{align*}
+        \begin{cases}
+            \dot{\gamma}^1(t)&=V^1_{\gamma(t)}\\
+            \vdots & \vdots \\
+            \dot{\gamma}^n(t)&=V^n_{\gamma(t)}
+        \end{cases}
+    \end{align*}
+    This is a system of ordinary differential equations (ODEs). Hence by Theorem D.1 in the appendix of \cite{smooth_manifolds}\footnote{On the course website}, 
+    the system admits a unique solution with \(\gamma(0)=p\in M \subset \R^n\). 
+
+    (b): Let \(\mathcal{E}\subset J\) be a subset of points \(t\in J\) such that \(\sigma(t)=\gamma(t)\).\marginnote{We need this, because the uniqueness part of the theorem is local, but our statement in (b) is not}
+    Observe that \(0\in\mathcal{E}\) by assumption. Observe also that \(\mathcal{E}\) is closed, since \(\sigma,\gamma\) are continuous functions.
+    Moreover \(\mathcal{E}\) is open by the uniqueness part of theorem D1. \(\implies \mathcal{E}=J\).\qedhere
+
+\end{proof}
+%TODO: Citation should be in the color of the course
+
+\begin{lemma}\label{lem:7.10}
+    If \(F:M\to N,X\in \cX(M),Y\in \cX(N),X,Y\) are \(F\) related, then \(F\) takes 
+    integral curves of \(X\) to integral curves of \(Y\).
+\end{lemma}
+
+\begin{proof}
+    Suppose \(\gamma:J\to M\) integral curve of \(X\). 
+    \begin{align*}
+        (F\circ \gamma)'(t)=dF_{\gamma(t)}\dot\gamma(t)\stackrel{F\text{-related}}{=}Y_{F\circ \gamma(t)}\qedhere
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    There is also a converse. (exercise)
+\end{remark}
+
+\begin{definition*}
+    We say that a vector field \(V\in \cX(M)\) is \dhighlight{complete} if for all 
+    \(p\in M\), the maximal integral curve starting at \(p\in M\) is defined on \(\R\).
+\end{definition*}
+
+\begin{example}[Example of a non-complete vector field]
+    \(M=\R\setminus\{0\},V=\partial_x\). Pick \(p=-1\in \R\). Then the integral curve starting at 
+    \(p\) is the map
+    \[t\mapsto -1 +t.\]
+    This is only defined on \(-\infty,1\).
+\end{example}
+
+
+\markeol{16}
+
+
+
