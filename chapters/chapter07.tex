@@ -424,7 +424,7 @@ where \(\dot{\gamma}^i(t)=\frac{d}{dt}\gamma^i(t)\).
 \begin{proof}
     Suppose \(\gamma:J\to M\) integral curve of \(X\). 
     \begin{align*}
-        (F\circ \gamma)'(t)=dF_{\gamma(t)}\dot\gamma(t)\stackrel{F\text{-related}}{=}Y_{F\circ \gamma(t)}\qedhere
+        (F\circ \gamma)'(t)=dF_{\gamma(t)}\dot\gamma(t)\stackrel{F\text{-related}}{=}Y_{F\circ \gamma(t)}\hspace{1cm}\qedhere
     \end{align*}
 \end{proof}
 
@@ -441,11 +441,157 @@ where \(\dot{\gamma}^i(t)=\frac{d}{dt}\gamma^i(t)\).
     \(M=\R\setminus\{0\},V=\partial_x\). Pick \(p=-1\in \R\). Then the integral curve starting at 
     \(p\) is the map
     \[t\mapsto -1 +t.\]
-    This is only defined on \(-\infty,1\).
+    This is only defined on \((-\infty,1)\).
 \end{example}
-
-
 \markeol{16}
 
+\beginlecture{17}{06.12.2024}
+\begin{example}[Another example of incompleteness]
+    \(M=\R,V=x^2\partial_x\)
+    \begin{figure}[H]\label{fig:7.09}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.09}
+    \end{figure}
+    Setting \(p=1\), let \(x\mapsto \gamma(x)\) the maximal integral curve of \(V\) starting at \(p\).
+    \[\implies \begin{cases}
+        \gamma(0)&=p\\
+        \dot{\gamma}(t)&=V_{\gamma(t)}=\gamma(t)^2(\partial_x)_{t}\stackrel{M=\R}{=}\gamma(t)^2
+    \end{cases}\]
+    Therefore \(\gamma(t)=\frac{1}{1-t}\), as \(t\to 1\)\marginnote{There is a finite time blow-up at \(1\) of the ODE. We never reach \(t=1\). Incomplete integral curves leave all compact sets!}
+\end{example}
+
+\section{Flows}
+
+Fix a smooth manifold \(M\).
+
+\begin{definition*}
+    A \dhighlight{flow domain} is an open set \(\mathcal{D}\subset\R\times M\) such that,
+    for all \(p\in M\),
+    \[\mathcal{D}^{(p)}=\{t\in \R\mid (t,p)\in \mathcal{D}\}\subset\R\]
+    is an open interval and \(0\in \mathcal{D}^{(p)}\).
+\end{definition*}
+
+\begin{example}[and non-example]
+    \begin{figure}[H]\label{fig:7.10}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.10}
+    \end{figure}
+\end{example}
+
+\begin{definition*}
+    A \dhighlight{flow} \(\Psi:\mathcal{D}\to M\) is a map such that 
+    \begin{enumerate}
+        \item[(i)] \(\Psi((0,p))=p\)
+        \item[(ii)] \(\Psi((t,\Psi(s,p)))=\Psi(s+t,p)\) whenever this makes sense, i.e. \(s,s+t\in\mathcal{D}^{(p)},t\in \mathcal{D}^{(p)}\) \marginnote{One parameter subgroup property}  
+    \end{enumerate}
+\end{definition*}
+
+\dhighlight{Notation}: Given a flow \(\Psi:\mathcal{D}\to M\), we write:
+\begin{itemize}
+    \item if \((-\epsilon,\epsilon)\times M\subset \cD, s\in (-\epsilon,\epsilon),\Psi_s=\Psi(s,\cdot):M\to M\). This is a diffeomorphism, since \(\Psi_{-s}\circ \Psi_s=\Psi_0=\text{id}\)
+    \item given \(p\in M\): \(\Phi^{(p)}=\Psi(\cdot,p):\underbrace{\cD^{(p)}}_{\subset \R}\to M\), which is a path
+\end{itemize}
+
+\begin{lemma}\label{lem:7.11}
+    \begin{enumerate}
+        \item[(a)] If \(\Psi:\cD\to M\) is a flow, then \(p\mapsto \frac{d}{dt}\restrict{t=0}\underbrace{\Psi(t,p)}_{\Psi^{(p)}(t)}\in T_p M\)  defines a smooth vector field \(V^{\Psi}\) on \(M\)
+        \item[(b)] For \(p\in M,\Psi^{(p)}:\cD^{(p)}\to M\) are integral curves of the vector \(V^{\Psi}\). 
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \dhighlight{(a):} Enough to show, for all smooth functions \(f:M\to \R, V^\Psi f=(p\mapsto V_p^\Psi f)\) is also smooth (lemma \ref{lem:7.3}).
+    But \(V^\Psi f(p)=V_p f=\frac{d}{dt}\restrict{t=0}(f\circ \Psi^{(p)}(t))=\partial_t (f\circ \Psi)(0,p)\), \(p\mapsto \partial_t(f\circ \Psi(0,p))\) is smooth.
+
+    \dhighlight{(b):} We need tho show that \(V_{\Psi^{(p)}(t_0)}=\Psi^{(p)}(t_0),t_0\in\cD^{(p)}\).
+    But for \(f\in C^\infty(M),q=\Psi^{(p)}(t_0)=\Psi(t_0,p)\), we have 
+    %TODO: FIX
+    \begin{align*}
+        V_q^{\Psi} f&=\Psi^{q}(0)f=\frac{d}{dt}\restrict{t=0}f(\Psi^{(q)}(t))\\
+        &=\frac{d}{dt}\restrict{t=0}f(\Psi(t,\underbrace{\Psi(t_0,p)}_{=q}))\\
+        &=\frac{d}{dt}\restrict{t=0} f(\Psi(t+t_0,p))=\frac{d}{dt}\restrict{t=0}f(\Psi^{(p)}(t_0+t))\\
+        &=\dot{\Psi}^{(p)}(t_0)f\subset T_{\Psi^{(p)}(t_0)}  
+    \end{align*}
+
+\end{proof}
 
 
+\begin{theorem}[Theorem of flows]\label{thm:7.12}\marginnote{The map AND the domain are unqiue}
+    Let \(V\in \cX(M)\). Then there exists a unique flow \(\Psi:\cD\to M\) such that 
+    \[V^{\Psi}=V\land\Psi^{(p)}:\cD^{(p)}\to M \text{ are maximal integral curves}\]
+    \begin{figure}[H]\label{fig:7.11}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.11}
+    \end{figure}
+\end{theorem}
+
+\begin{proof}[Sketch]
+    To define \(\Psi\) send \((t,p)\mapsto \gamma^{(p)}(t)\), where \(\gamma^{(p)}\) is the (unique) 
+    integral curve at \(p\).
+\end{proof}
+
+\section{The Lie derivative}
+
+\marginnote{A lot of the proves are sketches, to increase speed}
+\dhighlight{Trivia:} (Sophus Lie): Lie groups, Lie algebras, but also: (to) lie. There was a hearing in congress (NSF)
+about a grant of Lie groups.
+
+Let \(V=(V^1,\dots,V^n)\) be a vector field on \(\R^n\). \(V^i:\R^n\to \R\). The expression \(\partial_{x_i} V(x)=(\partial_{x_i} V^1,\dots,\partial_{x_i} V^n)\)
+the derivative of \(V\in \cX(\R^n)\) in the direction of \(\partial_{x_i}\).
+
+\dhighlight{However:} on a general manifold this does not make sense.
+\begin{figure}[H]\label{fig:7.12}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 7.12}
+\end{figure}
+
+\(\gamma:(-\epsilon,\epsilon)\to M,\gamma(0)=p\). Want to define \(\partial_{\gamma(0)}V\)
+\[\lim_{t\to 0}\frac{\overbrace{V_{\gamma(t)}}^{T_{\gamma(t)}M}-\overbrace{V_{\gamma(0)}}^{\in T_{\gamma(0)}M}}{t}\]
+Two approaches to defining derivatives  of vector fields
+\begin{itemize}
+    \item introduce connections (\(\pi:E\to B\)) Choose extra data. A connection \(\implies \nabla_{\gamma(0)}\sigma\) makes sense    
+    \item Lie derivatives: Only works on the tangent bundle ( a associated vector bundles)
+\end{itemize}
+
+\begin{definition*}
+    Let \(V,W\in \cX(M)\). We define at \(p\) \[\lim_{t\to 0}(\cL_VW)_p\coloneqq \frac{d}{dt}\restrict{t=0}
+    \left(\frac{d({}^V\Psi_{-t})(W_{{}^V\Psi_t(q)})-W_p}{t}\right)\]
+    %TODO: FIX
+\end{definition*}
+
+\begin{lemma}\label{lem:7.13}
+    \(\cL_VW\in \cX(M)\).
+\end{lemma}
+
+\begin{proof}
+    Let \((U,\varphi)\) be a chart with \(p\in U\). Let \(J_0\subset \R\) be the interval containing \(0\), let \(U_0\subset U\)
+    Assume \(J_0,U_0\) are sufficiently small such that \( {}^V \Psi\restrict{J_0\times U_0}\)
+    has image in \(U\).
+
+    In \((U,\varphi)\) coordinates (i.e. \(x_i\equiv x_i\circ \varphi\)), we have 
+    \begin{align*}
+        \Psi(t,x)=(\Psi^1(t,x),\dots,\Psi^{n}(t,x)).
+    \end{align*}
+    Then \((d\Psi_{-t})_{\Psi(t,x)}=\begin{bmatrix}
+        \partial_{x_i}\Psi^{j}(-t,x)
+    \end{bmatrix}_{1\leq i,j\leq n}\). Hence 
+    \(d\Psi_{-t}W_{\Psi(t,x)}=\begin{bmatrix}
+        \partial_{x_i}\Psi^{j}(-t,x)
+    \end{bmatrix}_{1\leq i,j\leq n} \underbrace{(W^1(\Psi(t,x)),W^n(\Psi(t,x)))}_{n\times 1}\)
+    Hence \(\frac{d}{dt}\Psi_{-t}W_{\Psi(t,x)}=\lim_{t\to 0}\left(\frac{d\Psi_{-t}W_{\Psi(t,x)}-W_{\Psi(t,x)}}{t}\right)\)
+\end{proof}
+
+\begin{remark}
+    If \(F:M\to N\) diffeomorphism,then 
+    \[F_\star(\cL_VW)=\cL_{F_V}F_\star W\]
+\end{remark}
+
+\begin{lemma}\label{lem:7.14}
+    \((\cL_VW)_p=[V,W]_p\)
+\end{lemma}
+
+\markeol{17}
