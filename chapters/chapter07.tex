@@ -450,7 +450,7 @@ where \(\dot{\gamma}^i(t)=\frac{d}{dt}\gamma^i(t)\).
     \(M=\R,V=x^2\partial_x\)
     \begin{figure}[H]\label{fig:7.09}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_7_09.png}
         \caption{Sketch 7.09}
     \end{figure}
     Setting \(p=1\), let \(x\mapsto \gamma(x)\) the maximal integral curve of \(V\) starting at \(p\).
@@ -475,7 +475,7 @@ Fix a smooth manifold \(M\).
 \begin{example}[and non-example]
     \begin{figure}[H]\label{fig:7.10}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_7_10.png}
         \caption{Sketch 7.10}
     \end{figure}
 \end{example}
@@ -507,7 +507,6 @@ Fix a smooth manifold \(M\).
 
     \dhighlight{(b):} We need tho show that \(V_{\Psi^{(p)}(t_0)}=\Psi^{(p)}(t_0),t_0\in\cD^{(p)}\).
     But for \(f\in C^\infty(M),q=\Psi^{(p)}(t_0)=\Psi(t_0,p)\), we have 
-    %TODO: FIX
     \begin{align*}
         V_q^{\Psi} f&=\Psi^{q}(0)f=\frac{d}{dt}\restrict{t=0}f(\Psi^{(q)}(t))\\
         &=\frac{d}{dt}\restrict{t=0}f(\Psi(t,\underbrace{\Psi(t_0,p)}_{=q}))\\
@@ -523,7 +522,7 @@ Fix a smooth manifold \(M\).
     \[V^{\Psi}=V\land\Psi^{(p)}:\cD^{(p)}\to M \text{ are maximal integral curves}\]
     \begin{figure}[H]\label{fig:7.11}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_7_11.png}
         \caption{Sketch 7.11}
     \end{figure}
 \end{theorem}
@@ -545,7 +544,7 @@ the derivative of \(V\in \cX(\R^n)\) in the direction of \(\partial_{x_i}\).
 \dhighlight{However:} on a general manifold this does not make sense.
 \begin{figure}[H]\label{fig:7.12}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{sketch_7_12.png}
     \caption{Sketch 7.12}
 \end{figure}
 
@@ -559,9 +558,16 @@ Two approaches to defining derivatives  of vector fields
 
 \begin{definition*}
     Let \(V,W\in \cX(M)\). We define at \(p\) \[\lim_{t\to 0}(\cL_VW)_p\coloneqq \frac{d}{dt}\restrict{t=0}
-    \left(\frac{d({}^V\Psi_{-t})(W_{{}^V\Psi_t(q)})-W_p}{t}\right)\]
-    %TODO: FIX
+    \left(\frac{d({}^V\Psi_{-t})(W_{{}^V\Psi_t(p)})-W_p}{t}\right)\]
 \end{definition*}
+
+Note \(d\left({}^V \Psi_{-t}\right)_{{}^V\Psi_{t}(p)}:T_{{}^V\Psi_{t}(p)}\to T_p\)
+
+\begin{figure}[H]\label{fig:7.13}
+    \centering
+    \includegraphics[width=.7\textwidth]{sketch_7_13.png}
+    \caption{Sketch 7.13}
+\end{figure}
 
 \begin{lemma}\label{lem:7.13}
     \(\cL_VW\in \cX(M)\).
@@ -576,18 +582,18 @@ Two approaches to defining derivatives  of vector fields
     \begin{align*}
         \Psi(t,x)=(\Psi^1(t,x),\dots,\Psi^{n}(t,x)).
     \end{align*}
-    Then \((d\Psi_{-t})_{\Psi(t,x)}=\begin{bmatrix}
+    Then \((d\Psi_{-t})_{\Psi(t,x)}=\begin{pmatrix}
         \partial_{x_i}\Psi^{j}(-t,x)
-    \end{bmatrix}_{1\leq i,j\leq n}\). Hence 
-    \(d\Psi_{-t}W_{\Psi(t,x)}=\begin{bmatrix}
+    \end{pmatrix}_{1\leq i,j\leq n}\). Hence 
+    \(d\Psi_{-t}W_{\Psi(t,x)}=\begin{pmatrix}
         \partial_{x_i}\Psi^{j}(-t,x)
-    \end{bmatrix}_{1\leq i,j\leq n} \underbrace{(W^1(\Psi(t,x)),W^n(\Psi(t,x)))}_{n\times 1}\)
-    Hence \(\frac{d}{dt}\Psi_{-t}W_{\Psi(t,x)}=\lim_{t\to 0}\left(\frac{d\Psi_{-t}W_{\Psi(t,x)}-W_{\Psi(t,x)}}{t}\right)\)
+    \end{pmatrix}_{1\leq i,j\leq n} \underbrace{(W^1(\Psi(t,x)),W^n(\Psi(t,x)))}_{n\times 1}\).
+    Hence \[\frac{d}{dt}\restrict{t=0}\left(d\Psi_{-t}W_{\Psi(t,x)} \right)=\lim_{t\to 0}\left(\frac{d\Psi_{-t}W_{\Psi(t,x)}-W_{\Psi(0,x)}}{t}\right)\qedhere\]
 \end{proof}
 
 \begin{remark}
     If \(F:M\to N\) diffeomorphism,then 
-    \[F_\star(\cL_VW)=\cL_{F_V}F_\star W\]
+    \[F_\star(\cL_VW)=\cL_{F_\star V}F_\star W\]
 \end{remark}
 
 \begin{lemma}\label{lem:7.14}
