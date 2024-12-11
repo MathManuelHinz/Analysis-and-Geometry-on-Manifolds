@@ -99,7 +99,7 @@ Let \(F:M \to N\) be a smooth map. Let \(X\in\mathcal{X}(M),Y\in \mathcal{X}(N)\
     \begin{center}
         \begin{tikzcd}
             \arrow[d]TM \arrow[r,"dF"]& TN\arrow[d] \\
-            \arrow[u,bend left,"X"]M \arrow[r,"F"] & N \arrow[u,bend right,swap,"Y"] % TODO: FIX
+            \arrow[u,bend left,"X"]M \arrow[r,"F"] & N \arrow[u,bend right,swap,"Y"]
         \end{tikzcd}
     \end{center} 
 \end{definition*}
@@ -120,7 +120,7 @@ Let \(F:M \to N\) be a smooth map. Let \(X\in\mathcal{X}(M),Y\in \mathcal{X}(N)\
     \begin{center}
         \begin{tikzcd}
             \arrow[d]TM \arrow[r,"dF"]& TN\arrow[d] \\
-            \arrow[u,bend left,"X"]M  &\arrow[l,"F^{-1}"] N \arrow[u,,swap,bend right,dotted,"F_\star X"] % TODO: FIX
+            \arrow[u,bend left,"X"]M  &\arrow[l,"F^{-1}"] N \arrow[u,,swap,bend right,dotted,"F_\star X"]
         \end{tikzcd}
     \end{center}
 \end{definition*}
@@ -271,10 +271,11 @@ If \(p\in U\), we also have been writing \((\partial_{x_i})_p=d\varphi_{\varphi(
 \end{lemma}
 
 \begin{proof}
-    Recall from last week \ref{lec15} % TODO: FIX 
+    
+    Recall from \href{lec15}{last week}  
     \marginnote{We often ommit the identity, i.e. the first \(n\) entries of the following} 
     \(M=\R^n\)m then the map \[(x_1,\dots,x_n)\mapsto (x_1,\dots,x_n,0,\dots,0,1,0\dots,0)\]
-    Then section 7.1 % TODO 
+    Then by section 7.1 % TODO 
     ,we have this is true, when \(M\) is an open subset of \(\R^n\).
 
     In general, \(d\varphi_{\varphi(p)}^{-1}((\partial_{x_i})_{\varphi(p)})=(\varphi)^{-1}_\star \partial_{x_i}\), where the pushfoward is 
@@ -282,17 +283,14 @@ If \(p\in U\), we also have been writing \((\partial_{x_i})_p=d\varphi_{\varphi(
     The lemma follows from the fact the fact that pushforwards of diffeomorphism send smooth vector fields to 
     smooth vector fields.
 \end{proof}
-
+\marginnote{It is important to understand the difference between vector fields and tangent vectors, like the difference between functions and elements of the target of those functions}
 \dhighlight{Notation:} The vector field \(U\ni p\mapsto (\partial_{x_i})_p\) shall be denoted by \(\partial_{x_i}\).
 Other sources / authors write \(\frac{\partial}{\partial x_i}\).
-\marginnote{It is important to understand the difference between vector fields and tangent vectors, like the difference between functions and elements of the target of those functions}
 
 \begin{definition*}
     Let \(M\) be smooth of dimension \(m\).
     \begin{enumerate}
-        \item[(i)] Given a point \(p\in M\), an m-tuple of vector fields \((X^1,\dots,X^m)\in \cX(M)^m\) is called a \dhighlight{local frame at \(p\)}, if \((X_p^1,\dots,X_p^m)\in T_p M^m\)\marginnote{Does this commute?
-        %TODO
-        }
+        \item[(i)] Given a point \(p\in M\), an m-tuple of vector fields \((X^1,\dots,X^m)\in \cX(M)^m\) is called a \dhighlight{local frame at \(p\)}, if \((X_p^1,\dots,X_p^m)\in T_p M^m\)
         \item[(ii)] We say that \((X^1,\dots,X^m)\in \cX(M)^m\) is a \dhighlight{global frame} if \((X_p^1,\dots,X_p^m)\) spans \(T_pM\) for all \(p\in M\). 
     \end{enumerate}
 \end{definition*}
@@ -613,16 +611,16 @@ Note \(d\left({}^V \Psi_{-t}\right)_{{}^V\Psi_{t}(p)}:T_{{}^V\Psi_{t}(p)}\to T_p
     that \(\partial_{x_1}=V\) on \(U\), where \((x_i)_{i=1}^n\) are the coordinate functions.
     \begin{figure}[H]\label{fig:7.14}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_7_14.png}
         \caption{Sketch 7.14}
     \end{figure}
     Hence, we can now assume that \(M=U\subset\R^n,V=\partial_{x_1}\). \marginnote{Due to being invariant under diffeomorphisms, we can just pick nice coordinates} % TODO
     \begin{align*}
-        \implies& {}^{\partial_{x_1}}\Psi_t(x)&=(x_1+t,x_2,\dots,x_n)\\
-        \implies& d(\Psi_{-t})_{\Psi_t(x)}(W_{\Psi_t(x)})&=d(\Psi_{-t})\left(\overbrace{W^1(x_1+t,x_2,\dots,x_n),\dots,W^n(x_1+t,x_2,\dots,x_n)}^{\in T_{\Psi_t(x)}\equiv \R^n}\right)&\\
-        &&=(\overbrace{W^1(x_1+t,x_2,\dots,x_n),\dots,W^n(x_1+t,x_2,\dots,x_n)}^{\in T_x M=\R^n})&\\
-        \implies& (\cL_V W)_0 =\frac{d}{dt}\restrict{t=0}\left(d(\Psi_{-t})_{\Psi_t(0)}(W_{\Psi_t(0)})\right)&=\frac{d}{dt}\restrict{t=0}\left(W^1(t,0,\dots,0),\dots,W^n(t,0,\dots,0)\right)&\\
-        &= (\partial_{x_1}W^{1}(0,\dots,0),\dots,\partial_{x_1}W^{n}(0,\dots,0))&=[\partial_{x_1}W]_0&
+        \implies& {}^{\partial_{x_1}}\Psi_t(x)=(x_1+t,x_2,\dots,x_n)\\
+        \implies& d(\Psi_{-t})_{\Psi_t(x)}(W_{\Psi_t(x)})=d(\Psi_{-t})\left(\overbrace{W^1(x_1+t,x_2,\dots,x_n),\dots,W^n(x_1+t,x_2,\dots,x_n)}^{\in T_{\Psi_t(x)}\equiv \R^n}\right)\\
+        &=(\overbrace{W^1(x_1+t,x_2,\dots,x_n),\dots,W^n(x_1+t,x_2,\dots,x_n)}^{\in T_x M=\R^n})\\
+        &\implies (\cL_V W)_0 =\frac{d}{dt}\restrict{t=0}\left(d(\Psi_{-t})_{\Psi_t(0)}(W_{\Psi_t(0)})\right)=\frac{d}{dt}\restrict{t=0}\left(W^1(t,0,\dots,0),\dots,W^n(t,0,\dots,0)\right)\\
+        &= (\partial_{x_1}W^{1}(0,\dots,0),\dots,\partial_{x_1}W^{n}(0,\dots,0))=[\partial_{x_1}W]_0
     \end{align*}
     
     \dhighlight{2.} \(p\in \overline{\{q\mid V_q\neq 0\}}\). This implies 
@@ -639,7 +637,7 @@ This is equivalent by \ref{thm:7.15} to \(^V\Psi,^W \Psi\) commuting.
 
 \begin{figure}[H]\label{fig:7.15}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
+    \includegraphics[width=.7\textwidth]{sketch_7_15.png}
     \caption{Sketch 7.15}
 \end{figure}
 
@@ -664,7 +662,7 @@ This is equivalent by \ref{thm:7.15} to \(^V\Psi,^W \Psi\) commuting.
     \((iii)\implies (i)\): \(^W\Psi {}^{( {}^V\Psi_t(p))}(s)= {}^V\Psi_t({}^W\Psi^{(p)})(s)\)
     \begin{figure}[H]\label{fig:7.16}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_7_16.png}
         \caption{Sketch 7.16}
     \end{figure}
     \[\frac{d}{ds}\restrict{s=0} {}^W\Psi {}^{( {}^V\Psi_t(p))}(s)=W_{\Psi_t(p)}=d( {}^V\Psi_t)(W_p)\]
@@ -696,4 +694,3 @@ This is equivalent by \ref{thm:7.15} to \(^V\Psi,^W \Psi\) commuting.
     Lecture 20 will start 5 minutes earlier!
 \end{remark}
 
-\markeol{18}
