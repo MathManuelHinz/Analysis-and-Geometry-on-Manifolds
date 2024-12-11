@@ -1,0 +1,79 @@
+\chapter{Vector bundles}
+
+\section{Review of linear algebra}
+
+\subsection{The category of vector spaces}
+
+Fix \(\bK\) a field (for this class we only care about \(\bK=\R\)).
+
+Let \(\text{vec}_\bK\) be the category of finite-dimensional \(\bK\) vector spaces:
+\begin{itemize}
+    \item Objects are (finite dimensional) \(\bK\) vector spaces 
+    \item Morphisms are linear maps.
+\end{itemize}
+
+The category \(\text{vec}_\bK\) is \dhighlight{abelian}. In particular 
+\begin{itemize}
+    \item given \(\psi:V\to W\), there exists \[0\to \ker \phi \hookrightarrow V\stackrel{\psi}{\to} W\]
+         \[V\stackrel{\psi}{\to} W\to W/\psi(V)\to 0\] %TODO
+    \item \(V,W\), can form \(V\oplus W \equiv V\times W\) \marginnote{We can only form direct sums of finitely many vector spaces, since \(\text{vec}_\bK\) only contain finite dimensional vector spaces}
+\end{itemize}
+
+The category \(\text{vec}_\bK\) is symmetric monoidal:
+\begin{align*}
+    \text{vec}_\bK \times \text{vec}_\bK \to \text{vec}_\bK\\
+    (V,W)\mapsto V \otimes_{\bK} W
+\end{align*}
+
+Note: % See picture
+
+The category \(\text{vec}_\bK\) admits an anti-involution:
+\begin{align*}
+    (\cdot)^{\vee}:\text{vec}_\bK&\to \text{vec}_\bK^{\text{op}}\\
+    V&\mapsto V^\vee \\
+    \psi\in\text{hom}(V,W)&\mapsto \psi^\vee \in \text{hom}(W^\vee,V^\vee) \\
+    (\cdot)^{\vee\vee} & \equiv \text{id}
+\end{align*}
+
+These notions will have corresponding notions for vector bundles.
+
+\subsection{Tensor products}
+
+Recall that the \dhighlight{tensor product} of vector spaces is characterized by:
+
+\dhighlight{Universal property:} If \(\alpha:V^1\times \dots\times V^k\to W\) is a 
+multi-linear map, then there exists 
+\begin{center}
+    \begin{tikzcd}
+        \arrow[d,"\pi"]V^1\times \dots \times V^m \arrow[r,"\alpha"]& W\\
+        V^1\otimes \dots \otimes V^m \arrow[ru,"\underline{\alpha}\equiv\alpha"]&
+    \end{tikzcd}
+\end{center}
+
+\begin{definition*}
+    Given a vector space \(V\in \text{vec}_\bK\), a \dhighlight{tensor of type} 
+    \((k,l)\in \N\times \N\) is an element of 
+    \[T^{k,l}V\coloneqq \underbrace{V\otimes \dots \otimes V}_{k\text{ times}}\otimes \underbrace{V^\vee\otimes \dots \otimes V^\vee}_{l\text{ times}}\]   
+\end{definition*}
+
+We write \(T^kV\equiv T^{k,0}V\) and \(T^lV^\vee\equiv T^{0,l}V\)
+
+\begin{remark}
+    This is not the same as the decomposition into \((l,k)\) forms in complex linear algebra. 
+\end{remark}
+
+A tensor \(\alpha\in T^lV^\vee=(T^l V)^\vee\) defines a map \(T^lV\to \bK\), hence also 
+a multi-linear map \(V\times \dots\times V\to \bK\). We denote these maps by \(\alpha\) by abuse of notation.
+
+\begin{definition*}
+    A tensor \(\alpha\in T^l V^\vee\) is 
+    \begin{itemize}
+        \item \dhighlight{alternating}: if the induced map \(\alpha:V^1\times \dots\times V^l\to\bK\) satisfies 
+            \[\alpha(x_1,\dots,x_i,\dots,x_j,\dots,x_l)=(-1)^{j-i}\alpha(x_1,\dots,x_j,\dots,x_i,\dots,x_l).\]
+        \item \dhighlight{symmetric} if the induced map \(\alpha:V^1\times \dots\times V^l\to\bK\) satisfies 
+            \[\alpha(x_1,\dots,x_i,\dots,x_j,\dots,x_l)=\alpha(x_1,\dots,x_j,\dots,x_i,\dots,x_l).\]
+    \end{itemize}
+    We let \(\Lambda^l(V^\vee)\subset T^l V^\vee\) be the subspace of alternating tensors. We let \(\Sigma^lV^\vee\subset T^l V^\vee\)
+    be the subspace of symmetric tensors.
+\end{definition*}
+

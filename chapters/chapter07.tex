@@ -596,8 +596,104 @@ Note \(d\left({}^V \Psi_{-t}\right)_{{}^V\Psi_{t}(p)}:T_{{}^V\Psi_{t}(p)}\to T_p
     \[F_\star(\cL_VW)=\cL_{F_\star V}F_\star W\]
 \end{remark}
 
-\begin{lemma}\label{lem:7.14}
-    \((\cL_VW)_p=[V,W]_p\)
-\end{lemma}
+\begin{proposition}\label{prop:7.14}\marginnote{In lecture 17 this was a lemma, but in lecture 18 this is a proposition}
+    \((\cL_VW)=[V,W]\) for \(V,W\in\cX(M)\).
+\end{proposition}
+
 
 \markeol{17}
+
+
+\begin{proof}\beginlecture{18}{10.12.2024}
+    Enough to check that \((\cL_VW)_p=[V,W]_p\)
+    We are going to consider three cases:
+    \dhighlight{1.} \(V_p\neq 0\):
+
+     According to Sheet 10, we can find a chart \(U,\varphi\), \(p\in U\) with the property 
+    that \(\partial_{x_1}=V\) on \(U\), where \((x_i)_{i=1}^n\) are the coordinate functions.
+    \begin{figure}[H]\label{fig:7.14}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.14}
+    \end{figure}
+    Hence, we can now assume that \(M=U\subset\R^n,V=\partial_{x_1}\). \marginnote{Due to being invariant under diffeomorphisms, we can just pick nice coordinates} % TODO
+    \begin{align*}
+        \implies& {}^{\partial_{x_1}}\Psi_t(x)&=(x_1+t,x_2,\dots,x_n)\\
+        \implies& d(\Psi_{-t})_{\Psi_t(x)}(W_{\Psi_t(x)})&=d(\Psi_{-t})\left(\overbrace{W^1(x_1+t,x_2,\dots,x_n),\dots,W^n(x_1+t,x_2,\dots,x_n)}^{\in T_{\Psi_t(x)}\equiv \R^n}\right)&\\
+        &&=(\overbrace{W^1(x_1+t,x_2,\dots,x_n),\dots,W^n(x_1+t,x_2,\dots,x_n)}^{\in T_x M=\R^n})&\\
+        \implies& (\cL_V W)_0 =\frac{d}{dt}\restrict{t=0}\left(d(\Psi_{-t})_{\Psi_t(0)}(W_{\Psi_t(0)})\right)&=\frac{d}{dt}\restrict{t=0}\left(W^1(t,0,\dots,0),\dots,W^n(t,0,\dots,0)\right)&\\
+        &= (\partial_{x_1}W^{1}(0,\dots,0),\dots,\partial_{x_1}W^{n}(0,\dots,0))&=[\partial_{x_1}W]_0&
+    \end{align*}
+    
+    \dhighlight{2.} \(p\in \overline{\{q\mid V_q\neq 0\}}\). This implies 
+    \[(\cL_VW)_p=[V,W]_p\]
+    by continuity.
+
+    \dhighlight{3.} \(p\) admits a neighborhood \(\mathcal{O}\subset M\) s.t. \(V\restrict{\mathcal{O}}\equiv 0\). Then 
+    \[(\cL_VW)_p=0=[V,W]_p.\]
+    This is an exercise.
+\end{proof}
+
+\dhighlight{A very important property:} We say that \(V,W\in\cX(M)\) \dhighlight{commute}, if \([V,W]=0\).
+This is equivalent by \ref{thm:7.15} to \(^V\Psi,^W \Psi\) commuting.
+
+\begin{figure}[H]\label{fig:7.15}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 7.15}
+\end{figure}
+
+\begin{theorem}\label{thm:7.15}
+    The following are equivalent:
+    \begin{enumerate}
+        \item[(i)] \([V,W]=\cL_VW=0\) 
+        \item[(i')] \([W,V]=\cL_WV=0\)
+        \item[(ii)] \(^V\Psi_t(\cdot)_\star W=W\)
+        \item[(ii')] \(^W\Psi_t(\cdot)_\star V=V\)
+        \item[(iii)] \(^V\Psi_s {}^W\Psi_t=^W\Psi_t {}^V\Psi_s\) for all \(s,t\) where this makes sense.   
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof sketch]
+    \((i)\iff (i')\): By definition.
+
+    \((i)\implies (ii)\): Need the identity from Sheet 10 (optional problem). Differentiate the expression \(\Psi_{t\star}W\).
+
+    \((ii)\implies (iii)\): Need to check (essentially a tautology) that if the flow of \(V\) preserves \(W\), then it preserves the flow of \(W\) as well.
+
+    \((iii)\implies (i)\): \(^W\Psi {}^{( {}^V\Psi_t(p))}(s)= {}^V\Psi_t({}^W\Psi^{(p)})(s)\)
+    \begin{figure}[H]\label{fig:7.16}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 7.16}
+    \end{figure}
+    \[\frac{d}{ds}\restrict{s=0} {}^W\Psi {}^{( {}^V\Psi_t(p))}(s)=W_{\Psi_t(p)}=d( {}^V\Psi_t)(W_p)\]
+    Apply \(d(\Psi_{-t})(\cdot)\) to both sides of the equality, to get 
+    \[d ^V\Psi_{-t}\left(W_{\Psi_t(p)}\right)=W_p.\]
+    Finally, apply \(\frac{d}{dt}\restrict{t=0}\) to get \((\cL_VW=0)\).
+\end{proof}
+
+
+\begin{theorem}\label{thm:7.16}\marginnote{This is a very good theorem to remember! Might very well be relevant to an exam problem}
+    Let \(M\) be a smooth manifold. Let \((V^1,\dots,V^m)\in \cX(M)^m\) be a local frame at \(p\).
+    Then, the following are equivalent:
+    \begin{enumerate}
+        \item[(i)] there exists a chart \((U,\psi),p\in U\) s.t. \(V^i=\partial_{x_i}\), where \((x_i)\) are the coordinate functions
+        \item[(ii)] \([V^i,V^j]=0\) near \(p\) for all \(i,j\).  
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}[Proof idea]
+    \((i)\implies (ii)\) is obvious.
+
+    \((ii)\implies (i)\). Define a chart \begin{align*}
+        (-\epsilon,\epsilon)^m&\to M\\
+        (t_1,\dots,t_n)&\mapsto\underbrace{\left(\left({}^{V^1}\Psi^{(p)}(t_1),\dots,{}^{V^m}\Psi^{(p)}(t_m)\right)=\right)}_{\text{bad notation}}{}^{V^1}\Psi_{t_1}\left(\dots {}^{V^m}\Psi_{t_m}(p)\right) 
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    Lecture 20 will start 5 minutes earlier!
+\end{remark}
+
+\markeol{18}
