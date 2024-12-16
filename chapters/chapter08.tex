@@ -78,3 +78,208 @@ a multi-linear map \(V\times \dots\times V\to \bK\). We denote these maps by \(\
 \end{definition*}
 
 \markeol{18}
+
+\beginlecture{19}{13.12.2024}
+
+\begin{lemma}\label{lem:8.1}
+    \dhighlight{(1):} The inclusion \(\Lambda^k(V^\vee)\subset T^k(V^\vee)\) splits via the map 
+    \begin{align*}
+        T^k(V^\vee)&\to \Lambda^k(V^\vee)\\
+        \alpha&\mapsto \text{alt}(\alpha)\coloneqq \frac{1}{k!}\sum_{\sigma\in S_k}(\text{sgn}(\sigma)) {}^\sigma \alpha
+    \end{align*}
+    where \[^\sigma \alpha(v_1,\dots,v_k)=\alpha(v_{{\sigma(1)}},\dots,v_{{\sigma(k)}}).\]
+    \dhighlight{(2):} The inclusion \(\Sigma^k(V^\vee)\subset T^k(V^\vee)\) also splits via the map 
+    \begin{align*}
+        T^k(V^\vee)&\to \Sigma^k(V^\vee)\\
+        \alpha & \mapsto \text{sym}(\alpha)\coloneqq \frac{1}{k!}\sum_{\sigma\in S_k} {}^\sigma \alpha
+    \end{align*}  
+\end{lemma}
+
+\begin{proof}\marginnote{We should also check that the maps acutally land in the claimed target set}
+    \dhighlight{(1):} We need to show that the composition
+    \begin{center}
+        \begin{tikzcd}
+        \Lambda^k(V^\vee)\arrow[r,"i"] & T^k(V^\vee)\arrow[r,"\text{alt}"] & \Lambda^k(V^\vee)
+        \end{tikzcd}
+    \end{center}
+    is the identity. This is the case because \((\text{sgn}(\sigma)) {}^\sigma\alpha=\alpha\) if \(\alpha \in \Lambda^k(V^\vee)\).
+
+    \dhighlight{(2)} is similar.
+\end{proof}
+
+\section{Vector bundles}
+
+\subsection{Basic definitions}
+
+\begin{definition*}
+    A (real, smooth) \dhighlight{vector bundle} is a triple \((\pi,E,B)\) where 
+    \begin{itemize}
+        \item \(E,B\) are manifolds 
+        \item \(\pi:E\to B\) is a smooth map
+        \item \(E_b=\pi^{-1}(b)\) carries the structure of a real vector space (finite dimensional).\marginnote{If we look at the fibres \dots }
+    \end{itemize}
+ 
+    This data must satisfy the following \dhighlight{``local triviality''} condition:
+
+    Given any \(b\in B\), there exists a neighborhood \(b\subset U\) and a diffeomorphism \(\psi:\pi^{-1}(U)\simeq U\times V\)
+    such that: \marginnote{\(V\) is some real, finite dimensional vector space}
+    \begin{enumerate}
+        \item[(i)] \(\pi\circ \psi(x,v)=x\)
+        \item[(ii)] \(\psi\restrict{E_b}:E_b\stackrel{\simeq}{\to} \{b\} V\) is an isomorphism of real vector spaces.  
+    \end{enumerate}
+    
+    \(B\) is called the \dhighlight{base}, \(\pi\) the \dhighlight{projection} and \(E\) is called the \dhighlight{total space}.
+
+\end{definition*}
+
+\begin{remark}
+    We assume in this course that \(\text{dim}_\bK(E_b)\) is constant (this is automatic if \(B\) is connected).
+    Under this convention we can assume that \(V=\R^k\), since every finite dimensional real vector space is non-cannoically isomorphic to \(\R^k\) for some \(k\in \N\) by composing \(\psi\) with \((\text{id},\phi_V)\), where \(\phi_V\) is said isomorphism.
+\end{remark}
+
+\begin{figure}[H]\label{fig:8.1}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch }
+\end{figure}
+In the homework
+\begin{figure}[H]\label{fig:8.2}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch }
+\end{figure}
+Rigorously \(E:[0,1]\times \R/(0,v)\sim(1,-v)\). Notice that in this case the local triviality really is local, i.e. we can't take \(U=E\).
+
+\begin{definition*}
+    A morphism of (smooth, real) vector bundles \((\pi,E,B)\to (\pi',E',B')\) is the data of smooth maps 
+    \(F:E\to E',f:B\to B'\) such that 
+    \begin{enumerate}
+        \item[(i)] \begin{tikzcd}
+            \arrow[d,"\pi"] E\arrow[r,"F"] & E'\arrow[d,"\pi'"]\\
+            B \arrow[r,"f"] & B'
+        \end{tikzcd} commutes. 
+        \item[(ii)] \(F\restrict{E_b}:E_b\to E_{f(b)}'\) is a linear map.
+    \end{enumerate}
+\end{definition*}
+
+\begin{remark} %TODO: Why?
+    \(f\) is determined by \(F\) and the condition that \(F\) sends fibers to fibers.\marginnote{Recoverable through quitioning}
+\end{remark}
+
+\dhighlight{Notation:} We write \(E=(\pi,E,B), (\pi,E,B)\stackrel{(F,f)}{\to} (\pi',E',B')\) is written as \(F:E\to E'\).
+
+\begin{definition*}
+    Given a vector bundle \(E\), a \dhighlight{sub-bundle} is a vector bundle \(F\) over the same base,
+    and a map \(i:F\hookrightarrow E\) covering the identity, such that \(F_b\stackrel{i}{\hookrightarrow}E_b\)
+    is injective, i.e. 
+    \begin{center}
+        \begin{tikzcd}
+            \arrow[d]F\arrow[r,hook,"i"] & E \arrow[d,"\pi"]\\
+            B\arrow[r,"="] & B
+        \end{tikzcd}
+    \end{center}
+    and \(F_b\hookrightarrow E_b\) is injective.
+\end{definition*}
+
+\begin{definition*}
+    We let \(\text{vectbund}\) be the category whose objects are (smooth, real) vector bundles. We 
+    let \(\text{vectbund}(B)\) be the subcategory on vector bundles over \(B\) with morphisms covering the 
+    identity.
+\end{definition*}
+
+\begin{remark}
+    Can similarly set up a theory of \(C^0,C^k,k\geq 1\) vector bundles over \(\R,\C\). This gives rise to 
+    analogous categories. Other would therefore write \(\text{vectbund}^\infty\) for what is here jut called \(\text{vectbund}\). 
+\end{remark}
+
+\begin{lemma}[Construction]\label{lem:8.2}
+    Let \(f:B\to C\) be a smooth map. Then there is a function \(f^\star:\text{vectbund}(C)\to \text{vectbund}(B)\).
+    This is called \dhighlight{pullback}. On objects, we have \(f:\underbrace{E}_{\in \text{vectbund}(C)}\to f^*(E)\coloneqq B\times_C E \to B\).
+\end{lemma}
+\dhighlight{Note:} Here we use the diagram: 
+\begin{center}
+    \begin{tikzcd}
+        \arrow[d,"\pi_B"]f^*(E)\arrow[r] & E\arrow[d,"\pi"]\\
+        B \arrow[r,"f"] & C 
+    \end{tikzcd}
+\end{center}
+
+\begin{proof}
+    Note that \(\pi:E\to C\) is a submersion (always true for vector bundles, follows from the condition \(\pi^{-1}(U)\simeq U\times V\)).
+    Hence \(f \pitchfork\pi\) %TOFIX 
+    are transverse, and the fiber product exists (in the category \(\maninf\)).
+    \begin{itemize}
+        \item \(\pi_B^{-1}(b)=\pi^{-1}(f(b))\) endows \(\pi_B^{-1}(b)\) with the structure of a vector space
+        \item given \(b\in B\) there exist \(U\ni f(b)\), and \(\psi:\pi^{-1}(U)\sim U\times V\). Hence \(\pi_B^{-1}(U)\simeq \pi^{-1}(U)\times V\), which verifies local triviality.
+    \end{itemize}
+
+    There is more to check, but the rest is trivial.
+\end{proof}
+
+\subsection{Examples of vector bundles}
+
+\begin{example}
+    Let \(B=\{x\}\). Then \(\text{vectbund}(\{x\})\simeq \text{vect}_\R\) by 
+    \[\{x\}\times V \stackrel{\pi}{\to} \{x\}\mapsto V\] % TODO other direction
+\end{example}
+
+\begin{example}
+    Let \(B\) be our favorite smooth manifold. Then there is a unique map \(f:B\to \{x\}\).
+    Hence by lemma \ref{lem:8.2}, we have a vector bundle \(f^\star V\). In fact 
+    \(f^\star V= B\times V\stackrel{\pi_B}{\to} B\) by \((b,v)\mapsto b\).\marginnote{This is a small exercise}
+    Any vector bundle of the form \(f^star V\) is called \dhighlight{trivial}. 
+\end{example}
+
+\begin{remark}
+    The Möbius bundle is not trivial:
+    \(M\stackrel{\pi}{\to} S^1\), if \(M=S^1 \times \R\to S^1\)  \((x,1)\mapsto x\) %TODO: again swap direction
+    , then we could define a section \(\sigma:S^1\to M,\pi\circ \sigma=\text{id}\) and \(\sigma\neq 0\).
+    Contradiction via the mean value theorem.
+\end{remark}
+
+\begin{example}
+    Let \(B\) be any manifold. Then \(TB\stackrel{\pi}{\to} B\) is a vector bundle.
+    \marginnote{Given a manifold: is the vector bundle trivial? is a nice question to ask (in the exam?)}
+\end{example}
+
+\dhighlight{Exercise:} \(T S^1\simeq S^1\times \R\) 
+
+What about \(TS^2\)?
+
+\subsection{Vector bundles from gluing data}
+
+This gives a mechanism to produce many more examples.
+
+\dhighlight{Construction}: % Own box? 
+Let \(M\) be a manifold. Let 
+\begin{itemize}
+    \item \(\{U_\alpha\}_{\alpha\in \cA}\) be a cover of \(M\)
+    \item \(\{V_\alpha\}_{\alpha\in \cA}\) be a collection of vector spaces 
+    \item \(\varphi_{\alpha\beta}:U_\alpha\cap U_\beta\to \text{GL}(V_\alpha,V_\beta)\simeq \text{GL}(\R^k)\subset \R^{k^2}\) be 
+          smooth maps satisfying \[\varphi_{\alpha\gamma}=\varphi_{\beta\gamma}\varphi_{\alpha\beta}\] on  \(U_\alpha\cap U_\beta\cap U_\gamma\) for all \(\alpha,\beta,\gamma\in\cA\). 
+          The equation is called \dhighlight{cocycle condition}.
+\end{itemize}
+We let \begin{equation}
+    E\coloneqq \coprod_{\alpha\in\cA} U_\alpha \times V_\alpha /\sim     
+\end{equation}
+where \(U_{\alpha}\times V_\alpha \ni (x,v)\sim (x,w)\in U_\beta\times V_\beta\)
+if \(w=\varphi_{\alpha\beta}(x)(v)\).
+
+We let \(\pi:E\to M\) be the forgetful map \[[(x,v)]\mapsto x.\]
+
+\begin{lemma}\label{lem:8.3}
+    \begin{enumerate}
+        \item[(a)] \(\pi:E\to M\) is a vector bundle
+        \item[(b)] All vector bundles arise in this way.  
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+    \dhighlight{(a)} is obvious (once you believe \(\sim\) is an equivalence relation)
+
+    \dhighlight{(b):} Let \(\pi:E\to B\) be a vector bundle, cover 
+    \(B\) by \(\{U_\alpha\}\), \(\psi:\pi^{-1}(U_\alpha)\to U_\alpha\times V_\alpha\) and let \(\varphi_{\alpha,\beta}=\psi_\beta\circ \psi_\alpha^{-1}\). \qedhere 
+\end{proof}
+
+\markeol{19}
+
