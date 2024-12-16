@@ -25,7 +25,12 @@ The category \(\text{vec}_\bK\) is symmetric monoidal:
     (V,W)\mapsto V \otimes_{\bK} W
 \end{align*}
 
-Note: % See picture
+\dhighlight{Note:} \[V\otimes W \simeq W\otimes V\] symmetric and 
+\[V\otimes(W\otimes Z)\simeq (V\otimes W)\otimes Z.\]
+
+\dhighlight{Note:} If \(V^1,\dots, V^k\) are vector spaces and \(\{e_j^i\}_{j=1}^l\) basis for \(V^i\), 
+then \[\{e_{j_1}^1\otimes\dots\otimes e_{j_k}^k\}\]
+basis for \(V^1\otimes \dots\otimes V^k\).
 
 The category \(\text{vec}_\bK\) admits an anti-involution:
 \begin{align*}
@@ -139,14 +144,14 @@ a multi-linear map \(V\times \dots\times V\to \bK\). We denote these maps by \(\
 
 \begin{figure}[H]\label{fig:8.1}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
-    \caption{Sketch }
+    \includegraphics[width=.7\textwidth]{sketch_8_01.png}
+    \caption{Sketch 8.01}
 \end{figure}
 In the homework
 \begin{figure}[H]\label{fig:8.2}
     \centering
-    \includegraphics[width=.7\textwidth]{example-image}
-    \caption{Sketch }
+    \includegraphics[width=.7\textwidth]{sketch_8_02.png}
+    \caption{Sketch 8.02}
 \end{figure}
 Rigorously \(E:[0,1]\times \R/(0,v)\sim(1,-v)\). Notice that in this case the local triviality really is local, i.e. we can't take \(U=E\).
 
@@ -206,7 +211,7 @@ Rigorously \(E:[0,1]\times \R/(0,v)\sim(1,-v)\). Notice that in this case the lo
 
 \begin{proof}
     Note that \(\pi:E\to C\) is a submersion (always true for vector bundles, follows from the condition \(\pi^{-1}(U)\simeq U\times V\)).
-    Hence \(f \pitchfork\pi\) %TOFIX 
+    Hence \(f \pitchfork\pi\)
     are transverse, and the fiber product exists (in the category \(\maninf\)).
     \begin{itemize}
         \item \(\pi_B^{-1}(b)=\pi^{-1}(f(b))\) endows \(\pi_B^{-1}(b)\) with the structure of a vector space
