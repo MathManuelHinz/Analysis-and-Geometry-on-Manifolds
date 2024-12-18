@@ -288,3 +288,193 @@ We let \(\pi:E\to M\) be the forgetful map \[[(x,v)]\mapsto x.\]
 
 \markeol{19}
 
+\beginlecture{20}{17.12.2024}
+
+\dhighlight{Terminology:} A vector bundle \(\pi:E\to B\) has to satisfy the local triviality condition: around any \(p\in B\exists U\ni o\land \psi_U:\pi^{-1}(U)\simeq U\times V\),
+where \(V\) is a vector field. \(\psi:U\) is called a \dhighlight{local trivialisation}. We call 
+\(E_b,\in B\) the \dhighlight{fibers}. \marginnote{and the \(E_b\) trivially are vector spaces}
+\((U\cap \mathcal{V})\times V_U \to (U\cap \mathcal{V})\times V_{\mathcal{V}}\) by the transition function 
+\(\psi_\mathcal{V}\circ \psi_{U}^{-1}\)
+\marginnote{The transition function only really acts on the second component}
+\[(x,v)\mapsto (x,w)=(x,\psi_\mathcal{V}\circ \psi_{U}^{-1}(x,v)).\]
+
+
+
+
+%TODO: FIX
+
+\begin{remark}\marginnote{If the instructor had different tatse, the above construction might as well have been the definition}
+    \begin{itemize}
+        \item Different choices of data \((\{U_\alpha\},\{V_\alpha\},\{\phi_{\alpha\beta}\})\) may give rise to 
+              the same vector bundle. \marginnote{For example, if you take more open sets, you still get the same structure}    
+        \item however, with appropriate notion of equivalence, \{vector bundles\} \(\equiv (\{U_\alpha\},\{V_\alpha\},\{\phi_{\alpha\beta}\})\).
+              This can be made precise by defining a category of gluing data, which then becomes equivalent to the category of vector bundles. 
+    \end{itemize}
+\end{remark}
+
+\section{Globalizing linear algebra constructions}
+
+\begin{theorem}[Omnibus theorem]\label{thm:8.4}\marginnote{Not really well defined ...}
+    Any  canonical linear algebra construction can be globalized 
+    to the category of smooth vector bundles. 
+
+    More precisely: The category \(\text{vectbund}_\R\) admits 
+    \(\cdot \oplus \cdot,\cdot \otimes \cdot,(\cdot)^\vee,(\cdot)/(\cdot), \text{Hom}(\cdot,\cdot),\dots\)
+
+    \begin{enumerate}
+        \item[(i)] the operations are compatible with pullback: i.e. given \(f:B\to B'\),
+        \[f^\star(E'\oplus F')=f^\star(E')\oplus f^\star(F').\]
+        Also \(f^\star(E'\otimes F')=f^\star(E')\otimes f^\star(F')\) for \(E'\to B'\) and \(F'\to B'\).  
+        \item[(ii)] On \(\text{vectbund}_\R(\{x\})\simeq \text{vect}_\R\), the operations coincide. 
+    \end{enumerate}
+\end{theorem}
+
+\begin{remark}[Warning]
+    In contrast to \(\text{vect}_\bK\), the category \(\text{vectbund}_\R\) is \dhighlight{not abelian} (nor is 
+    \(\text{vectbund}(B)\) in general). To see  what goes wrong:
+
+    Consider \((E=\R\times \R)\to \R\); \(\phi:\R\times \R \to \R\times \R\), \marginnote{first component is the base}
+    \[(t,v)\mapsto (t,tv).\]
+    Note: \(\phi_t:\underbrace{E_t}_{=\R}\to E_t, v\mapsto tv\). If \(t\neq 0\), then \(\phi_t:E_t\to E_t\)
+    is an isomorphism. If \(t=0,\phi_t\equiv 0\) (not an isomorphism).
+    
+    So \(\text{ker}(\phi)\) \textit{wants to be}
+    \begin{figure}[H]\label{fig:8.03}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 8.03}
+    \end{figure}
+    The \textit{fix} is to embed \(\text{vectbund}_\R\subset\text{sheaves}_\R\). 
+    This is the start of a long story \dots 
+\end{remark}
+
+\begin{remark}[Warning]
+    In this category \(\text{vectbund}_\R\) there is a difference between 
+    \dhighlight{sub-bundles} and \dhighlight{sub-objects}. 
+    We say that \begin{tikzcd}
+        \arrow[rd]E\arrow[rr,hook,"i"] && F\arrow[ld]\\
+        &B&
+    \end{tikzcd}
+    is a sub-bundle, if \(i_b:E_b\to F_b\) is injective.
+
+    Meanwhile, in any category, a sub-object \(C\) of \(D\) is a map \(C\to D\), which is a 
+    \dhighlight{monomorphism} (this means that for all \(Z\), \begin{tikzcd}
+    Z\arrow[r,bend right,"f_1"]\arrow[r,bend left,"f_2"]&C\
+    \end{tikzcd}
+    \(i\circ f_1=i\circ f_2\implies f_1=f_2\)).
+    
+    We can only form quotients of sub-bundles. In fact \(\phi\) from the previous example is a 
+    sub-object, but not a sub-bundle.
+\end{remark} 
+
+The omnibus theorem allows us to produce new bundles from old:
+\begin{example}
+    \begin{center}
+        \begin{tikzcd}
+            &T^\star M \arrow[d,"="]& \arrow[ld,"="]\coloneqq U_{m\in M} (T_m M)^\vee\\
+            TM\arrow[ru] & (TM)^\vee 
+        \end{tikzcd}
+    \end{center}
+    the cotangent bundle and 
+    \begin{center}
+        \begin{tikzcd}
+            &\Lambda^k T^\star M\\
+            TM\arrow[ru]\arrow[rd] & \\
+            &\Sigma^k T^\star M 
+        \end{tikzcd}
+    \end{center}
+    which are the \dhighlight{k-th exterior power of the cotangent bundle} and the \dhighlight{k-th symmetric power of the cotangent bundle}.
+\end{example}
+
+\begin{proof}[Proof of theorem \ref{thm:8.4}]
+    These definitions are all natural, so how could they fail? % TODO: as a quote
+
+    In (slightly) more detail: Let \(E^1,\dots,E^k\) be vector bundles over \(B\).
+    Let \(\{U_\alpha\}\) be an open cover of \(B\), which simultaneously trivializes all of the \(E^i\).
+    Then the \(E^i\) cna be presented as follows: 
+    \begin{itemize}
+        \item \(\{V_\alpha^i\}_{\alpha\in\cA}\)
+        \item \(\{\phi_{\alpha\beta}^i:U_\alpha\cap U_\beta\to \text{GL}(V_\alpha^iV_\beta^i)\}\), such that \(\phi_{\alpha\gamma}=\phi_{\beta\gamma}\phi_{\alpha\beta}\) (lemma \ref{lem:8.3}).
+    \end{itemize} 
+    Let \(\mathfrak{F}(E^1\dots,E^k)\in\text{vectbund}_\R(B)\) defined by applying some combination of 
+    \(\oplus,\otimes,\text{Hom}(\cdot,\cdot),(\cdot)/(\cdot),\dots\) (any cannoical linear algebraic construction) fiberwise.
+
+    I.e. \(\mathfrak{F}(E^1,\dots,E^k)\coloneqq \bigcup_{b\in B}\mathfrak{F}(E_b^1,\dots,E_b^k)\)\marginnote{the fibers are all disjoint}
+
+    We can present \(\mathfrak{F}(E^1,\dots,E^k)\) by 
+    \begin{itemize}
+        \item \(\{\mathfrak{F}(V_\alpha^1,\dots,V_\alpha^k)\}_{\alpha\in \cA}\)
+        \item \(\phi_{\alpha\beta}:U_\alpha\cap U_\beta \to \text{GL}(\mathfrak{F}(V_\alpha^1,\dots,V_\alpha^k),\mathfrak{F}(V_\beta^1,\dots,V_\beta^k))\)
+    \end{itemize}
+
+    Must check: Smoothness of the \(\phi_{\alpha\beta}^i\) implies smoothness of \(\phi_{\alpha\beta}\). This 
+    is essentially because, of the  fixing \(V_\alpha^i\simeq \R^k\), then \(\phi_{\alpha\beta}^i\) is just 
+    a matrix and \(\phi_{\alpha\beta}(x)\) is obtained from \(\{\phi_{\alpha\beta}^i\}\) by a sequence of matrix addition, multiplications,
+    taking adjoints, \dots all of which preserve smoothness of the coefficients. \qedhere
+
+\end{proof}
+
+\section{Sections of vector bundles}
+
+\begin{definition*}
+    Let \(\pi:E\to B\) be a vector bundle. A \dhighlight{Section} \(\sigma:B\to E\) is a 
+    smooth map, such that \(\pi\circ \sigma=\text{id}\).
+\end{definition*}
+We let \(\Gamma(E)\) denote the space of sections of \(E \to M\). \marginnote{Here \(M=B\) will be switched arbitrarily}
+
+What is the name of a section of a tangent bundle? Vector field % TODO: Check
+
+\begin{lemma}\label{lem:8.5}
+    \begin{enumerate}
+        \item[(i)] \(\Gamma(E)\) is an \(\R\)-vector space 
+        \item[(ii)] \(\Gamma(E)\) is a module over \(C^\infty(M,\R)=C^\infty(M)\)  
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Exercise. Same proof as for \(TM\).
+\end{proof}
+
+These are very important definition!
+
+\begin{example}
+    \(E=TM\to M,\Gamma(E)=\cX(M)\), elements are called \dhighlight{vector fields}.
+\end{example}
+
+\begin{example}\marginnote{1-forms are dual to vector fields}
+    \(E=T^\star M\to M,\Gamma(E)\eqqcolon \Omega^1(M)\), elements are called \dhighlight{1-forms}.
+\end{example}
+
+\begin{example}
+    \(E=\Lambda^k T^\star M \to M\), \(\Gamma(\Lambda^k T^star M)\eqqcolon \Omega^k(M)\), elements are called \dhighlight{k-forms}
+\end{example}
+
+\begin{example}\marginnote{A little silly, but good to see}
+    \(E=M\times \R^k\to M, \Gamma(E)\equiv C^\infty(M,\R^k)\)
+    % TODO \[\Gamma(E)\ni\sigma\mapsto (x\mapsto (x,\sigma_x(x)))\]
+\end{example}
+
+\begin{remark}
+    \(\Gamma(E)\) is an infinite dimensional vector space (unless \(E=M\times \{x\}\)).
+\end{remark}
+
+\begin{lemma}\label{lem:8.6}
+    Let \(\pi:E\to B\) be a vector bundle. Suppose that \(A\subset B\) is closed. Let \(A\subset U\) be open.
+    Suppose that \(\sigma:A\to E\) is a smooth section (i.e. around every \(a\in A,\sigma\) extends to a smooth section in a neighborhood of \(a\)).
+    
+    Then there exists \(\tilde{\sigma}\in \Gamma(E)\) such that 
+    \begin{enumerate}
+        \item[(i)] \(\tilde{\sigma}\restrict{A}=\sigma\)
+        \item[(ii)] \(\text{supp}(\tilde{\sigma})\subset U\)  
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    Sheet 12. We already have a lemma for the trivial case, then use partition of unity.
+\end{proof}
+
+Picking a section to a point, we can globally extend it to a smooth function, then we can easily connect it 
+to the previous remark.
+
+\markeol{20}
+
