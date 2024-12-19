@@ -126,11 +126,11 @@ a multi-linear map \(V\times \dots\times V\to \bK\). We denote these maps by \(\
  
     This data must satisfy the following \dhighlight{``local triviality''} condition:
 
-    Given any \(b\in B\), there exists a neighborhood \(b\subset U\) and a diffeomorphism \(\psi:\pi^{-1}(U)\simeq U\times V\)
+    Given any \(b\in B\), there exists a neighborhood \(b\subset U\) and a diffeomorphism \(\psi^{-1}:\pi^{-1}(U)\simeq U\times V\)
     such that: \marginnote{\(V\) is some real, finite dimensional vector space}
     \begin{enumerate}
         \item[(i)] \(\pi\circ \psi(x,v)=x\)
-        \item[(ii)] \(\psi\restrict{E_b}:E_b\stackrel{\simeq}{\to} \{b\} V\) is an isomorphism of real vector spaces.  
+        \item[(ii)] \(\psi\restrict{E_b}:E_b\stackrel{\simeq}{\to} \{b\} \times V\) is an isomorphism of real vector spaces.  
     \end{enumerate}
     
     \(B\) is called the \dhighlight{base}, \(\pi\) the \dhighlight{projection} and \(E\) is called the \dhighlight{total space}.
@@ -204,7 +204,7 @@ Rigorously \(E:[0,1]\times \R/(0,v)\sim(1,-v)\). Notice that in this case the lo
 \dhighlight{Note:} Here we use the diagram: 
 \begin{center}
     \begin{tikzcd}
-        \arrow[d,"\pi_B"]f^*(E)\arrow[r] & E\arrow[d,"\pi"]\\
+        \arrow[d,"\pi_B"]f^\star(E)\arrow[r] & E\arrow[d,"\pi"]\\
         B \arrow[r,"f"] & C 
     \end{tikzcd}
 \end{center}
@@ -232,14 +232,14 @@ Rigorously \(E:[0,1]\times \R/(0,v)\sim(1,-v)\). Notice that in this case the lo
     Let \(B\) be our favorite smooth manifold. Then there is a unique map \(f:B\to \{x\}\).
     Hence by lemma \ref{lem:8.2}, we have a vector bundle \(f^\star V\). In fact 
     \(f^\star V= B\times V\stackrel{\pi_B}{\to} B\) by \((b,v)\mapsto b\).\marginnote{This is a small exercise}
-    Any vector bundle of the form \(f^star V\) is called \dhighlight{trivial}. 
+    Any vector bundle of the form \(f^\star V\) is called \dhighlight{trivial}. 
 \end{example}
 
 \begin{remark}
     The Möbius bundle is not trivial:
     \(M\stackrel{\pi}{\to} S^1\), if \(M=S^1 \times \R\to S^1\)  \((x,1)\mapsfrom x\)
     , then we could define a section \(\sigma:S^1\to M,\pi\circ \sigma=\text{id}\) and \(\sigma\neq 0\).
-    Contradiction via the mean value theorem.
+    Contradiction via the intermediate value theorem.
 \end{remark}
 
 \begin{example}
