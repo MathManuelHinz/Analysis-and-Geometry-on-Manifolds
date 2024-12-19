@@ -15,7 +15,7 @@ Let \(\text{vec}_\bK\) be the category of finite-dimensional \(\bK\) vector spac
 The category \(\text{vec}_\bK\) is \dhighlight{abelian}. In particular 
 \begin{itemize}
     \item given \(\psi:V\to W\), there exists \[0\to \ker \phi \hookrightarrow V\stackrel{\psi}{\to} W\]
-         \[V\stackrel{\psi}{\to} W\to W/\psi(V)\to 0\] %TODO
+        \[V\stackrel{\psi}{\to} W\to W/\psi(V)\to 0\]
     \item \(V,W\), can form \(V\oplus W \equiv V\times W\) \marginnote{We can only form direct sums of finitely many vector spaces, since \(\text{vec}_\bK\) only contain finite dimensional vector spaces}
 \end{itemize}
 
@@ -225,7 +225,7 @@ Rigorously \(E:[0,1]\times \R/(0,v)\sim(1,-v)\). Notice that in this case the lo
 
 \begin{example}
     Let \(B=\{x\}\). Then \(\text{vectbund}(\{x\})\simeq \text{vect}_\R\) by 
-    \[\{x\}\times V \stackrel{\pi}{\to} \{x\}\mapsto V\] % TODO other direction
+    \[\{x\}\times V \stackrel{\pi}{\to} \{x\}\mapsfrom V\]
 \end{example}
 
 \begin{example}
@@ -237,7 +237,7 @@ Rigorously \(E:[0,1]\times \R/(0,v)\sim(1,-v)\). Notice that in this case the lo
 
 \begin{remark}
     The Möbius bundle is not trivial:
-    \(M\stackrel{\pi}{\to} S^1\), if \(M=S^1 \times \R\to S^1\)  \((x,1)\mapsto x\) %TODO: again swap direction
+    \(M\stackrel{\pi}{\to} S^1\), if \(M=S^1 \times \R\to S^1\)  \((x,1)\mapsfrom x\)
     , then we could define a section \(\sigma:S^1\to M,\pi\circ \sigma=\text{id}\) and \(\sigma\neq 0\).
     Contradiction via the mean value theorem.
 \end{remark}
@@ -291,19 +291,18 @@ We let \(\pi:E\to M\) be the forgetful map \[[(x,v)]\mapsto x.\]
 \beginlecture{20}{17.12.2024}
 
 \dhighlight{Terminology:} A vector bundle \(\pi:E\to B\) has to satisfy the local triviality condition: around any \(p\in B\exists U\ni o\land \psi_U:\pi^{-1}(U)\simeq U\times V\),
-where \(V\) is a vector field. \(\psi:U\) is called a \dhighlight{local trivialisation}. We call 
+where \(V\) is a vector field. \(\psi:U\) is called a \dhighlight{local trivialization}. We call 
 \(E_b,\in B\) the \dhighlight{fibers}. \marginnote{and the \(E_b\) trivially are vector spaces}
 \((U\cap \mathcal{V})\times V_U \to (U\cap \mathcal{V})\times V_{\mathcal{V}}\) by the transition function 
 \(\psi_\mathcal{V}\circ \psi_{U}^{-1}\)
-\marginnote{The transition function only really acts on the second component}
+
 \[(x,v)\mapsto (x,w)=(x,\psi_\mathcal{V}\circ \psi_{U}^{-1}(x,v)).\]
+\marginnote{The transition function only really acts on the second component}
+\begin{remark}
+    If the instructor had different taste, the above construction might as well have been the definition
+\end{remark}
 
-
-
-
-%TODO: FIX
-
-\begin{remark}\marginnote{If the instructor had different tatse, the above construction might as well have been the definition}
+\begin{remark}
     \begin{itemize}
         \item Different choices of data \((\{U_\alpha\},\{V_\alpha\},\{\phi_{\alpha\beta}\})\) may give rise to 
               the same vector bundle. \marginnote{For example, if you take more open sets, you still get the same structure}    
@@ -341,7 +340,7 @@ where \(V\) is a vector field. \(\psi:U\) is called a \dhighlight{local triviali
     So \(\text{ker}(\phi)\) \textit{wants to be}
     \begin{figure}[H]\label{fig:8.03}
         \centering
-        \includegraphics[width=.7\textwidth]{example-image}
+        \includegraphics[width=.7\textwidth]{sketch_8_03.png}
         \caption{Sketch 8.03}
     \end{figure}
     The \textit{fix} is to embed \(\text{vectbund}_\R\subset\text{sheaves}_\R\). 
@@ -387,7 +386,11 @@ The omnibus theorem allows us to produce new bundles from old:
 \end{example}
 
 \begin{proof}[Proof of theorem \ref{thm:8.4}]
-    These definitions are all natural, so how could they fail? % TODO: as a quote
+    \phantom{Test}
+
+    \begin{displayquote}[Prof. Côté]
+        Proof: These definitions are all natural, so how could they fail?
+    \end{displayquote}
 
     In (slightly) more detail: Let \(E^1,\dots,E^k\) be vector bundles over \(B\).
     Let \(\{U_\alpha\}\) be an open cover of \(B\), which simultaneously trivializes all of the \(E^i\).
@@ -422,8 +425,6 @@ The omnibus theorem allows us to produce new bundles from old:
 \end{definition*}
 We let \(\Gamma(E)\) denote the space of sections of \(E \to M\). \marginnote{Here \(M=B\) will be switched arbitrarily}
 
-What is the name of a section of a tangent bundle? Vector field % TODO: Check
-
 \begin{lemma}\label{lem:8.5}
     \begin{enumerate}
         \item[(i)] \(\Gamma(E)\) is an \(\R\)-vector space 
@@ -435,7 +436,7 @@ What is the name of a section of a tangent bundle? Vector field % TODO: Check
     Exercise. Same proof as for \(TM\).
 \end{proof}
 
-These are very important definition!
+These are very important definitions!
 
 \begin{example}
     \(E=TM\to M,\Gamma(E)=\cX(M)\), elements are called \dhighlight{vector fields}.
@@ -451,7 +452,9 @@ These are very important definition!
 
 \begin{example}\marginnote{A little silly, but good to see}
     \(E=M\times \R^k\to M, \Gamma(E)\equiv C^\infty(M,\R^k)\)
-    % TODO \[\Gamma(E)\ni\sigma\mapsto (x\mapsto (x,\sigma_x(x)))\]
+    He wrote: %TODO: Fix
+    \[\Gamma(E)\ni\sigma\mapsto (x\mapsto (x,\sigma_x(x)))\]
+    But erased it later, to be fixed. Essentially the point is that the second component describes the function.
 \end{example}
 
 \begin{remark}

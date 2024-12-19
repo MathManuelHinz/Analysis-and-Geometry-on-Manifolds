@@ -28,6 +28,8 @@
 \usepackage{etoolbox}
 \usepackage{xstring}
 \usepackage{accents}
+\usepackage{stmaryrd}
+\usepackage{csquotes}
 \usepackage{footnotehyper}
 \usepackage{nameref}
 \usepackage[
@@ -319,17 +321,17 @@ backend=bibtex
   breakable
 }
 
-%\tcolorboxenvironment{example}{
-%  colback=red!5!white,
-%  boxrule=0pt,
-%  boxsep=1pt,
-%  left=2pt,right=2pt,top=2pt,bottom=2pt,
-%  oversize=2pt,
-%  sharp corners,
-%  before skip=\topsep,
-%  after skip=\topsep,
-%  breakable
-%}
+\tcolorboxenvironment{displayquote}{
+  colback=blue!5!white,
+  boxrule=0pt,
+  boxsep=1pt,
+  left=2pt,right=2pt,top=2pt,bottom=2pt,
+  oversize=2pt,
+  sharp corners,
+  before skip=\topsep,
+  after skip=\topsep,
+  breakable
+}
 
 \tcolorboxenvironment{adefinition}{
   colback=blue!5!white,

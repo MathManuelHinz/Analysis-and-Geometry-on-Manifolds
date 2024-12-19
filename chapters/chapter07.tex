@@ -56,8 +56,8 @@ Another picture:
     A vector field \(X\in\mathcal{X}(\R^n)\) is just a map  
     \begin{center}
         \begin{tikzcd}
-            X:\R^n \arrow[r] & R^n\times \R^n\\
-            p \arrow[r] & (p,v(p))
+            X:\R^n \arrow[r] & \R^n\times \R^n\\
+            p \arrow[r,Mapsto] & (p,v(p))
         \end{tikzcd}
     \end{center}
     Equivalently \(X\) is a map \(\R^n\to\R^n\), since the first coordinate is just fixed to be the 
@@ -65,7 +65,9 @@ Another picture:
 \end{example}
 
 \begin{remark}
-    \(T_p\R^n\) has a canonical basis \(\{(\partial_{x_1})_p,\dots,(\partial_{x_n})_p\}\). This identifies 
+    \(T_p\R^n\) has a canonical basis \(\{(\partial_{x_1})_p,\dots,(\partial_{x_n})_p\}\).
+    
+    This identifies 
     \((\partial_{x_i})_p\equiv (0,\dots,0,\overbrace{1}^{i\text{th component}},0\dots,0)\). We can equivalently 
     write a vector field on \(\R^n\) as \[p\mapsto (X^1(p),\dots,X^n(p))\]
     or 
