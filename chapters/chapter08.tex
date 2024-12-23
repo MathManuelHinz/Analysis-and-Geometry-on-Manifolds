@@ -481,3 +481,61 @@ to the previous remark.
 
 \markeol{20}
 
+\beginlecture{21}{20.12.24}
+
+\begin{definition*}
+    Let \(f:M\to M'\) be a smooth map. Let 
+    \(\pi:E'\to M'\) be a vector bundle over \(M'\). Then 
+    there is a \(\R\) linear map
+    \begin{align*}
+        \Gamma(E')&\to \Gamma(f^\star(E'))
+        \sigma & \mapsto \sigma \circ f = f^\star \sigma
+    \end{align*}
+    i.e. 
+    \begin{center}
+        \begin{tikzcd}
+            \arrow[d]f^\star E'\arrow[r] & E' \arrow[d,swap,"\pi'"]\\
+            \arrow[u,bend left,"\sigma\circ f"]M \arrow[r,"f"]& M' \arrow[u,bend right,swap, "\sigma"]
+        \end{tikzcd}
+    \end{center} 
+    If \(E'=T^\star M'\), then we have 
+    \begin{center}
+        \begin{tikzcd}
+            \arrow[d]T^\star M & \arrow[l,"df^\vee"]\arrow[d]f^\star (T^\star M')\arrow[r] & T^\star M'\arrow[d]\\
+            \arrow[u,bend left,"df^\vee\circ \sigma \circ f"]M \arrow[r,"="] & M \arrow[r,"f"]& M' \arrow[u,bend right, swap, "\sigma"]
+        \end{tikzcd}
+    \end{center}
+    where all vertical maps are projections.
+    Here \(df^\vee(p,v)=(p,df_p^\vee(v))\) for \(p\in M,v\in f^\star(T^\star M')_p=T_{f(p)}^\star M'\)
+    By abuse of notation we also write 
+    \[f^\star \sigma=df^\vee\circ \sigma \circ f\in \Gamma(T^\star M)=\Omega^1(M).\]
+\end{definition*}
+
+The \dhighlight{upshot} is that we can pullback 1-forms along smooth maps.
+
+{\color{red} In contrast, we can not push forward vector fields along arbitrary smooth maps.}\marginnote{We have already seen examples, but it is obvious, since we can't reverse the projection maps \dots}
+
+Concretely: if \(\sigma \in \Omega^1(M')\), then \(f^\star \sigma\in \Omega^1(M)\) is 
+characterized by the formula
+\marginnote{This is the only thing that can make sense}
+\[(f^\star \sigma)_p(\underbrace{v}_{T_pM})=\sigma_{f(p)}(df_p(v)).\]
+More generally, if \(\sigma \in \Gamma(T^k T^\star M'), f^\star\in  \gamma(T^k T^\star M)\)
+is characterized by the formula 
+\[(f^\star \sigma)_p(v_1,\dots,v_k)=\sigma_{f(p)}(df_p(v_1),\dots,df_p(v_k)).\]
+
+\begin{definition*}
+    Let \(\pi:E\to M\) be a vector bundle. Let \(X^1,\dots,X^k\in \Gamma(E)\) (assuming that the fibers have dimension \(k\)).
+    We say: 
+    \begin{enumerate}
+        \item[(1)] \(X^1,\dots,X^k\) is a \dhighlight{local frame} at \(p\in M\), if \(\text{span}(X^1(p),\dots,X^k(p))=E_p\)
+        \item[(2)]  \(X^1,\dots,X^k\) is a \dhighlight{global frame}, if \(\text{span}(X^1(q),\dots,X^k(q))=E_q,\forall q\in M\)
+    \end{enumerate}
+\end{definition*}
+
+\dhighlight{Exercise:} If \(X^1,\dots, X^k\) is a local / global frame for \(E\stackrel{\pi}{\to}M\), then 
+\((X^{1})^\vee,\dots,(X^{k})^\vee\) is a local / global frame for \(E^\vee \to M\), hence \(((X^i(p))^\vee)(X^j(p))=\delta_{ij}\).
+
+\begin{example}
+    For \(M=\R^n\) we have \(\{\partial_{x_1},\dots,\partial_{x_n}\}\) a global frame and we write 
+    \(dx_i=(\partial_{x_i})^\vee\).
+\end{example}
