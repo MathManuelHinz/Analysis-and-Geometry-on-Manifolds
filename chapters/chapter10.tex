@@ -4,7 +4,7 @@ Exam:  Same difficulty as the homework, slightly easier. He will not fail everyo
 
 How to study: do lots of problems. No notes, no anything.
 
-No comments on true / false questions etc. The last week is non examable and that tuesday is canceled.
+No comments on true / false questions etc. The last week is non examable and that Tuesdays is canceled.
 
 Change of notation: 
 
@@ -76,7 +76,7 @@ which is smooth by \ref{lem:10.1}.
     \begin{align*}
         df_p(v)(x)=v(x\circ f)=v(f).
     \end{align*}
-    Hence \[df_p(v)=v(f)\cdot (\partial_x)_{f_p}.\] % TODO: add where each element lies
+    Hence \[\underbrace{df_p(v)}_{\in T_{f(p)}\R}=\underbrace{v(f)}_{\in\R}\cdot \underbrace{(\partial_x)_{f_p}}_{T_{f(p)\R}}.\] % TODO: add where each element lies
 \end{remark}
 
 \subsection{Line integrals}
@@ -291,7 +291,7 @@ E.g. \(V=\R^3,k=2,\{\epsilon^{12},\epsilon^{23},\epsilon^{23}\}\).
 
 \subsection{The algebra of differential forms}
 
-Let \(M\) be a a manifold. We have 
+Let \(M\) be a manifold. We have 
 
 \begin{align*}
     \Lambda^k T_p^\star M\times \lambda^l T_p^\star M&\to \Lambda^{k+l}T_p^\star M\\
@@ -335,7 +335,7 @@ Exercise: Suppose that \(\dim V=n\), then \(\Lambda^k V^\star=0\) , whenever \(k
 \begin{proof}
     \highlight{(a)} ok
 
-    \highlight{(b)} ok. Proof point wise, follows from definition.
+    \highlight{(b)} ok. Proof point-wise, follows from definition.
 
     \highlight{(c)} Combine (b) with lemma \ref{lem:10.2} (\(F^\star dy_i=d(y_i\circ F)=dF_i\)).
 
@@ -357,8 +357,8 @@ this is a chain complex.
     \(H_{dR}^k(M)\coloneqq \ker(d:\Omega^k(M)\to\Omega^{k+1}(M))/\text{im}(d:\Omega^{k-1}(M)\to\Omega^k(M))\)
 \end{definition*}
 
-\begin{theorem}[deRham]\label{thm:10.11}\label{Non examable.}
-    \[H_{dR}^k(M)=H_{\text{sing}^k(M)\to\R}\]
+\begin{theorem}[deRham]\label{thm:10.11}\marginnote{Non examable.}
+    \[H_{dR}^k(M)=H_{\text{sing}}^k(M)\to\R\]
 \end{theorem}
 \markeol{23}
 
