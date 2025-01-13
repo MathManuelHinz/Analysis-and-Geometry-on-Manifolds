@@ -1,0 +1,366 @@
+\beginlecture{22}{07.01.2025}
+
+Exam:  Same difficulty as the homework, slightly easier. He will not fail everyone.
+
+How to study: do lots of problems. No notes, no anything.
+
+No comments on true / false questions etc. The last week is non examable and that tuesday is canceled.
+
+Change of notation: 
+
+If \(V\) finite dimensional vector space, \(V^\vee\) is the dual space. We now also write 
+\(V^\star=V^\vee\).
+
+\chapter{Differential forms}
+
+Recall from section 8.4 the following definition:
+
+\begin{definition*}
+    Given \(M\) a smooth manifold, \(k\geq 0\), a \dhighlight{k-form} is a section 
+    \(\alpha\in \Gamma(\Lambda^kT^\star M)\equiv=\Omega^k(M)\).
+\end{definition*}
+
+Upshot: The spaces \(\Omega^k(M)\)\marginnote{as \(k\) varies} carry a great deal of information about \(M\).
+
+\section{\(k\)-forms}
+
+\subsection{Differentials of functions}
+
+\begin{definition*}
+    Let \(f:M\to \R\). we let\marginnote{\(f\) smooth, of course}. \(df\in\Omega^1(M)\),
+    be defined by \[df_p(v)\coloneqq v(f),v\in T_pM\]
+    for all \(p\in M\). 
+\end{definition*}
+
+\begin{lemma}\label{lem:10.1}
+    Fix \(f:\R^n\to \R\). With respect to the canonical identification
+    \(T^\star\R^n\simeq \R^n\times \R^n\).
+    \[df=(\underbrace{\partial_{x_1} f}_{\in C^\infty(\R^n,\R)},\dots, \partial_{x_n}f).\] .
+\end{lemma}
+
+\begin{proof}
+    Test \(df\) against coordiante vector fields \((\partial_{x_i})_p\equiv (0,\dots,0,1,0,\dots,0)\).
+    Then \begin{align}
+        df_p((\partial_{x_i})_p)=(\partial_{x_i})_p (f)=(\partial_{x_i}f)_p
+    \end{align}
+\end{proof}
+
+\begin{lemma}\label{lem:10.2}
+    Given \(\varphi:M\to N,f:N\to \R,\varphi^\star(df)=d(f\circ \varphi)\).
+\end{lemma}
+
+\begin{proof}
+    \begin{align*}
+        (\varphi^\star df)_p(v)=df_{C(p)}(d\varphi(v))=d\varphi(v)(f)=v(f\circ \varphi)=d(f\circ \varphi)(v) \qedhere
+    \end{align*}
+\end{proof}
+ 
+As a consequence: if \(f:M\to \R\) smooth, then \(df\in \Omega^1(M)\) is smooth. To see this, note that 
+locally we can write \(f=f\circ \varphi^{-1}\circ \phi\). Then \[df=d((f\circ \varphi^{-1})\circ \varphi)\stackrel{\text{\ref{lem:10.2}}}{under}\varphi^\star d(f\circ \varphi^{-1}),\]
+which is smooth by \ref{lem:10.1}.
+
+\begin{remark}
+    We have seen \((dx_i)_p=(\partial_{x_i})_p^\star\)
+    Write \(x_i\in C^\infty(\R^n,\R)(x_1,\dots,x_n)\mapsto x_i\).
+    Then \((dx_i)_p((\partial_{x_i})_p)=\delta_{ij}\). Hence \((dx_i)_p=(dx_i)_p\) (i.e. the notations agree). 
+\end{remark}
+
+\begin{remark}
+    Given \(f:M\to \R\), we have \begin{tikzcd}
+        \arrow[dr]TM \arrow[rr]&& \arrow[dl]f^* T\R\equiv M\times \R \\
+        &M& 
+    \end{tikzcd}
+    by the map \[(p,v)\mapsto (p,df_p(v)).\]
+    Again the notations are consistent: View \(v\) as a derivation at \(p\),
+    write \(x=\text{id}:\R\to\R\). Then 
+    \begin{align*}
+        df_p(v)(x)=v(x\circ f)=v(f).
+    \end{align*}
+    Hence \[df_p(v)=v(f)\cdot (\partial_x)_{f_p}.\] % TODO: add where each element lies
+\end{remark}
+
+\subsection{Line integrals}
+
+\begin{definition*}
+    \begin{enumerate}
+        \item[(1)] Let \(\omega\in \Omega^1([a,b])\). Then \(\omega=f(t)dt\) uniquely, \(f:[a,b]\to\R\).
+                   We let \[\int_a^b\omega=\int_a b f(t)dt.\]\marginnote{He does not write the dt \dots} 
+        \item[(2)] Let \(\omega\in \Omega^1(M)\). Let \(gamma:[a,b]\to M\). We let \[\int_\gamma \omega\coloneqq \int_a^b\underbrace{\gamma^\star \omega}_{\in\Omega^1([a,b])}.\]
+    \end{enumerate}
+\end{definition*}
+
+\begin{lemma}\label{lem:10.3}
+    If \(\sigma:[c,d]\to[a,b],\sigma'>0,\sigma(c)=a,\sigma(d)=b\). Then \[\int_c^d (\gamma\circ \sigma)^\star \omega= \int_a^b\gamma^\star \omega.\]
+\end{lemma}
+
+\begin{proof}
+    Observe that \((\gamma\circ \sigma)^\star=\sigma^\star(\gamma^\star)\omega\). So it is enough to 
+    prove that \[\int_c^d \sigma^\star \eta=\int_a^b \eta\]
+    where \(\eta=f(t)dt\in\Omega^1([a,b])\).
+
+    But \begin{align*}
+        \int_c^d\sigma^\star \eta & =\int_c^d \eta(\sigma(t))\sigma'(t)dt\\
+        &=\int_a^b\eta(s)ds = \int_a^b \eta \qedhere
+    \end{align*}
+    by the change of variables formula.
+\end{proof}
+
+\begin{lemma}\label{lem:10.4}
+    If \(f:M\to\R\) and \(\gamma:[a,b]\to M\), then  
+    \[\int_a^b\gamma^\star (df)=\int_a^b (f\circ \gamma)dt\]
+\end{lemma}
+
+\begin{proof}
+    Homework
+\end{proof}
+
+Hence, if \(\gamma(0)=\gamma(1), \int_\gamma df=0.\)
+
+\begin{example}
+    Let \(\omega=\frac{xdy-ydx}{x^2+y^2}\in \Omega^1(\R^2\setminus\{0\}).\) Let \(\gamma:[0,2\pi]\to\R^2\setminus \{0\},t\mapsto (\cos t,\sin t)\).
+
+    \begin{align*}
+        \int_\gamma \omega&=\int_0^{2\pi} \frac{\cos t d(\sin t)-\sin t d(\cos t)}{\cos^2 t+\sin^2 t}\\ 
+        &=\int_0^{2\pi} \cos t (\cos t dt)- \sin t (\sin t dt)=\int_0^{2\pi} (\cos^2 t +\sin^2 t)dt=2\pi
+    \end{align*}
+    \(\implies \omega\) is not the differential of some function \(f:\R^2\setminus\{0\}\to \R\)
+\end{example}
+
+Second EXAM same difficulty and same  content (i.e. everything that is examable in the first exam is examable in the second and vice verca)
+
+\begin{definition*}\marginnote{This definition only makes sense locally \dots}
+    Let \(U\subset \R^n\) be open  We say that \(\omega\in \Omega^1(U)\) is 
+    \begin{itemize}
+        \item \dhighlight{exact}, if \(omega=df\) for some \(f:U\to \R\)
+        \item \dhighlight{closed} of \(\partial_{x_i}w^j=\partial_{x_j}w^i,\) where \(\omega=\omega^1 dx_1+\dots+\omega^ndx_n,\omega^i:U\to\R\).
+    \end{itemize}
+\end{definition*}
+
+Observe that exact \(\implies\) closed. Because if \(\omega=df\implies \omega=\sum_{i}\partial_{x_i}fdx_i\), but \(\partial_{x_i}\partial_{x_j}f=\partial_{x_j}\partial_{x_i}f\).
+
+
+\dhighlight{Question:} Does closed imply exact? \dhighlight{No!} Test that the previous example is closed, 
+but not exact.
+
+\begin{proposition}[Poincaré Lemma]\label{prop:10.5}\marginnote{Very important, should remember for the exam}
+    Let \(\omega\in\Omega^1(B_1(0)),B_1(0)\subset\R^n,\) be a closed 1-form. Then \(\omega\) is exact.    
+\end{proposition}
+
+\begin{remark}
+    The failure of 1 forms to be exact is a measure of the topology of the domain? %TODO: quote 
+\end{remark}
+
+\begin{proof}
+    Assume \(\omega\in \Omega^1(B_1(0))\) is closed. Define \[f(x)\coloneqq\int_{\gamma_x}\omega,\]
+    where \(\gamma_x:[0,1]\to B_1(0)\ni x\), \(t\mapsto tx\).
+
+    Write \(\omega=\omega^1dx_1+\dots+\omega^n dx_n\). We have 
+    \begin{align*}
+        f(x)&=\int_0^1 \omega_{\gamma_x(t)}\left(\dot{\gamma}_x(t)\right)dt = \int_0^1\left(\sum_{i=1}^n \omega^i(tx)\cdot x_i\right)dt 
+    \end{align*}
+
+    \begin{align*}
+        \partial_{x_j}f(x)&=\partial_{x_j}\left(\int_0^1\left(\sum_{i=1}^n \omega^i(tx)\cdot x_i\right)dt\right)\\
+        &= \int_0^1\left(\sum_{i=1}^n \partial_{x_i}\omega^j(tx)\cdot t\cdot x_i+\omega^j(tx)\right)dt\\
+        &\stackrel{\omega \text{ closed}}{=} \int_0^1\left(\left(\sum_{i=1}^n \partial_{x_j} \omega^j(tx)\cdot t \cdot x_i\right)+\omega^j(tx)\right)\\
+        &=\int_0^1\frac{d}{dt}(t \omega^j(tx))dt=t\omega^j(x)\mid_{t=0}^{t=1}=\omega^j(x)
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    The same proof works if we replace the ball wit any star shaped domain.
+\end{remark}
+
+\section{\(k\)-forms}
+
+\subsection{More linear algebra}
+
+Let \(V\) be a vector space. Recall from section 8.2.2. %TODO 
+ that \(\Lambda^k V^\star \subset T^k V^\star\) is spanned by 
+multilinear maps \(\alpha:V\times \dots\times V\to\R\) which are alternating. We have \(\text{Alt}^k:T^k(V\to \Lambda^k V)\).
+Let \(\{\epsilon^1,\dots,\epsilon^n\}\) be a basis for \(V^\star\). Write \(I=(i_1,\dots,i_k)\), where 
+\(1\leq u_1,\dots,i_k,\leq n\). We let \(\epsilon^I\in \Lambda^k(V^\star)\) be defined by 
+\[\epsilon^I(v_1,\dots,v_k)=\det\underbrace{\begin{pmatrix}
+    \epsilon^{i_1}(v_1) & \dots & \epsilon^{i_1}(v_k)\\
+    \vdots & \ddots & \vdots \\
+    \epsilon^{i_k}(v_1) &\dots & \epsilon^{i_k}(v_k)
+\end{pmatrix}}_{\in\R^{k\times k}}.\]
+\markeol{22}
+
+\beginlecture{23}{10.01.2025}
+
+\begin{example}
+    Let \(V=\R^3\), with the standard basis / dual basis. Let \(v=(v_1,v_2,v_3)\), 
+    \(w=(w_1,w_2,w_3), z=(z_1,z_2,z_3)\in \R^3\)
+    \begin{align*}
+        \epsilon^{123}(v,w,z)=\det \begin{pmatrix}
+            v_1 &w_1 &z_1\\
+            v_2 &w_2 &z_2\\
+            v_3 &w_3 &z_3\\
+        \end{pmatrix}
+    \end{align*}
+\end{example}
+
+\begin{lemma}\label{lem:10.6}
+    Let \(\{e_1,\dots,e_n\}\) be the basis for \(V\), \(\{\epsilon_1,\dots,\epsilon_n\}\) be the dual basis.
+    Let \(I=(i_1,\dots,i_k)\).
+    \begin{enumerate}
+        \item[(a)] If \(I\) has a repeated index, then \(\epsilon^I=0\)
+        \item[(b)] Let \(J\coloneqq I_\sigma,\sigma\in S_k\). Then \[\epsilon^J=(\text{sgn}(\sigma))\epsilon^I\]
+        \item[(c)] Given \(J=(j_1,\dots,j_k)\), \[\epsilon^I(e_{j_1},\dots,e_{j_k})=\delta_J^I,\] where \(\delta_J^I\coloneqq \det(\delta_{j_l}^{i_m})_{1\leq l,m\leq k}\)  
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    omitted / follows directly from the definitions.
+\end{proof}
+
+\begin{lemma}\label{lem:10.7}
+    Fix basis \(\{\epsilon_1,\dots,\epsilon_n\}\) for \(V^\star\). Then, for
+    \(k\leq n\), the collection \(\{\epsilon^I\mid I \text{ is an increasing multiindex of length } k\}\) forms a basis for \(\Lambda^k V^\star\). 
+\end{lemma}
+
+E.g. \(V=\R^3,k=2,\{\epsilon^{12},\epsilon^{23},\epsilon^{23}\}\).
+
+\begin{proof}
+    See sheet 11 exercise 3 for details.
+\end{proof}
+
+\begin{definition*}
+    Given \(\omega\in \Lambda^k V^\star,\eta\in \Lambda^l V^\star\), let 
+    \[\omega \wedge \eta\coloneqq \frac{(k+l)!}{k!l!}(\omega\otimes \eta)\in \Lambda^{k+l}V^\star.\]
+    This operation is called the \dhighlight{wedge product} or the \dhighlight{exterior product}.
+\end{definition*}
+
+\begin{lemma}\label{lem:10.8}
+    Let \((\epsilon_1,\dots,\epsilon_n)\) be a basis for \(V^\star\). Given 
+    \(I=(i_1,\dots,i_k),J=(j_1,\dots,j_l)\), let \(IJ=(i_1,\dots,i_k,j_1,\dots,j_l)\).
+    Then \[\epsilon^I\wedge \epsilon^J=\epsilon^{IJ}.\]
+\end{lemma}
+
+\begin{proof}
+    Homework of this week. The factor in the definition makes this statement true. Hint: Test against the dual basis
+    and show they are equal.
+\end{proof}
+
+\begin{remark}
+    We defined \(\Lambda^k V^\star\subset T^k V^\star\), but we can also do \[\oplus_k T^k V^*/(v\otimes v).\]
+    In this case we would not have the factor in the definition of the wedge product.
+\end{remark}
+
+\begin{proposition}[Properties of the wedge product]\label{prop:10.9}
+    Suppose that \(w,w',\eta,\eta',\xi\in \Lambda^{\cdot}(V^\star)\).
+    \begin{enumerate}
+        \item[(a)] \((a\omega+a'\omega')\wedge \eta=a\omega \wedge \eta + a' \omega'\wedge \eta\) and similar in the second component
+        \item[(b)] \(\omega\wedge (\eta\wedge \xi)= (\omega\wedge \eta)\wedge \xi\)
+        \item[(c)] \(\omega\wedge \eta=(-1)^{|\omega|\cdot |\eta|}\eta\wedge \omega\)
+        \item[(d)] given \(I=(i_1,\dots,i_k),\{\epsilon^1,\dots,\epsilon^k\}\) Basis for \(V^\star\),\[\epsilon^I=\epsilon^{i_1}\wedge\dots\wedge\epsilon^{i_k}\]
+        \item[(e)] given \(w^1,\dots w^k\in V^\star,v_1,\dots,v_k\in V\) we have \[\omega^i\wedge\dots\wedge\omega^k(v_1,\dots,v_k)=\det(\omega^i(v_j)).\]   
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \highlight{(a)} follows from multilinearity of \(\otimes\)
+    
+    \highlight{(b)} Fix a basis \(\{\epsilon^1,\dots,\epsilon^n\}\). Lemma \ref{lem:10.8} implies 
+    \begin{align*}
+        (\epsilon^I\wedge \epsilon^J)\wedge \epsilon^K&=\epsilon^{IJ}\wedge \epsilon^K=\epsilon^{IJK}\\
+        \epsilon^I\wedge \epsilon^{JK}=\epsilon^{I}\wedge (\epsilon^{J}\wedge \epsilon^K).
+    \end{align*}
+    The generality follows from lemma \ref{lem:10.7} and multilinearity.
+
+    \highlight{(c)} Note that
+    \begin{align*}
+        \epsilon^I\wedge \epsilon^J&\stackrel{\text{\ref{lem:10.8}}}{=}\epsilon^{IJ}\\
+        &\stackrel{\text{\ref{lem:10.6} (b)}}{=} (-1)^{|I||J|}=(-1)^{|I||J|}\epsilon^J\wedge \epsilon^I
+    \end{align*}
+    where the general case follows from multilinearity.
+
+    \highlight{(d)} By lemma \ref{lem:10.8} and induction.
+
+    \highlight{(e)} If \(w^i=\epsilon^i\), then this follows from
+    (d) + the definition of \(\epsilon^I,I=(1,\dots,k).\) The general case follows 
+    by multilinearity.
+\end{proof}
+
+\begin{definition*}\marginnote{\(\Lambda^0 V^\star=\R\)}
+    Given a vector space \(V\), let \(\Lambda^\cdot V^\star\coloneqq \oplus_{k\geq 0} \Lambda^KV^\star\),
+    which is just a vector space. We can make this into a (skew-) commutative algebra with respect to \(\wedge\).
+    This is usually called the \dhighlight{exterior algebra} of \(V\).
+\end{definition*}
+
+\subsection{The algebra of differential forms}
+
+Let \(M\) be a a manifold. We have 
+
+\begin{align*}
+    \Lambda^k T_p^\star M\times \lambda^l T_p^\star M&\to \Lambda^{k+l}T_p^\star M\\
+    (\omega_p,\eta_p)&\mapsto \omega_p\wedge \eta_p.
+\end{align*}
+
+Since, by definition, \(T^\star M=\coprod_{p\in M} T_p^\star M\), we get 
+\begin{align*}
+    \Gamma(\Lambda^k T^\star M)\times \Gamma(\Lambda^lT^\star M)&\to \Gamma(\Lambda^{k+l}T^\star M)\\
+    (\omega,\eta)&\mapsto \omega \wedge \eta
+\end{align*}
+
+\dhighlight{Notation:} \(\Omega^k(M)\coloneqq \Gamma(\lambda^k T^\star M)\).
+
+We let \(\Omega^\cdot(M)\coloneqq_{k\geq 0} \Omega^k(M)\) with multiplication \(\wedge\).
+This is called the \dhighlight{algebra of differential forms on \(M\)}.
+
+Exercise: Suppose that \(\dim V=n\), then \(\Lambda^k V^\star=0\) , whenever \(k>n\). This algebra is only supported up to degree \(n\).
+
+\begin{example}
+    On \(M=\R\). \(\Omega^0(\R^1)=\{\text{smooth maps }f:\R\to\R\}\),
+    \(\Omega^1(\R)=\{f(x)dx,f:\R\to\R\}\). A typical element of \(\Omega^\cdot(\R)\) is 
+    \(f_0(x)+f_1(x)dx\).
+\end{example}
+
+\begin{example}
+    \(M=\R^3,\Omega^2(\R^3)=\{f_{12}(x)dx_1\wedge dx_2+f_{13}(x)dx_1\wedge dx_3+ f_{23}(x)dx_2\wedge dx_3\}\)
+\end{example}
+
+\begin{lemma}[Naturality of the wedge product]\label{lem:1.10}
+    Let \(F:M\to N\). Let \(F^\star:\Omega^k(N)\to\Omega^k(M)\) be the pullback (section 8.4) % TODO 
+    \begin{enumerate}
+        \item[(a)] \(F^\star:\Omega^k(N)\to\Omega^k(M)\) is \(\R\) linear 
+        \item[(b)] \(F^\star(\omega\wedge \eta)=F^\star \omega\wedge F^\star \eta \)
+        \item[(c)] If \((y_i)\) are local coordinates in \(N\), we have \(F^\star\sum_I \omega_I dy^i\wedge\dots\wedge y^{i_k}=\sum (\omega_I\circ F)dF^{i_1}\wedge \dots\wedge dF^{i_k}\)
+        \item[(d)] If \(\dim M=\dim N\), \((x_i)\) local coordinates on \(U\subset M\), \((y_i)\) local coordinates on \(V\subset M\), \(U\subset F^{-1(V)}\),
+                   then \(F^\star(vdy_1\wedge \dots \wedge dy_n)=v\circ F\det (dF)dx^1\wedge \dots \wedge x^n, v:V\to \R\).   
+    \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+    \highlight{(a)} ok
+
+    \highlight{(b)} ok. Proof point wise, follows from definition.
+
+    \highlight{(c)} Combine (b) with lemma \ref{lem:10.2} (\(F^\star dy_i=d(y_i\circ F)=dF_i\)).
+
+    \highlight{(d)} From (c), we have \(F^\star vdy_1\wedge\dots\wedge dy_n=(v\circ F)dF_1\wedge \dots\wedge dF_n\).
+    By proposition \ref{prop:10.9} (e), \((dF_1\wedge\dots\wedge dF_n)(\partial_{x_1},\dots,\partial_{x_n})=\det(dF_i(\partial_{x_j}))=\det(\partial_{x_j}F_i)-\det(dF)\).
+
+\end{proof}
+
+\subsection{The exterior derivative}
+
+The \dhighlight{punchline}: There is a canonical \(\R\)-linear map \(d:\Omega^k(M)\to\Omega^{k+1}(M)\), called 
+the \dhighlight{exterior derivative}. It holds \(d\circ d=0\)
+\begin{tikzcd}
+0\arrow[r] &\Omega^0(M)\arrow[r,"d"] &\Omega^1(M)\arrow[r,"d"]& \dots \arrow[r,"d"]&\Omega^n(M)\arrow[r,"d"]&0
+\end{tikzcd}
+this is a chain complex.
+
+\begin{definition*}
+    \(H_{dR}^k(M)\coloneqq \ker(d:\Omega^k(M)\to\Omega^{k+1}(M))/\text{im}(d:\Omega^{k-1}(M)\to\Omega^k(M))\)
+\end{definition*}
+
+\begin{theorem}[deRham]\label{thm:10.11}\label{Non examable.}
+    \[H_{dR}^k(M)=H_{\text{sing}^k(M)\to\R}\]
+\end{theorem}
+\markeol{23}
+
+
+
