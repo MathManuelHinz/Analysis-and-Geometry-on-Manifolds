@@ -335,7 +335,7 @@ Exercise: Suppose that \(\dim V=n\), then \(\Lambda^k V^\star=0\) , whenever \(k
 \begin{proof}
     \highlight{(a)} ok
 
-    \highlight{(b)} ok. Proof point-wise, follows from definition.
+    \highlight{(b)} ok. Proof point-wise, follows from the definitions.
 
     \highlight{(c)} Combine (b) with lemma \ref{lem:10.2} (\(F^\star dy_i=d(y_i\circ F)=dF_i\)).
 
@@ -357,10 +357,165 @@ this is a chain complex.
     \(H_{dR}^k(M)\coloneqq \ker(d:\Omega^k(M)\to\Omega^{k+1}(M))/\text{im}(d:\Omega^{k-1}(M)\to\Omega^k(M))\)
 \end{definition*}
 
-\begin{theorem}[deRham]\label{thm:10.11}\marginnote{Non examable.}
-    \[H_{dR}^k(M)=H_{\text{sing}}^k(M)\to\R\]
+\begin{theorem}[deRham]\label{thm:10.11}\marginnote{Non examable. But really nice. These objects come from different parts of mathematics}
+    There is a natural isomorphism 
+    \[H_{dR}^\cdot(M)\simeq H_{\text{sing}}^\cdot(M,\R)\]
+    for any smooth manifold \(M\).
 \end{theorem}
 \markeol{23}
+\beginlecture{24}{14.01.2025}
+
+There are four more lectures (including this one) that are examable!
+
+\dhighlight{Recall} we had the following complex 
+\begin{tikzcd}
+    0\arrow[r] &\Omega^0(M)\arrow[r,"d"] &\Omega^1(M)\arrow[r,"d"]& \dots \arrow[r,"d"]&\Omega^n(M)\arrow[r,"d"]&0
+\end{tikzcd}
+
+\dhighlight{Notation:} If \(\omega\in \Omega^k(U), U\subset \R^n\), we write \marginnote{Just to save some time}
+\[\omega=\sum_{|I|=k}'\omega_I dx_I\coloneqq \sum_{\substack{|I|=k\\I\text{ increasing}}}\omega_I dx_I.\]
+\begin{definition*}\marginnote{Remember \(\bH^n=\{x_1,\dots,x_n\}\subset\R^n\mid x_n\geq 0\)}
+    Let \(U\subset\R^n\) or \(U\subset \bH n\). Let \(\omega=\left(\sum_{|I|=k}'\omega_I dx_I\right)\in\Omega^k(U)\). Then, we 
+    let \(d(\omega)=d\left(\sum_{|I|=k}'\omega_I dx_I\right)\coloneqq \sum_{|I|=k}'d\omega_I \wedge dx_I\).
+    We call \(d\) the \dhighlight{exterior derivative}.
+\end{definition*}
+
+\begin{example}
+    \(\omega\in \Omega^0(U)=C^\infty(U),d\omega=d\omega\), where the latter is the definition from section 10.1.%TODO
+\end{example}
+
+\begin{example}
+    \(\omega\in \Omega^1(U),U\subset\R^n,\omega=\sum_{i=1}^n \omega_i dx_i\), then 
+    \[d\omega = \sum_{i=1}^n\left(\sum_{j=1}^n\partial_{x_j}w_i dx_j\right)\wedge dx_i=\sum_{1\leq i<j\leq n}(\partial_{x_i}w_j)-\partial_{x_j}w_i dx_i\wedge dx_j,\]
+    since \(dx_i\wedge dx_j=dx_j\wedge dx_i\).
+\end{example}
+
+\begin{remark}
+    \(\omega\) closed (in the sense of section 10.1.2 % TODO
+    ) is equivalent to \(d\omega=0\)    
+\end{remark}
+
+\highlight{Now to defining \(d\) on manifolds (not just subsets of \(\R^n\)).}
+
+\begin{proposition}\label{prop:10.12}
+    Let \(U\subset\R^n/\bH^n\) open. Let \(d:\Omega^k(U)\to\Omega^{k+1}(U)\). Then 
+    \begin{enumerate}
+        \item[(a)] \(d\) is \(\R\) linear.
+        \item[(b)] (Leibniz rule) Given \(\omega\in\Omega^k(U),\eta\in \Omega^l(U)\), we have \[d(\omega\wedge \eta)=(d\omega)\wedge \eta+(-1)^k\wedge d\eta\]
+        \item[(c)] \(d^2=0\)
+        \item[(d)] Suppose \(f:\underbrace{U}_{\subset\R^n/\bH^n}\to \underbrace{V}_{\in\R^n\bH^m},\omega\in\Omega^k(V)\).
+                    Then \(dF^\star \omega=F^\star d\omega\).     
+    \end{enumerate}
+\end{proposition}
+
+\begin{proof}
+    \dhighlight{(a)} is trivial. 
+
+    \dhighlight{(b)}: As a first step, let us prove that for \dhighlight{any} multiindex \(I\), we have 
+    that \(d(u_Idx_I)=du_I\wedge dx_I\). If \(I=(i_1,\dots,i_k)\) has repeating indices, then both sides are zero. 
+    If \(I\) has no repeated indices, there exists some \(\sigma\in S_k\) s.t. \(J=I_\sigma\) is increasing and \[d(u_Idx_I)=d(\text{sgn}(\sigma)u_I dx_j)=(\text{sgn}\sigma)d(U_idx_J)=du_I\wedge \{(\text{sgn}\sigma)dx_J\}=du_I\wedge dx_I.\]
+    We may assume \(\omega=udx_I,|I|=k,\) increasing, \(\eta=vdx_J,|J|=l\), increasing.
+    Now \begin{align*}
+        d(\omega\wedge \eta)&=d(udx_I\wedge vdx_J)\\
+        &=d(uv dx_I\wedge dx_J)\\
+        &=d(uv)\wedge dx_I\wedge dx_J\\
+        &=(vdu+udv)\wedge dx_I \wedge dx_j\\
+        &=vdu\wedge dx_I\wedge dx_J+udv\wedge dx_I\wedge dx_J\\
+        &=du\wedge dx_I(vdx_J)+(-1)^k udx_I\wedge dv\wedge dx_J\\
+        &=d\omega \wedge \eta + (-1)^k\omega \wedge d\eta
+    \end{align*}
+
+    \dhighlight{(c)}: We can assume that \(\omega=udx_I=udx_{i_1}\wedge \dots \wedge dx_{i_k}\).
+    \begin{align*}
+        d\omega&=du\wedge dx_I\\
+        dd\omega\stackrel{(b)}{=}\underbrace{ddu}_{_{=0}}\wedge dx_I-du\wedge ddx_I
+    \end{align*}
+
+    \begin{align*}
+        ddu=d\left(\sum_{i=1}^n\partial_{x_i}udx_i\right)=\sum_{i<j}\underbrace{\left(\partial_{x_i}\partial_{x_j}u-\partial_{x_j}\partial_{x_i}u\right)}_{=0}dx_i\wedge dx_j
+    \end{align*}
+    \(ddx_I\) is zero by \(b\) and induction.
+
+    \dhighlight{(d)}: Can assume \(\omega=udx_{i_1}\wedge \dots \wedge dx_{i_k}\).
+
+    \begin{align*}
+        F^\star d\omega&=F^\star d(udx_{i_1}\wedge \dots \wedge dx_{i_k})\\
+        &=F^\star(du\wedge dx_{i_1}\wedge \dots \wedge dx_{i_k})\\
+        &=d(u\circ F)\wedge dF_{i_1}\wedge \dots \wedge dF_{i_k}\\ 
+        dF\omega&=d(u\circ FdF_{i_1}\wedge \dots \wedge dF_{i_k})\\
+        &=d(u\circ F)\wedge dF_{i_1}\wedge \dots \wedge dF_{i_k}
+    \end{align*}
+\end{proof}
 
 
+In the exam, proving that two complicated things are equal, is as easy as fixing a point and then proving the statement at that point! % TODO
+
+\begin{theorem}\label{thm:10.13}[Existence and uniqueness of the exterior derivative]\marginnote{Main theorem of this lecture}
+    Let \(M\) be a smooth manifold (possibly with non-empty boundary). There \dhighlight{exists} a \dhighlight{unique} operator 
+    \(d:\Omega^k(M)\to \Omega^{k+1}(M),k\geq 0\) satisfying the following properties:
+    \begin{enumerate}
+        \item[(i)] \(d\) is \(\R\) linear 
+        \item[(ii)] given \(\omega\in\Omega^k(M),\eta\in\Omega^l(M), d(\omega\wedge \eta)d\omega\wedge \eta+ (-1)^k\omega \wedge d\eta\)
+        \item[(iii)] \(d^2=0\)
+        \item[(iv)] \(f\in \Omega^0(M)\equiv C^\infty(M),df\) is the differential of \(f\), as defined in section 10.1 % TODO  
+    \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+    \dhighlight{Existence}: Fix \(\omega\in\Omega^k(M)\). Given a  chart \((U,\varphi)\), define \[d\omega=\varphi^\star d(\varphi^{-1\star}\omega)\]
+    on \(U\). This is well defined, since \marginnote{By property (d) of \ref{prop:10.12}}
+    if \((V,\psi)\) another smooth chart, \(\psi\circ\varphi^{-1}:\varphi(U\cap V)\to\psi(U\cap V)\), we have:
+    \begin{align*}
+        \varphi^{-1\star}\psi^\star d(\psi^{-1\star}\omega)&=(\psi\circ \varphi^{-1})^\star d(\psi^{-1\star}\omega)=d((\psi\circ \varphi^{-1})^\star \psi^{-1\star}\omega)\\
+        &=d(\varphi^{-1\star} \psi^\star \psi^{-1\star} \omega)=d(\varphi^{-1\star}\omega) 
+    \end{align*}
+    \(\implies\), by applying \(\varphi^{\star}(\cdot)\), \[\psi^\star(d\psi^{-1\star}\omega)=\varphi^\star d(\varphi^{-1\star}\omega).\]
+    This takes care of existence, since the properties follow from the case of subsets from \(\R^n / \bH^n\)!
+
+    \dhighlight{Uniqueness:} Let \(\tilde{d}\coloneq \Omega^k(M)\to \Omega^{k+1}(M)\) and satisfies the same properties.
+    Let \(\omega_1,\omega_2\in \Omega^k(M)\). Suppose 
+    that \(\omega_1,\omega_2\) agree on some non-empty open subset \(U\subset M\). Fix \(p\in U\).
+    Then \(\tilde{d}(w_-1\omega_2)_p=\tilde{d}(\omega_1)_p-\tilde{d}(\omega_2)_p\)
+    Let \(\phi\) be a bump function supported in \(U\), s.t. \(\phi\equiv1\) near \(p\). Then 
+    assuming \(\omega\) vanishes in \(U\), we have 
+    \begin{align*}
+        0=\tilde{d}(\underbrace{\phi\omega}_{\equiv 0}) &= \underbrace{\tilde{d}\phi \wedge \omega}_{0\text{ near }p}  \underbrace{\phi}_{\equiv 1\text{ near }p} \tilde{d}\omega
+    \end{align*}
+    \(\implies \tilde{d}\omega\) vanishes near \(p\). 
+
+    Now let \(\omega\in\Omega^k(M)\) be an arbitrary \(k\) form. Fix \(p\in M\) and a chart \((U,\varphi),p\in U\).
+    Let us again let \(\phi\) be a bump function supported on \(U\) with \(\phi\equiv 1\) near \(p\).
+    Then \(\tilde{d}(\phi\omega)_p=(\tilde{d}\omega)_p\) (by what we just checked). Similarly 
+    \((d\phi\omega)_p=(d\omega)_p\). We claim that it is enough that \(d\omega=\tilde{d}\omega\) under the 
+    assumption that \(\supp \omega\subset U\). 
+
+    In local coordinates
+    \begin{align*}
+        \omega &= \sum' \omega_i dx_I=\sum'\omega_I\tilde{d}x_I\\
+        \tilde{d}\omega&=\sum' \tilde{d}(\omega_Idx_I)\\
+        &\stackrel{(ii)}{=}\sum' \tilde{d}\omega_I\wedge dx_I\stackrel{(iv)}{=}\sum' d\omega_i \wedge dx_i=\omega\qedhere
+    \end{align*}
+\end{proof}
+
+
+\begin{corollary}[naturality]\label{cor:10.14}
+    If \(F:M\to N\),\(\omega\in \Omega^k(N)\), then \(dF^\star\omega =F^\star d\omega\).    
+\end{corollary}
+\begin{proof}
+    Let \((U,\varphi)\) be a chart on \(M\), let \((V,\psi)\) a chart on \(N\). Assume 
+    that \(F(U)\subset V\). On \(U\), we have 
+    \begin{align*}
+        F^\star d\omega&=F^\star\psi^\star d(\psi^ {-1\star}\omega)=\varphi^\star\varphi^{-1\star}F^\star \psi^\star d(\psi^{-1\star}\omega)\\
+        &=\varphi^{\star}(\psi\circ F\circ \varphi^{-1})\star d(\psi^{-1\star}\omega)\\
+        &=\varphi^\star d(\psi\circ F\circ \varphi^{-1})\star \psi^{-1\star}\omega \\
+        &=\varphi^\star d\varphi^{-1\star}F^\star \psi^\star \psi^{-1\star}\omega \\
+        &=\varphi^\star d(\varphi^{-1\star}(F^\star\omega))=dF^\star \omega  
+    \end{align*}
+\end{proof}
+\markeol{24}
+\beginlecture{25}{17.01.2025}
+\begin{definition*}
+    Given a manifold \(M\), we say that \(\omega\in\Omega^k(M)\) is \dhighlight{closed} if \(d\omega=0\)
+    and \dhighlight{exact} if there exists \(\eta\in \Omega^k(M)\) such that \(d\eta=\omega\).
+\end{definition*}
 

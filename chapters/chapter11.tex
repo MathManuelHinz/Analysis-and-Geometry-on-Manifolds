@@ -1,0 +1,178 @@
+\chapter{Integration theory}
+
+\section{Orientations of vector spaces}
+
+Let \(V\) be a real vector space of dimension \(n\geq 0\). Then:
+\begin{itemize}
+    \item \(\Lambda^n V^\star\) is a 1 dimensional vector space 
+    \item \(\Lambda^nV^\star\setminus\{0\}\), carries an action of  \(\R_+\coloneqq [0,\infty)\)
+          by scaling \((\lambda,\omega)\mapsto \lambda \omega\). The quotient \(\Lambda^n V^\star\setminus\{0\}/\R_+\) is a 
+          is a set with two elements, with discrete topology. 
+    \item Let \(B=\{v_1,\dots,v_n\},\tilde{B}=\{\tilde{v_1},\dots,\tilde{v_n}\}\). We write \(M_B^{\tilde{B}}\) for the transition matrix 
+          i.e. \[v_i=\sum_{j=1}^n (M_B^{\tilde{B}})_ij \tilde{v}_j\]
+\end{itemize}
+
+\dhighlight{Exercise:} If \(B^\star,\tilde{B}^\star\) are the dual basis, then \(M_{B^\star}^{\tilde{B}^\star}=(M_B^{\tilde{B}})^\star\).
+
+\begin{definition*}\marginnote{Only for this lecture}
+    Given \(V\) as above, we write \(B\sim \tilde{B}\iff \det(M_B^{\tilde{B}})>0\).
+\end{definition*}
+
+Clearly this is an equivalence relation.
+
+\begin{lemma}\label{lem:11.1}
+    Let \(V\) be a finite dimensional vector space. TFAE:
+    \begin{enumerate}
+        \item[(i)] an equivalence class \([B]\) of bases for \(V\)
+        \item[(ii)] an equivalence class \([B^\star]\) of bases for \(V^\star\)
+        \item[(iii)] an element of \(\Lambda^{\text{top}}V^\star\setminus \{0\}\) \marginnote{\(\Lambda^{\text{top}}V\setminus \{0\}=\Lambda^{n}V\setminus \{0\}\), where \(n=\dim V\). He also didn't use a star after \(V\)}.  
+    \end{enumerate}
+    We call any one of these equivalent pieces of data an \dhighlight{orientation}.
+\end{lemma}
+
+\begin{proof}
+    \((i)\iff(ii)\) is clear.
+
+    (ii) \(\implies\) (iii). If \(B=\{v_1,\dots,v_n\}\) basis of \(V^\star\), then 
+    \(v_1\wedge \dots\wedge v_n\in \Lambda^{\text{top}}V^\star\setminus\{0\}\). If \(\tilde{B}=\{\tilde{v}_1,\dots,\tilde{v}_n\}\)
+    is any other basis, then \(\tilde{v}_1\wedge \dots\wedge \tilde{v}_n=\det(M_{B}^{\tilde{B}})v_1\wedge \dots\wedge v_n\).
+\end{proof}
+
+\begin{definition*}[Interior multiplication]
+    Let \(V\) be a finite-dimensional, \(R\)-vector space. Fix \(v\in V,\omega\in \Lambda^k V^\star\). Then we 
+    let \(\iota_v\omega(\cdot,\dots\cdot)\coloneqq \omega(v,\cdot,\dots,\cdot)\in \Lambda^{k-1}V^\star\)
+\end{definition*}
+
+\begin{lemma}[Induced orientation]\label{lem:11.2}
+    Let \(V\) be a finite-dimensional, \(\R\)-vector space. Let \(j:H\hookrightarrow V\) be a \(n-1\) dimensional 
+    subspace. Fix an orientation \(\omega\in \Lambda^{n}V^\star\setminus\{0\}\). Fix \(v\in V\) transverse to \(H\).
+    \begin{figure}[H]\label{fig:11.1}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 11.1}
+    \end{figure}  
+    Then:
+    \begin{enumerate}
+        \item[(i)] \(\iota_v\omega\restrict{H}=j^\star(\iota_v\omega)\in \Lambda^{n-1}H^\star\) is an orientation on \(H\)\marginnote{it is non-zero!}
+        \item[(ii)] the orientation from (i) only depends on the connected component of \(V\setminus H\) in which \(v\) is contained. 
+    \end{enumerate} 
+\end{lemma}
+
+\begin{proof}
+    \dhighlight{(i)} need to check, that \(j^\star(\iota_v\omega)\neq 0\).  Pick a basis \(\{y_1,\dots,y_{n-1}\}\) for \(H\). Then 
+    \begin{align*}
+        (j^\star(\iota_v\omega))(y_1,\dots,y_{n-1})=\omega(v,y_1,\dots,y_{n-1})\neq 0
+    \end{align*}
+    since \(v,y_1,\dots,y_{n-1}\) is a basis for \(V\).
+    
+    \dhighlight{(ii)} If \(v,w\) are in the same connected component, then \(v=\lambda w\sum_{i=1}^n a_iy_i\), where 
+    \(\lambda>0,a_1,\dots,a_{n-1}\). Then 
+    \begin{align*}
+        \iota_v\omega(y_1,\dots,y_n)&=\omega(v,y_1,\dots,y_{n-1})\\
+        &=\omega(\lambda w+ \sum_{i=1}^{n-1}a_i y_i,y_1,\dots,y_{n-1})\\
+        &=\omega(\lambda w,y_1,\dots,y_{n-1})+\underbrace{\omega(\sum_{i=1}^{n-1}a_iy_i,y_1,\dots,y_{n-1})}_{=0}\\
+        &=\lambda\omega(w,y_1,\dots,y_{n-1})\\
+        &=\lambda\iota_w(y_1,\dots,y_{n-1})\\
+        \implies \iota_v\omega&=\lambda\iota_w\omega
+    \end{align*}
+\end{proof}
+
+\section{Orientations of smooth manifolds}
+
+\begin{definition*}
+    Let \(M\) be a smooth manifold.  An \dhighlight{orientation} is a smooth section 
+    \(\sigma\in\Gamma^1(\Lambda^{\text{top}}T^\star M)=\Omega^{\text{top}}(M)\), which is non-vanishing, modulo the 
+    equivalence relation \(\sigma\sim\sigma'\iff \exists f:M\to\R_+,\sigma'=f\sigma\).
+    
+    We call the data of a manifold + an orientation an \dhighlight{oriented manifold}.
+\end{definition*}
+
+\begin{remark}[for topology enthusiast]\marginnote{non examable, proved by approximation}
+    The following definitions are equivalent to the one above:
+    \begin{enumerate}
+        \item[(i)] a continuous \(\sigma\) of \(\Lambda^{\text{top}}T^\star M\), 
+                   which is non-vanishing, modulo \(\sigma\sim\sigma'\iff \exists f:M\to\R_+\), continuous, \(\sigma'=f\sigma\). 
+        \item[(ii)] A section of the fiber bundle \((\Lambda^{\text{top}}T^\star M\setminus 0_M)/\R_+\stackrel{\pi}{\to}M\ni p\)
+                    \(\pi^{-1}(p)=(\Lambda^{\text{top}}T_p^\star M\setminus 0_M)/\R_+\)            
+    \end{enumerate}
+\end{remark}
+
+\begin{example}
+    \(\R^n,\omega_0\coloneqq dx_1\wedge\dots\wedge dx_n\in\Omega^n(\R^n)\). We call 
+    \(\omega_0\) the \dhighlight{canonical} orientation.
+\end{example}
+
+\begin{example}[Non-example / Warning]
+    Not all manifolds admit an orientation! E.g. \(\R\bP^{2n}\) are non-orientable, similarly the Möbius band.
+\end{example}
+
+If we have a manifold, the \(TM\) is also a manifold and it is always orientable!
+
+\begin{lemma}\label{lem:11.3}
+    Let \(M\) be a manifold and let \(j:H\hookrightarrow M\) be a codimension \(1\) submanifold. Fix an orientation 
+    \(\omega\) on \(M\). Let \(V\) be a vector field along \(H\), which is transverse to \(H\), i.e. a section \(V\) 
+    \((\underbrace{j^\star TM}_{\equiv TM\restrict{H}}\to H)\) s.t. \(\sigma_p\perp T_p H, T_pH\subset T_p M\).
+    Then 
+    \begin{enumerate}
+        \item[(i)] \(j^\star\iota_V\omega \in \Omega^{\text{top}}\) is an orientation
+        \item[(ii)] if \(W\) is a vector field along \(H\), transverse to \(H\), such that \(V_p,W_p\) lie in the same connected component
+                    of \(T_pM\setminus T_pH\) for all \(p\in H\). Then \(j^\star(\iota_V\omega)=j^\star(\iota_W\omega)\).   
+    \end{enumerate}
+    We call this orientation the \dhighlight{induced orientation} (depends on \(H\subset M,\omega,V\)).
+\end{lemma}
+
+\begin{proof}
+    Immediate corollary of lemma \ref{lem:11.2}.
+\end{proof}
+
+\begin{definition*}
+    Let \(M\) be a manifold with boundary. A vector \(v\in T_pM,p\in\partial M\subset M\) is said to be 
+    \dhighlight{inward-pointing} if there exists a curve \(\gamma:[0,\epsilon)\to M,\dot{\gamma}(0)=v\notin T_p \partial M\). We say 
+    \(w\in T_pM\) is \dhighlight{outward pointing} if \(-w\) is inward-pointing. 
+\end{definition*}
+
+\dhighlight{Observe:} Any positive linear combination of inward-pointing vectors is inward-pointing.
+If we have \(a_1,\dots,a_n\geq 0,\sum a_i=1\), \(v_1,\dots,v_n\) inward-pointing at \(p\), then so is \(\sum_{a_i}v_i\).
+
+
+\begin{lemma}\label{lem:11.4}
+    Let \(M\) be a manifold with non-empty boundary.
+    \begin{enumerate}
+        \item[(i)] There exists an inward pointing vector field (also outward-pointing vector fields)
+        \item[(ii)] If \(\omega\in\Lambda^{\text{top}}(M)\) orientation on \(M\), \(Z\) any outward-pointing vector field, then 
+                    \(j^\star(\iota_Z\omega)\in \Omega^{\text{top}}\), \(j:\partial M\hookrightarrow M\), is an orientation. 
+    \end{enumerate}
+    We call \(j^\star(\iota_Z\omega)\in\Omega^{\text{top}}(\partial M)\) the \dhighlight{induced / Stokes orientation} on \(\partial M\). It does not depend on the choice of outward pointing vector field.
+\end{lemma}
+
+
+\begin{proof}
+    \dhighlight{(ii):} Immediate consequence of lemma \ref{lem:11.3}.
+
+    \dhighlight{(i):} We seek \(Z\) a section of \((\underbrace{j^\star TM}_{=\partial M\substack{\times\\M} TM}\to \partial M)\)
+    s.t. \(\forall p\in \partial M, Z_p\in T_p\partial M\subset T_p M\), \(Z_p\) lies in the \highlight{canonical} component of 
+    \(T_p M \setminus T_p \partial M\). Choose a covering of \(\partial M\) by charts \((U_\alpha,\varphi_\alpha),\varphi_\alpha:U_\alpha\to\bH^n\).
+    Choose a subordinate partition of unity \(\{\eta_\alpha\}_{\alpha}\).
+
+    Let \(Z_0\in\Gamma(\bH^n),Z_0=\partial_{x_n}\)
+    \begin{figure}[H]\label{fig:11.2}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 11.2}
+    \end{figure}
+    Let \(Z=\sum_{\alpha}\eta_\alpha(d\varphi_{\alpha}^{-1}(Z_0))\) this works 
+    because of the previous observation about positive combinations of inward pointing vectors.    
+\end{proof}
+
+\begin{example}
+    Let \(B^{n+1}(1)\subset \R^{n+1},\partial B^{n+1}(1)=S^n\).
+    We have \(Z=x_1\partial_{x_1}+\dots+x_n\partial_{x_n}\). Clearly \(\forall p\in S^n, Z_p\perp T_p S^n\)
+    \begin{figure}[H]\label{fig:11.3}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 11.3}
+    \end{figure}
+    \(\implies\) By lemma \ref{lem:11.4}, \(i_z \omega_0\) on \(S^n\).
+\end{example}
+
+\markeol{25}
