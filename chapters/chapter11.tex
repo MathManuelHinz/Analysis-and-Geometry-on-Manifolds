@@ -176,3 +176,290 @@ If we have \(a_1,\dots,a_n\geq 0,\sum a_i=1\), \(v_1,\dots,v_n\) inward-pointing
 \end{example}
 
 \markeol{25}
+
+\beginlecture{26}{21.01.2025}
+\dhighlight{Exam announcement:}
+\begin{itemize}
+    \item 1 Problem is drawn from homework (maybe slightly simplified)
+    \item both exams are indented to be of similar difficulty
+    \item Everything up to this week is relevant
+    \item Prepare for the exam by doing old exams questions 
+    \item The exam consists of problems, not just repeating proves of the class, however the proof ideas might be useful!
+    \item 2 hours
+    \item Please look at the course webpage! 
+\end{itemize}
+
+\begin{definition*}
+    Let \(M\) be an oriented manifold. We say that a chart \((U,\varphi)\) is positively/ negatively 
+    oriented if, w.r.t to local coordinates \(x_1,\dots,x_n\), \(\varphi^\star(dx_1,\dots,dx_n)\in\Omega^{\text{top}}(\Omega)(U)\) agrees / disagrees with 
+    the orientation of \(M\) (restricted to \(U\)). 
+\end{definition*}
+
+In this setting, any chart is either positively or negatively oriented! Let \(r:\R^n\to\R^n,(x_1,\dots,x_n)\mapsto (-x_1,\dots,x_n)\).
+Then observe that \((U,\varphi)\) \(\pm\) oriented  iff \((U,r\circ \varphi)\) is \(\mp\) oriented.
+
+Recall a Riemannian manifold \((M,g)\) is a manifold \(M\) + a section \(g\)
+\(\Gamma(T^{\otimes 2}T^\star M)\) such that
+\((T_p M,g_p)\) is an inner product space.  
+
+\dhighlight{Exercise: }\marginnote{he would like us to do this exercise, it is insightful and important, but belongs to section9}
+Let \((M,g)\) be a Riemannian manifold. Given \(p\in M\), there exists a local orthonormal 
+frame at \(p\) (i.e. \(U\ni p,e_1,\dots e_n\in \Gamma(TM\restrict{U}),g_q(e_i,e_j)=\delta_{ij}\forall q\in U\)).
+\begin{proof}[proof idea]\marginnote{Might very well be important for the exam}
+    Apply the Gram-Schmitt process, all the operations are smooth. Take a local frame through this process and show it works.
+\end{proof}
+
+For reasons which will become apparent later today, a nowhere-zero top-form \(\omega\in\Omega^{\text{top}}(M)\)
+defines an orientation and is often called a \dhighlight{volume form}.
+
+\begin{lemma}\label{lem:11.5}
+    Let \((M,g)\) be a orientable Riemannian manifold. Then there exists a unique top form 
+    \(\omega_g\in\Omega^{\text{top}}(M)\), with the property that \((\omega_g)_p(e_1,\dots,e_n)\), where \(\{e_1,\dots,e_n\}=1\) is an orthonormal basis at \(p\).
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+    Fix \(p\in M\). Let \((\epsilon^1,\dots,\epsilon^n)\) be a local, orthonormal, co-frame. Define 
+    \(\omega_g\coloneqq \epsilon^1\wedge\dots\wedge \epsilon^n\) near \(p\). Suppose that 
+    \(\tilde{\epsilon}^1,\dots,\tilde{\epsilon}^n\) is another orthonormal co-frame. Let \(M_{B}^{\tilde{B}}\)
+    be the transition matrix. We have \(\epsilon^{1}\wedge \dots\wedge \epsilon^n=\det(M_{B}^{\tilde{B}})\tilde{\epsilon}^1\wedge\dots\wedge\tilde{\epsilon}^n\). Since 
+    \(\{\epsilon\},\{\tilde{\epsilon}\},M_B^{\tilde{B}}\in O(TM,g)\), i.e. \(M_B^{\tilde{B}}(q)\in (T_q M, g_q)\).
+    Therefore \(\det(M_{B}^{\tilde{B}})=\pm1\). Choosing the correct orientation concludes the proof.
+\end{proof}
+
+\section{Integration on manifolds}
+
+In Analysis 1-3, you developed the notion of the integral of function \(f:\R^n\to \R\).
+
+\[\int_{\R^n} fdx_1,\dots,fx_m\]
+\(\supp(f)\) compact, \(f\) measurable.
+
+\dhighlight{Careful, this is not invariant under diffeomorphism!} This notion makes no sense in our category.
+
+\begin{example}
+    \begin{figure}[H]\label{fig:11.}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch }
+    \end{figure}
+    \(\int fdx\approx 2\). Consider \(\phi:\R\to\R,x\mapsto x/100\)
+    \[\int_\R \phi^\star f=\int_\R (f\circ \phi)\approx 200.\]
+\end{example}
+\dhighlight{Solution:} Instead of integrating functions, we should be integrating top forms.
+
+\dhighlight{Key lemma}: 10.10 (d) Recall
+
+\(\phi M\to N,\varphi^\star(fdy_1\wedge\dots\wedge dy_n)(d\phi)dx_1,\dots,dx_n\).
+The change of variable is backed in the pullback of top forms.
+
+\begin{definition*}
+    Let \(U\subset\R^n/\bH^n\). Let \(\sigma=f(x_1,\dots,x_n)dx_1,\wedge\dots\wedge x_n\in\Omega^{\text{top}}(U)\)
+    be a \highlight{compactly supported} top form. We define:
+    \[ \int_U sigma\coloneqq \int_U f(x_1,\dots,x_n)dx_1,\dots,dx_n,\]
+    where the right side is the usual integral from analysis 2/3.
+\end{definition*}
+
+\begin{lemma}\label{lem:11.6}
+    Let \(U,V\subset \R^n/\bH^n\). Let \(\varphi:U\to V\) be a diffeomorphism. Given \(\eta\) compactly supported,
+    we have \[\int_U \varphi^\star \eta=\begin{cases}
+        \int_V \eta & \text{if } \sigma\text{ orientated positively}\\
+        -\int_V \eta & \text{if } \sigma\text{ orientated negatively}
+    \end{cases}\] 
+\end{lemma}
+\begin{proof}
+    \begin{align*}
+        \int_U \varphi^\star \eta&=\int_U \varphi^\star(fd_y1\wedge \dots\wedge dy_n)\\
+        &\stackrel{\text{Lemma \ref{lem:1.10} (d)}}{=}\int_U (f\circ \varphi)(\det d\varphi) dx_1\wedge \dots dx_n\\
+        &= \int_U (f\circ \varphi)(\det d\varphi) dx_1\dots dx_n\\
+        &=(\pm)\int_U (f\circ \varphi)|\det d\varphi| dx_1\dots dx_n\\
+        &=(\pm) \int_V f dy_1,\dots,dy_n
+    \end{align*}
+    by the change of variable theorem and 
+    \begin{align*}
+        (\pm) \int_V f dy_1,\dots,dy_n &= \int_V f dy_1\wedge\dots\wedge dy_n\\
+        &=\int_V \eta\qedhere
+    \end{align*}
+\end{proof}
+
+
+\begin{lemma}[Provisional definition, only for this lecture]\label{lem:11.7}
+    Let \(M\) be a smooth manifold, possibly with boundary Let \(\omega\in \Omega^{\text{top}}(M)\). Suppose that:
+    \begin{enumerate}
+        \item[(i)] \(\supp(\omega)\) is compact 
+        \item[(ii)] there exists a chart \((U,\varphi)\) such that \(\supp(\omega)\subset U\).  
+    \end{enumerate}
+    Then \(\int_M\omega\coloneqq \pm \int_{\varphi(U)}(\varphi^{-1})^\star \omega\)
+    where we choose \(\pm\) depending on wether \((U,\varphi)\) is positively or negative oriented.
+    This expression does not depend on the choice of chart \((U,\varphi)\).
+\end{lemma}
+\begin{proof}
+    Let \((V,\psi)\) be another such chart. For simplicity, assume that 
+    both are positively oriented. Then we have: 
+    \begin{align*}
+        \int_{\psi(V)}(\psi^{-1})^\star \omega&=\int_{\psi(V\cap V)}(\psi^{-1})^\star \omega\\
+        &=\int_{\varphi(U\cap V)} (\psi\circ\phi^{-1})^\star (\psi^{-1})^\star\omega\\
+        &=\int_{\varphi(U\cap V)}(\varphi^{-1})^\star \psi^\star(\psi^{-1})^\star \omega\\
+        &=\int_{\varphi(U)}(\varphi^{-1})^\star \omega \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{lemma}\label{lem:11.8}
+    Let \(M\) be an orientated, smooth \(n\) manifold, possibly with boundary. Let 
+    \(\omega\in \Omega^n(M)\). Suppose that: 
+    \begin{enumerate}
+        \item[(i)] \(\supp\omega\) is compact
+        \item[(ii)] \(\{U_i,\varphi_i\}_{i=1}^N\) such that \(\supp\omega\subset \bigcup_{i=1}^N U_i\) \marginnote{Unproblematic, since \(\supp \omega\) is compact} 
+        \item[(iii)] \(\{\eta_i\}_{i=1}^N\) be a partition of unity subordinate to \(\{U_i\}_{i=1}^N\). 
+    \end{enumerate}
+    We define 
+    \[\int_M \omega\coloneqq \sum_{i=1}^N \int_{M}\eta_i\omega=\sum_{i=1}^N \int_{\varphi_i(U_i)}(\varphi^{-1})^\star\eta_i\omega\]
+    This definition does not depend on the choice of \(\{(U_i,\varphi_i)\}_i,\{\eta_i\}\)\marginnote{Please remember this for for the exam}
+\end{lemma}
+\begin{proof}
+    Let \(\{(\tilde{U}_j,\tilde{\varphi}_j)\}_{j=1}^{\tilde{N}},\{\tilde{\eta}_j\}_{j=1}^{\tilde{N}}\) be another such choice.
+    Then observe that 
+    \begin{align*}
+        \int_M \eta_i \omega &= \int_M \left(\sum_{j=1}^{\tilde{N}\tilde{\eta}_i}\right)\eta_i\omega\\
+        &=\sum_{j=1}^{\tilde{N}}\int_{M}(\tilde{\eta}_j\eta_i)\omega.
+    \end{align*}
+    Similarly \[\int_m \tilde{\eta}_j\omega=\sum_{i=1}^N\int_M(\tilde(\eta)_j\eta_i)\omega.\]
+    Now 
+    \begin{align*}
+        \int_M\omega&=\sum_{i=1}^N\int_M \eta_i \omega =\sum_{i=1}^N\sum_{j=1}^{\tilde{N}}\int_M(\tilde{\eta}_j\eta_i)\omega\\
+        &=\sum_{j=1}^{\tilde{N}}\sum_{i=1}^N\int_M(\tilde{\eta}_j\eta_i)\omega=\sum_{j=1}^{\tilde{N}}\int_M \tilde{\eta}_j \omega \eqqcolon \int_M \omega \qedhere
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    \begin{itemize}
+        \item All of the familiar properties of the integral in \(\R^n\) remain true, but are left as an exercise. E.g.
+                \[\int_M a\omega +b\eta=\int_M a\omega +\int_M b\eta\]
+        \item You can do measure theory on manifold, but this is not what we have done today. Integration of smooth functions in \(\R^n\) can be generalized in two ways \begin{itemize}
+            \item integration on manifolds 
+            \item integrations of measurable functions in \(\R^n\)
+        \end{itemize}
+    \end{itemize}
+\end{remark}
+
+\markeol{26}
+\beginlecture{27}{24.01.2025}
+
+Klausureinsicht\footnote{Revision / discussion of the exam grades} for exam number one: SR0.011 at 12:30-13:30 on thursday 13.02.25.
+Last lecture he said it exam will be problem based, but he might ask us to prove a step of some proof of the lecture.
+
+\begin{remark}[Integration on zero-dimensional manifolds]\marginnote{This is important (in practice)}
+    \begin{itemize}
+        \item By convention, if \(V\) is a 0-dim. vector space, an orientation \(o_V\) on \(V\) is an element \(o_V\in \{\pm 1\}\)
+        \item Hence if \(M\) is a 0-dim manifold, an orientation is the assignment of \(\pm 1\) to each element of \(M\) (\(\sigma\in \Omega^0(M)=C^\infty(M)\), nowhere zero)
+        \item If \(M\) is a zero-dimensional oriented manifold, \(\eta\in \Omega^0(M)=C^\infty(M)\), compactly supported. Then \[\int_M \eta=\sum_{p\in M}(\pm)\eta(p)\] where \(\pm\) depends on wether \(p\) is oriented \(\pm\).  
+    \end{itemize}
+\end{remark}
+
+\section{Stokes' theorem}
+
+\begin{theorem}[Stokes's theorem]\label{thm:11.9}
+    Let \(M\) be an oriented \(n\)-manifold with boundary. Let 
+    \(\omega\in \Omega^{n-1}(M)\) be a compactly supported \(n-1\) form. Then 
+    \[\int_M \underbrace{d\omega}_{\in \Omega^n(M)}=\int_{\partial M} \omega.\]
+\end{theorem}
+
+\begin{remark}
+    \begin{itemize}
+        \item \(\partial M =\emptyset\) is allowed 
+        \item it is understood that \(\partial M\) carries the induced boundary orientation from section 11.1 (outward pointing, stokes orientation)
+        \item the expression \(\int_{\partial M}\omega\) secretly means \[\int_{\partial M} j^\star \omega,j:\partial M \hookrightarrow M\]
+    \end{itemize}
+\end{remark}
+
+\begin{lemma}\label{lem:11.10}
+    Endow \(\partial \bH^n\) with the induced orientation. The map \(\R^{n-1}\to\partial \bH^n\),
+    which sends \[(x_1,\dots,x_n)\mapsto (x_1,\dots,x_n,0)\]
+    is orientation preserving if \(n\) is even and orientation reversing if \(n\) is odd.
+\end{lemma}
+
+\begin{proof}
+    By definition, orientation on \(\partial \bH^n\) \(i_{-\partial_{x_n}}w_0=i_{(-\partial_{x_n})}dx_1\wedge\dots\wedge dx_n = (-1)^{n}i_{\partial_{x_n}}dx_1\wedge \dots \wedge dx_{n-1}\).
+    \[j^\star((-1)^ndx_1\wedge \dots \wedge dx_{n-1})=(-1)^n dx_1\wedge\dots \wedge dx_{n-1}\qedhere\]
+\end{proof}
+Proof of Stokes theorem, see \cite{smooth_manifolds} theorem 16.11.
+
+\begin{proof}[Proof when \(M=\bH^n\)]
+Since \(\omega\) is compactly supported, \(\supp \omega\subset \underbrace{[-R,R]\times\dots\times  [-R,R]}_{n-1\text{ times}}\times [0,R]\) 
+\begin{figure}[H]\label{fig:11.5}
+    \centering
+    \includegraphics[width=.7\textwidth]{example-image}
+    \caption{Sketch 11.5}
+\end{figure}   
+We can write \(\omega=\sum_{i=1}^n\omega_i dx_i\wedge \dots \wedge \hat{dx_i}\wedge \dots \wedge dx_n\).\marginnote{\(\hat{dx_i}\) means we are omitting this term}
+We can now compute 
+\begin{align*}
+    d\omega&=\sum_{i=1}^n\sum_{j=1}^n \partial_{x_j} w_i dx_j\wedge dx_1\dots\wedge dx_i\dots \wedge dx_n\\
+    &=\sum_{i=1}^n(-1)^{i-1}\partial_{x_i}w_i dx_1\wedge \dots\wedge dx_n
+\end{align*}
+By definition 
+\begin{align*}
+    \int_{\bH^n} d\omega &=\int_{A} d\omega=\int_A \sum_{i=1}^n(-1)^{i-1}\partial_{x_i}w_i dx_1\wedge \dots\wedge dx_n\\
+    &= \sum_{i=1}^{n} (-1)^{i-1}\int_A \partial_{x_i}w_i dx_1\dots dx_n=\sum_{i=1}^n (-1)^{i-1}\int_0^R\int_{-R}^R\dots \int_{-R}^R\partial_{x_i}w_i dx_1\dots dx_n =(\star)
+\end{align*}
+\dhighlight{Observe:} \[\int_\R^R \partial_{x_i}\omega_i dx_i=\omega_i\mid_{-R}^R=0\] 
+\begin{align*}
+    (\star) &= (-1)^{n-1} \int_0^R\dots\int_{-R}^R \partial_{x_n}\omega_n dx_1\dots dx_n\\
+    &=(-1)^n\int_{-R}^R\dots \int_{-R}^R \omega_n(x_1,\dots,x_{n-1},0) dx_1\dots dx_n
+\end{align*}
+
+Meanwhile 
+\begin{align*}
+    \int_{\partial \bH^n}\omega&=\int_{\partial \bH^n\cap A}\sum_{i=1}^n\omega_i dx_1\wedge \dots\wedge \hat{dx_i}\wedge \dots \wedge dx_n
+\end{align*}
+Note that, since \(x_n\equiv 0\partial\) on \(\bH^n\), \(dx_n\equiv 0\) on \(\partial \bH^n\)
+\begin{align*}
+    \implies \int_{\partial \bH^n}\omega=\int_{A\cap \partial \bH^n}\omega_n dx_1\wedge \dots\wedge  dx_{n-1} 
+\end{align*}
+But now, by lemma \ref{lem:11.10}, we have 
+\begin{align*}
+    \int_{A\cap \partial \bH^n} \omega_n dx_1\wedge \dots \wedge dx_{n-1}&=(-1)^n \int_{[-R,R]^{n-1}}\omega_ndx_1\wedge \dots \wedge dx_{n-1}\\
+    &= (-1)^n \int_{-R}^R\dots \int_{-R}^R \omega_n (x_1,\dots,x_{n-1},0)dx_1\dots dx_{n-1}
+\end{align*} 
+\end{proof}
+
+\begin{proof}[Proof when \(M=\R^n\)]
+    As before \(\omega=\sum_{i=1}^n\omega_i dx_1\wedge \dots \wedge \hat{dx_i}\wedge \dots\wedge dx_n\),
+    \(d\omega=\sum_{i=1}^n(-1)^{i-1}\partial_{x_i}\omega_i dx_1\wedge \dots \wedge dx_n\). Want:
+    \[\int_{\R^n}d\omega=\int_{\partial \R^n}=0\]
+    \begin{align*}
+        \int_{\R^n} d\omega&=\int_{\R^n} \sum_{i=1}^n(-1)^{i-1}\partial_{x_i}\omega_i dx_1\wedge \dots \wedge dx_n \\
+        &=\sum_{i=1}^n(-1)^{i-1}\int_{-R}^R\partial_{x_i}\omega_i dx_1\dots dx_n =0
+    \end{align*}
+    by the fundamental theorem of calculus.
+\end{proof}
+
+\begin{proof}[Proof  for \(M\) arbitrary, under the extra assumption that  there exists a chart \((U,\varphi)\), s.t. 
+              \(\supp\omega\subset U\)]
+    \begin{figure}[H]\label{fig:11.6}
+        \centering
+        \includegraphics[width=.7\textwidth]{example-image}
+        \caption{Sketch 11.6}
+    \end{figure}
+    For simplicity assume that \((U,\varphi)\) is positively oriented. Then 
+    \begin{align*}
+        \int_M d\omega&\coloneqq \int_{\varphi(M)}(\varphi^{-1})^\star(d\omega)\\
+        &=\int_{\varphi(M)}d((\varphi^{-1})^\star \omega)\\
+        &=\int_{bH^n} d((\varphi^{-1})^\star \omega)\\
+        &=\int_{\partial \bH^n} (\varphi^{-1})^\star \omega\eqqcolon\int_{\partial M} \omega
+    \end{align*}
+\end{proof}
+
+\begin{proof}[Proof of theorem \ref{thm:11.9} (General Case)]
+    Let \(\omega\in \Omega^{n-1}(M)\) with compact support. Let \((U_i,\varphi_i)_{i=1}^N\)
+    be a finite set of charts, whose union covers the support of \(\omega\). Let 
+    \(\{\eta_i\}_{i=1}^N\) be a partition of unity subordinate to the cover. Then 
+    \begin{align*}
+        \int_{\partial M}\omega= \sum_{i=1}^N\int_{\partial M} (\underbrace{\eta_i\omega}_{\supp(\eta_i\omega)\subset U_i})\\
+        &=\sum_{i=1}^N\int_M d(\eta_i\omega)
+        &=\sum_{i=1}^N \int (d\eta_i\wedge \omega+\eta_id\omega)\\
+        &=\int_M sum_{i=1}^N d\eta_i\wedge \omega +\int_M (\sum_{i=1}^N \eta_i) d\omega\\
+        &=\int_M \underbrace{d(\sum_{i=1}^N \eta_i)}_{=0}\wedge \omega +\int_M d\omega\\
+        &=\int_M d\omega \qedhere
+    \end{align*}
+\end{proof}
+Everything after now is not examable. Next friday will be about next semester and the future :)
+\markeol{27}
