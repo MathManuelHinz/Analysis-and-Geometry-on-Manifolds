@@ -199,7 +199,7 @@ backend=bibtex
 \renewcommand{\cftsecleader}{\color{mycolor}     \cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsubsecleader}{\color{mycolor} \cftdotfill{\cftsecdotsep}}
 \renewcommand{\cftsubsubsecleader}{\color{mycolor} \cftdotfill{\cftsecdotsep}}
-
+\renewcommand{\cftchapnumwidth}{70pt}
 \def\lecturelist{}
 \def\tutlist{}
 
@@ -224,7 +224,7 @@ backend=bibtex
 \renewcommand{\labelitemiii}{$\textcolor{mycolor}{\diamond}$}
 \renewcommand{\labelitemiv}{$\textcolor{mycolor}{\ast}$}
 
-%\makesavenoteenv{tcolorbox} % this is problematic, TODO: FIX
+\makesavenoteenv{tcolorbox} % this is problematic, TODO: FIX
 
 \tcolorboxenvironment{corollary}{
   colback=green!5!white,
